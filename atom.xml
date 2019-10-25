@@ -2,13 +2,26 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-10-24T06:13:43.622Z</updated>
+    <updated>2019-10-25T03:52:08.785Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[如何去除win10右下角红色叹号更新图标?]]></title>
+        <id>https://imenghu.github.io/post/ru-he-qu-chu-win10-you-xia-jiao-hong-se-tan-hao-geng-xin-tu-biao</id>
+        <link href="https://imenghu.github.io/post/ru-he-qu-chu-win10-you-xia-jiao-hong-se-tan-hao-geng-xin-tu-biao">
+        </link>
+        <updated>2019-10-25T03:50:43.000Z</updated>
+        <content type="html"><![CDATA[<p><img src="https://imenghu.github.io/post-images/1571975515369.png" alt=""><br>
+1.按Win+R打开运行，输入”services.msc“打开服务。<br>
+2.找到&quot;Windows Update”，选择【属性】。<br>
+3.将Windows Update的启动类型修改为【禁用】，按【确定】保存设置就可以禁用自动更新服务了。<br>
+4.在状态栏右键-打开任务管理器，找到资源管理器这个程序，在点击窗口右下角的重启程序就OK了。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[接触互联网这么久，才知道搜索引擎这么用！]]></title>
         <id>https://imenghu.github.io/post/jie-hong-hu-lian-wang-zhe-me-jiu-cai-zhi-dao-sou-suo-yin-qing-zhe-me-yong</id>
