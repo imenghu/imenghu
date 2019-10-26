@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-10-26T00:58:19.418Z</updated>
+    <updated>2019-10-26T10:18:25.144Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
@@ -16,7 +16,8 @@
         </link>
         <updated>2019-10-26T00:55:15.000Z</updated>
         <content type="html"><![CDATA[<p>1 搜索aa这个模块并将里面的内容全部导入<br>
-2 给个模块起一个别名aa,然后后面就可以使用aa.xx来调用模块里面的东西了。</p>
+2 给个模块起一个别名aa,然后后面就可以使用aa.xx来调用模块里面的东西了。<br>
+3 给import 取as 的别名的时候就是为了防止跟本地的变量名称冲突。</p>
 ]]></content>
     </entry>
     <entry>
