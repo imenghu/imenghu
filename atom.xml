@@ -2,13 +2,25 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-10-26T10:20:54.475Z</updated>
+    <updated>2019-10-28T02:52:39.473Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[Python大盘点：全局变量、局部变量、类变量、实例变量]]></title>
+        <id>https://imenghu.github.io/post/python-da-pan-dian-quan-ju-bian-liang-ju-bu-bian-liang-lei-bian-liang-shi-li-bian-liang</id>
+        <link href="https://imenghu.github.io/post/python-da-pan-dian-quan-ju-bian-liang-ju-bu-bian-liang-lei-bian-liang-shi-li-bian-liang">
+        </link>
+        <updated>2019-10-28T02:51:47.000Z</updated>
+        <content type="html"><![CDATA[<p>1、全局变量：在模块内、在所有函数外面、在class外面，这就是全局变量。<br>
+2、局部变量：在函数内、在class的方法（构造、类方法、静态方法、实例方法）内（变量未加self修饰），这就是局部变量<br>
+3、 静态变量（类变量）：在class内的，但不在class的方法内的，这就是静态变量（类变量）<br>
+4、 实例变量：在class的方法内的，用self修饰的变量，这就是实例变量</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[import aa 导入时做的事情]]></title>
         <id>https://imenghu.github.io/post/import-aa-dao-ru-shi-zuo-de-shi-qing</id>
@@ -334,18 +346,6 @@ git pull</p>
 <p>7.登陆sql    mysql -uroot -p</p>
 <p>密码为空密码，进行密码修改：   set password for root@localhost=password('123');</p>
 <p><a href="https://downloads.mysql.com/archives/community/">mysql下载地址</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hello imenghu]]></title>
-        <id>https://imenghu.github.io/post/hello-gridea</id>
-        <link href="https://imenghu.github.io/post/hello-gridea">
-        </link>
-        <updated>2019-10-05T12:24:22.000Z</updated>
-        <content type="html"><![CDATA[<p><strong>👏  欢迎来到萌虎的Blog</strong></p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
 ]]></content>
     </entry>
 </feed>
