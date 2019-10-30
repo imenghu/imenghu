@@ -2,13 +2,41 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-10-29T05:33:49.406Z</updated>
+    <updated>2019-10-30T12:17:30.679Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[Sql Server中查询当天，最近三天，本周，本月，最近一个月，本季度的数据的sql语句]]></title>
+        <id>https://imenghu.github.io/post/sql-server-zhong-cha-xun-dang-tian-zui-jin-san-tian-ben-zhou-ben-yue-zui-jin-yi-ge-yue-ben-ji-du-de-shu-ju-de-sql-yu-ju</id>
+        <link href="https://imenghu.github.io/post/sql-server-zhong-cha-xun-dang-tian-zui-jin-san-tian-ben-zhou-ben-yue-zui-jin-yi-ge-yue-ben-ji-du-de-shu-ju-de-sql-yu-ju">
+        </link>
+        <updated>2019-10-30T12:15:11.000Z</updated>
+        <content type="html"><![CDATA[<p>当天：</p>
+<pre><code class="language-sql">select * from T_news where datediff(day,addtime,getdate())=0
+</code></pre>
+<p>最近三天：</p>
+<pre><code class="language-sql">select * from T_news where datediff(day,addtime,getdate())&lt;= 2 and datediff(day,addtime,getdate())&gt;= 0
+</code></pre>
+<p>本周：</p>
+<pre><code class="language-sql">select * from T_news WHERE (DATEPART(wk, addtime) = DATEPART(wk, GETDATE())) AND (DATEPART(yy, addtime) = DATEPART(yy, GETDATE()))
+注意：此时不能用 datediff 差值为7,因为，datediff只表示间隔数
+</code></pre>
+<p>本月：</p>
+<pre><code class="language-sql">select * from T_news WHERE (DATEPART(yy, addtime) = DATEPART(yy, GETDATE())) AND (DATEPART(mm, addtime) = DATEPART(mm, GETDATE()))
+</code></pre>
+<p>最近一个月：</p>
+<pre><code class="language-sql">select * from T_news WHERE (DATEPART(yy, addtime) = DATEPART(yy, GETDATE())) 
+AND ((DATEPART(mm, addtime) = DATEPART(mm, GETDATE())) OR (31-DATEPART(DD,addtime)+DATEPART(DD, GETDATE()))&lt;=31)
+</code></pre>
+<p>本季度：</p>
+<pre><code class="language-sql">select * from T_news where DATEPART(qq, addtime) = DATEPART(qq, GETDATE()) and DATEPART(yy, addtime) = DATEPART(yy, GETDATE())
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[别降低对自己的要求，因为会变本加厉]]></title>
         <id>https://imenghu.github.io/post/bie-jiang-di-dui-zi-ji-de-yao-qiu-yin-wei-hui-bian-ben-jia-li</id>
@@ -442,23 +470,6 @@ exec   killspid   '出问题的数据库名'</p>
 <p>领取规则：</p>
 <p>关注+评论，每天推送头条文末评论区留言点赞数最高者，将由后台联系并免费邮寄，送出这本书！（获奖名单会在第二天的头条留言区公布）</p>
 <p>你点的每个在看，我都认真当成了喜欢</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[删除本地文件后 Git从远程仓库重新获取]]></title>
-        <id>https://imenghu.github.io/post/shan-chu-ben-di-wen-jian-hou-git-cong-yuan-cheng-cang-ku-chong-xin-huo-qu</id>
-        <link href="https://imenghu.github.io/post/shan-chu-ben-di-wen-jian-hou-git-cong-yuan-cheng-cang-ku-chong-xin-huo-qu">
-        </link>
-        <updated>2019-10-09T05:56:09.000Z</updated>
-        <content type="html"><![CDATA[<p>删除本地文件后，想从远程仓库中从新Pull最新版文件。</p>
-<p>Git提示：up-to-date，但未得到删除的文件</p>
-<p>原因：当前本地库处于另一个分支中，需将本分支发Head重置至master.</p>
-<p>git checkout master<br>
-git reset --hard</p>
-<p>git 强行pull并覆盖本地文件</p>
-<p>git fetch --all<br>
-git reset --hard origin/master<br>
-git pull</p>
 ]]></content>
     </entry>
 </feed>

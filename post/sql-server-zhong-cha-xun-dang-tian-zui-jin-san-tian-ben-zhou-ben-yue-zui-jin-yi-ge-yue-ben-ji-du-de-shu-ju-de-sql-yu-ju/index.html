@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>MYSQL5.7.22安装教程 | i萌虎</title>
+<title>Sql Server中查询当天，最近三天，本周，本月，最近一个月，本季度的数据的sql语句 | i萌虎</title>
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -98,54 +98,39 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">MYSQL5.7.22安装教程</h2>
-            <div class="post-date">2019-10-08</div>
+            <h2 class="post-title">Sql Server中查询当天，最近三天，本周，本月，最近一个月，本季度的数据的sql语句</h2>
+            <div class="post-date">2019-10-30</div>
             
             <div class="post-content">
-              <p>最近系统老重装，要安装环境老忘记操作步骤，所以特地记录下来</p>
-<p>MYSQL安装教程：</p>
-<p>1.下载mysql5.7.22绿色免安装包，解压到盘符中  例：F:\mysql-5.7.22-winx64</p>
-<p>2.创建my.ini文件</p>
-<p>[mysqld]</p>
-<p>port = 3306</p>
-<p>basedir=F:\mysql-5.7.22-winx64</p>
-<p>datadir=F:\mysql-5.7.22-winx64\data</p>
-<p>max_connections=200</p>
-<p>character-set-server=utf8</p>
-<p>default-storage-engine=INNODB</p>
-<p>sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES</p>
-<p>secure_file_priv=</p>
-<p><br/><br/></p>
-<p>[mysql]</p>
-<p>default-character-set=utf8</p>
-<p>3.配置环境变量，</p>
-<p>MYSQL</p>
-<p>F:\mysql-5.7.22-winx64</p>
-<p>path:    %MYSQL%\bin;</p>
-<p>4.运行cmd，输入初始化指令 mysqld --initialize-insecure</p>
-<p>此指令会自动创建一个data文件夹</p>
-<p>5.输入安装指令 mysqld -install</p>
-<p>6.启动服务  net start mysql</p>
-<p>7.登陆sql    mysql -uroot -p</p>
-<p>密码为空密码，进行密码修改：   set password for root@localhost=password('123');</p>
-<p><a href="https://downloads.mysql.com/archives/community/">mysql下载地址</a></p>
+              <p>当天：</p>
+<pre><code class="language-sql">select * from T_news where datediff(day,addtime,getdate())=0
+</code></pre>
+<p>最近三天：</p>
+<pre><code class="language-sql">select * from T_news where datediff(day,addtime,getdate())&lt;= 2 and datediff(day,addtime,getdate())&gt;= 0
+</code></pre>
+<p>本周：</p>
+<pre><code class="language-sql">select * from T_news WHERE (DATEPART(wk, addtime) = DATEPART(wk, GETDATE())) AND (DATEPART(yy, addtime) = DATEPART(yy, GETDATE()))
+注意：此时不能用 datediff 差值为7,因为，datediff只表示间隔数
+</code></pre>
+<p>本月：</p>
+<pre><code class="language-sql">select * from T_news WHERE (DATEPART(yy, addtime) = DATEPART(yy, GETDATE())) AND (DATEPART(mm, addtime) = DATEPART(mm, GETDATE()))
+</code></pre>
+<p>最近一个月：</p>
+<pre><code class="language-sql">select * from T_news WHERE (DATEPART(yy, addtime) = DATEPART(yy, GETDATE())) 
+AND ((DATEPART(mm, addtime) = DATEPART(mm, GETDATE())) OR (31-DATEPART(DD,addtime)+DATEPART(DD, GETDATE()))&lt;=31)
+</code></pre>
+<p>本季度：</p>
+<pre><code class="language-sql">select * from T_news where DATEPART(qq, addtime) = DATEPART(qq, GETDATE()) and DATEPART(yy, addtime) = DATEPART(yy, GETDATE())
+</code></pre>
 
             </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://imenghu.github.io/tag/2MJtm3v-A" class="tag">
-                    mysql
-                  </a>
-                
-              </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://imenghu.github.io/post/hello-gridea">
+                <a href="https://imenghu.github.io/post/bie-jiang-di-dui-zi-ji-de-yao-qiu-yin-wei-hui-bian-ben-jia-li">
                   <h3 class="post-title">
-                    Hello imenghu
+                    别降低对自己的要求，因为会变本加厉
                   </h3>
                 </a>
               </div>
