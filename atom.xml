@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-10-31T11:07:38.816Z</updated>
+    <updated>2019-10-31T11:10:00.385Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
@@ -21,46 +21,75 @@
 <p>变量的作用域无非就是两种：全局变量和局部变量。</p>
 <p>Javascript语言的特殊之处，就在于函数内部可以直接读取全局变量。</p>
 <p>js code:</p>
-<p>var n = 999;</p>
-<p>function f1(){</p>
-<p>console.log(n);</p>
-<p>}</p>
-<p>f1();　　//999</p>
+<pre><code class="language-javascript">var n = 999;
+
+function f1(){
+
+　　console.log(n);
+
+}
+
+f1();　　//999
+</code></pre>
 <p>另一方面，在函数外部自然无法读取函数内的局部变量。</p>
 <p>js code:</p>
-<p>function f1(){</p>
-<p>var n = 999;</p>
-<p>}</p>
-<p>console.log(n);　　//error</p>
+<pre><code class="language-javascript">function f1(){
+
+　　var n = 999;
+
+}
+
+console.log(n);　　//error
+</code></pre>
 <p>这里有一个地方需要注意，函数内部声明变量的时候，一定要使用var命令。如果不用的话，你实际上声明了一个全局变量。</p>
 <p>js code</p>
-<p>function f1(){</p>
-<p>n = 999;</p>
-<p>}</p>
-<p>f1();</p>
-<p>console.log(n);　　//999</p>
+<pre><code class="language-javascript">function f1(){
+
+　　n = 999;
+
+}
+
+f1();
+
+console.log(n);　　//999
+</code></pre>
 <p>二、如何从外部读取局部变量？</p>
 <p>出于种种原因，我们有时候需要得到函数内的局部变量。但是，前面已经说过了，正常情况下，这是办不到的，只有通过变通方法才能实现。</p>
 <p>那就是在函数的内部，再定义一个函数。</p>
 <p>js code</p>
-<p>function f1(){</p>
-<p>n = 999;</p>
-<p>function f2(){</p>
-<p>console.log(n);　　//999</p>
-<p>}</p>
-<p>}</p>
+<pre><code class="language-javascript">function f1(){
+
+　　n = 999;
+
+　　function f2(){
+
+　　　　console.log(n);　　//999
+
+　　}
+
+}
+</code></pre>
 <p>在上面的代码中，函数f2就被包括在函数f1内部，这时f1内部的所有局部变量，对f2都是可见的。但是反过来就不行，f2内部的局部变量对f1就是不可见的。这就是javascript语言特有的‘链式作用域’结构(chain scope)，子对象会一级一级地向上寻找所有父对象的变量。所以，父对象的所有变量，对子对象都是可见的，反之则不成立。</p>
 <p>既然f2可以读取f1中的局部变量，那么只要把f2作为返回值，我们就可以在f1外部读取它的内部变量了。</p>
 <p>js code</p>
-<p>function f1(){</p>
-<p>n = 999;</p>
-<p>function f2(){</p>
-<p>console.log(n);</p>
-<p>}</p>
-<p>return f2;</p>
-<p>}</p>
-<p>var result = f1();　　//返回的是f2函数</p>
-<p>result();　　//999</p>
+<pre><code class="language-javascript">function f1(){
+
+　　n = 999;
+
+　　function f2(){
+
+　　　　console.log(n);
+
+　　}
+
+　　return f2;
+
+}
+
+var result = f1();　　//返回的是f2函数
+
+result();　　//999
+</code></pre>
 <p>三、闭包的概念</p>
 <p>上一节代码中的f2函数，就是闭包。</p>
 <p>闭包就是能够读取其他函数内部变量的函数，函数没有被释放，整条作用域链上的局部变量都将得到保留。</p>
@@ -69,20 +98,34 @@
 <p>四、闭包的用途</p>
 <p>闭包可以用在许多地方。它的最大用处有两个，一个是前面提到的可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中。</p>
 <p>js code</p>
-<p>function f1(){</p>
-<p>var n = 999;</p>
-<p>nAdd = function(){</p>
-<p>n += 1;</p>
-<p>}</p>
-<p>function f2(){</p>
-<p>console.log(n);</p>
-<p>}</p>
-<p>return f2;</p>
-<p>}</p>
-<p>var result = f1();</p>
-<p>result();　　//从函数外部通过闭包f2获取到函数f1内部局部变量的值</p>
-<p>nAdd();　　//从函数外部通过闭包修改局部变量n的值</p>
-<p>result();　　//再次通过闭包f2获取到函数f1内部局部变量的值</p>
+<pre><code class="language-javascript">function f1(){
+
+　　var n = 999;
+
+　　nAdd = function(){
+
+　　　　n += 1;
+
+　　}
+
+　　function f2(){
+
+　　　　console.log(n);
+
+　　}
+
+　　return f2;
+
+}
+
+var result = f1();
+
+result();　　//从函数外部通过闭包f2获取到函数f1内部局部变量的值
+
+nAdd();　　//从函数外部通过闭包修改局部变量n的值
+
+result();　　//再次通过闭包f2获取到函数f1内部局部变量的值
+</code></pre>
 <p>在这段代码中，result实际上就是闭包f2函数。它一共运行了两次，第一次的值是999，第二次的值是1000。这证明了，函数f1中的局部变量n 一直保存在内存中，并没有在f1调用后被自动清除。</p>
 <p>为什么会这样呢？原因就在于f1是f2的父函数，而f2被赋给了一个全局变量，这导致f2始终在内存中，不会再调用结束后，被垃圾回收机制(garbage collection)回收。</p>
 <p>这段代码中另一个值得注意的地方，就是‘nAdd=function(){n+=1}’这一行，首先在nAdd前面没有使用var关键字，因此nAdd是一个全局变量，而不是局部变量。其次，nAdd的值是一个匿名函数(anonymous function)，而这个匿名函数本身也是一个闭包，所以nAdd相当于是一个setter，可以在函数外部对函数内部的局部变量进行操作。</p>
