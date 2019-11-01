@@ -2,13 +2,92 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-11-01T00:47:25.648Z</updated>
+    <updated>2019-11-01T06:10:05.548Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[mysql数据库使用总结]]></title>
+        <id>https://imenghu.github.io/post/mysql-shu-ju-ku-shi-yong-zong-jie</id>
+        <link href="https://imenghu.github.io/post/mysql-shu-ju-ku-shi-yong-zong-jie">
+        </link>
+        <updated>2019-11-01T06:09:48.000Z</updated>
+        <content type="html"><![CDATA[<p>本文主要记录一些mysql日常使用的命令，供以后查询。<br>
+1.更改root密码<br>
+mysqladmin -uroot password 'yourpassword'<br>
+2.远程登陆mysql服务器<br>
+mysql -uroot -p -h192.168.137.10 -P3306<br>
+3.查询数据库<br>
+show databases;<br>
+4.进入某个数据库<br>
+use databasename;<br>
+5.列出数据库中的表<br>
+show tables;<br>
+6.查看某个表全部字段<br>
+desc slow_log;<br>
+show create table slow_log\G; （不仅可以显示表信息，还可以显示建表语句）<br>
+7.查看当前用户<br>
+select user();<br>
+8.查看当前所在数据库<br>
+select database();<br>
+9.创建新数据库（可以指定字符集）<br>
+create database db1 charset utf8;<br>
+10.创建新表<br>
+create table t1 (<code>id</code> int(4), <code>name</code> char(40));<br>
+11.查看数据库版本<br>
+select version();<br>
+12.查看数据库状态<br>
+show status;         当前会话状态<br>
+show global status;  全局数据库状态<br>
+show slave status\G;   查看主从数据库状态信息<br>
+13.查询数据库参数<br>
+show variables;<br>
+14.修改数据库参数<br>
+show variables like 'max_connect%';<br>
+set global max_connect_errors = 1000;（重启数据库会失效，要在配置文件中修改）<br>
+15.查看当前数据库队列<br>
+show processlist;<br>
+16.创建普通用户并授权给某个数据库<br>
+grant all on databasename.* to 'user1'@'localhost' identified by '123456';<br>
+17.查询表数据<br>
+select * from mysql.db;           //查询该表中的所有字段<br>
+select count(<em>) from mysql.user;  //count(</em>)表示表中有多少行<br>
+select db,user  from mysql.db;    //查询表中的多个字段<br>
+select * from mysql.db where host like '10.0.%';在查询语句中可以使用万能匹配 “%”<br>
+18.插入一行数据<br>
+insert into db1.t1 values (1, 'abc');<br>
+19.更改表的某一行数据<br>
+update db1.t1 set name='aaa' where id=1;<br>
+20.清空表数据<br>
+truncate table db1.t1;<br>
+21.删除表<br>
+drop table db1.t1;<br>
+22.清空数据库中的所有表（数据库名是eab12）<br>
+mysql -N -s information_schema -e &quot;SELECT CONCAT('TRUNCATE TABLE ',TABLE_NAME,';') FROM TABLES WHERE TABLE_SCHEMA='eab12'&quot; | mysql -f eab12<br>
+23.删除数据库<br>
+drop database db1;<br>
+24.数据库备份<br>
+mysqldump  -uroot -p'yourpassword' mysql &gt;/tmp/mysql.sql<br>
+25.数据库恢复<br>
+mysql -uroot -p'yourpassword' mysql &lt;/tmp/mysql.sql<br>
+26.新建普通用户<br>
+CREATE USER name IDENTIFIED BY 'ssapdrow';<br>
+27.更改普通用户密码<br>
+SET PASSWORD FOR name=PASSWORD('fdddfd');<br>
+28.查看name用户权限<br>
+SHOW GRANTS FOR name;<br>
+29.脚本中执行mysql命令<br>
+mysql -uuser -ppasswd -e&quot;show databases&quot;<br>
+echo &quot;show databases&quot;|mysql -uuser -ppassword<br>
+以下是执行大量mysql语句采用的方式<br>
+mysql -uuser -hhostname -ppasswd &lt;&lt;EOF<br>
+mysql语句<br>
+EOF</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[深入理解JS闭包]]></title>
         <id>https://imenghu.github.io/post/shen-ru-li-jie-js-bi-bao</id>
@@ -456,23 +535,6 @@ exec   killspid   '出问题的数据库名'</p>
 <p>六、最有说服力的表现</p>
 <p>一个人要想得到提升，一个人的嘴巴的修辞远远不够，必须要产生结果，可以吃几盎司米饭放在桌子上，让大家看看，为了达到减肥的目的。</p>
 <p>这些技巧你悟到了吗？</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[如何判断两个IP是不是在同一个网段内]]></title>
-        <id>https://imenghu.github.io/post/ru-he-pan-duan-liang-ge-ip-shi-bu-shi-zai-tong-yi-ge-wang-duan-nei</id>
-        <link href="https://imenghu.github.io/post/ru-he-pan-duan-liang-ge-ip-shi-bu-shi-zai-tong-yi-ge-wang-duan-nei">
-        </link>
-        <updated>2019-10-12T01:00:27.000Z</updated>
-        <content type="html"><![CDATA[<p>和子网掩码转2进制相与 后，得到网络地址，网络地址一样则在一个子网。<br>
-子网掩码是一个32位地址，子网掩码的作用是用于屏蔽IP地址的一部分以区别网络标识和主机标识，并说明该IP地址是在局域网上，还是在远程网上。一般的IP地址设置如下：</p>
-<figure data-type="image" tabindex="1"><img src="https://imenghu.github.io/post-images/1570842143130.jpg" alt=""></figure>
-<p>而怎么求网络标识和主机标识呢？网络标识的求法如下：将子网掩码的二进制与IP地址的二进制相“与”。具体如下</p>
-<figure data-type="image" tabindex="2"><img src="https://imenghu.github.io/post-images/1570842274932.jpg" alt=""></figure>
-<p>主机标识的求法：将子网掩码的二进制值取反后，再与IP地址进行与（AND）运算，具体如下：</p>
-<figure data-type="image" tabindex="3"><img src="https://imenghu.github.io/post-images/1570842297577.jpg" alt=""></figure>
-<p>要判断两个IP地址是不是在同一个网段，就是比较网络标识（网络地址），如果网络标识相同，就在同一子网，否则，不在同一子网。如下：</p>
-<figure data-type="image" tabindex="4"><img src="https://imenghu.github.io/post-images/1570842326889.jpg" alt=""></figure>
 ]]></content>
     </entry>
 </feed>
