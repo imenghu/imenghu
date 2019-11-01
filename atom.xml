@@ -2,13 +2,43 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-11-01T07:08:11.908Z</updated>
+    <updated>2019-11-01T07:42:53.298Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[Python 连接sqlserver]]></title>
+        <id>https://imenghu.github.io/post/python-lian-jie-sqlserver</id>
+        <link href="https://imenghu.github.io/post/python-lian-jie-sqlserver">
+        </link>
+        <updated>2019-11-01T07:41:31.000Z</updated>
+        <content type="html"><![CDATA[<pre><code class="language-python">import pymssql
+class linkDB():
+    def linkdb():
+        #数据库远程连接
+        conn = pymssql.connect(host=&quot;数据库IP地址:端口号&quot;,user=&quot;用户名&quot;,password=&quot;密码&quot;,database=&quot;数据库名&quot;,charset=&quot;utf8&quot;)
+        #使用cursor()方法获取操作游标
+        cursor = conn.cursor()
+        #查询语句
+        sql = &quot;这里面是sql语句&quot;
+        try:
+            cursor.execute(sql)  #游标
+            result = cursor.fetchall() #查询
+            print(result)
+        except:
+            print(&quot;连接数据库报错了！&quot;)
+        #关闭数据库连接
+        conn.close()
+
+if __name__ == '__main__':
+    linkDB.linkdb()
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Django2.0入门教程:Django常用命令]]></title>
         <id>https://imenghu.github.io/post/django20-ru-men-jiao-cheng-django-chang-yong-ming-ling</id>
@@ -492,47 +522,6 @@ list2.append(list1)
 <p>related:指令只适用于Google，返回的结果是与某个网站有关联的页面。比如搜索</p>
 <p>related:http://cnseotool.com我们就可以得到Google 所认为的与点石网站有关联的其他页面。 这种关联到底指的是什么，Google 并没有明确说明，一般认为指的是有共同外部链接的网站。</p>
 <p>上面介绍的这几个高级搜索指令，单独使用可以找到不少资源，或者可以更精确地定位竞争对手。把这些指令混合起来使用则更强大。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[SqlServer：此数据库处于单用户模式，导致数据库无法删除的处理]]></title>
-        <id>https://imenghu.github.io/post/sqlserverci-shu-ju-ku-chu-yu-dan-yong-hu-mo-shi-dao-zhi-shu-ju-ku-wu-fa-shan-chu-de-chu-li</id>
-        <link href="https://imenghu.github.io/post/sqlserverci-shu-ju-ku-chu-yu-dan-yong-hu-mo-shi-dao-zhi-shu-ju-ku-wu-fa-shan-chu-de-chu-li">
-        </link>
-        <updated>2019-10-15T13:41:14.000Z</updated>
-        <content type="html"><![CDATA[<p>今天在删除一个数据库时，一直报错，大意是：此数据库处理单用户模式，尚在连接当中，无法删除（既使将SQLServer停止后再启动也是如此）</p>
-<p>百度之后找到了解决办法，备份于此:</p>
-<p>USE [master]<br>
-GO</p>
-<p>/****** Object:  StoredProcedure [dbo].[killspid]    Script Date: 03/28/2011 11:01:32 ******/<br>
-SET ANSI_NULLS ON<br>
-GO</p>
-<p>SET QUOTED_IDENTIFIER ON<br>
-GO</p>
-<p>--建一个存储过程，断开所有用户连接。<br>
-create   proc   [dbo].[killspid]   (@dbname   varchar(20))<br>
-as<br>
-begin<br>
-declare   @sql   nvarchar(500)<br>
-declare   @spid   int<br>
-set   @sql='declare   getspid   cursor   for<br>
-select   spid   from   sysprocesses   where   dbid=db_id('''+@dbname+''')'<br>
-exec   (@sql)<br>
-open   getspid<br>
-fetch   next   from   getspid   into   @spid<br>
-while   @@fetch_status&lt;&gt;-1<br>
-begin<br>
-exec('kill   '+@spid)<br>
-fetch   next   from   getspid   into   @spid<br>
-end<br>
-close   getspid<br>
-deallocate   getspid<br>
-end</p>
-<p>GO</p>
-<p>先在master中创建一个存储过程，用于干掉所有连接，然后调用</p>
-<p>use   master<br>
-exec   killspid   '出问题的数据库名'</p>
-<p>再删除就ok了</p>
 ]]></content>
     </entry>
 </feed>
