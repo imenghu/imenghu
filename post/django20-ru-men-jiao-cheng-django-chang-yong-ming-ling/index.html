@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>MYSQL5.7.22安装教程 | i萌虎</title>
+<title>Django2.0入门教程:Django常用命令 | i萌虎</title>
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -122,54 +122,32 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">MYSQL5.7.22安装教程</h2>
-            <div class="post-date">2019-10-08</div>
+            <h2 class="post-title">Django2.0入门教程:Django常用命令</h2>
+            <div class="post-date">2019-11-01</div>
             
             <div class="post-content">
-              <p>最近系统老重装，要安装环境老忘记操作步骤，所以特地记录下来</p>
-<p>MYSQL安装教程：</p>
-<p>1.下载mysql5.7.22绿色免安装包，解压到盘符中  例：F:\mysql-5.7.22-winx64</p>
-<p>2.创建my.ini文件</p>
-<p>[mysqld]</p>
-<p>port = 3306</p>
-<p>basedir=F:\mysql-5.7.22-winx64</p>
-<p>datadir=F:\mysql-5.7.22-winx64\data</p>
-<p>max_connections=200</p>
-<p>character-set-server=utf8</p>
-<p>default-storage-engine=INNODB</p>
-<p>sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES</p>
-<p>secure_file_priv=</p>
-<p><br/><br/></p>
-<p>[mysql]</p>
-<p>default-character-set=utf8</p>
-<p>3.配置环境变量，</p>
-<p>MYSQL</p>
-<p>F:\mysql-5.7.22-winx64</p>
-<p>path:    %MYSQL%\bin;</p>
-<p>4.运行cmd，输入初始化指令 mysqld --initialize-insecure</p>
-<p>此指令会自动创建一个data文件夹</p>
-<p>5.输入安装指令 mysqld -install</p>
-<p>6.启动服务  net start mysql</p>
-<p>7.登陆sql    mysql -uroot -p</p>
-<p>密码为空密码，进行密码修改：   set password for root@localhost=password('123');</p>
-<p><a href="https://downloads.mysql.com/archives/community/">mysql下载地址</a></p>
+              <p>安装Django：	pip install django  指定版本 pip3 install django==2.0</p>
+<p>新建项目：	django-admin.py startproject mysite</p>
+<p>新建APP :	python manage.py startapp blog</p>
+<p>启动：python manage.py runserver 8080</p>
+<p>同步或者更改生成 数据库：</p>
+<p>python manage.py makemigrations</p>
+<p>python manage.py migrate</p>
+<p>清空数据库：	python manage.py flush</p>
+<p>创建管理员：	python manage.py createsuperuser</p>
+<p>修改用户密码： python manage.py changepassword username</p>
+<p>Django项目环境终端： python manage.py shell</p>
+<p>这个命令和 直接运行 python 进入 shell 的区别是：你可以在这个 shell 里面调用当前项目的 models.py 中的 API，对于操作数据的测试非常方便。</p>
+<p>更多关于Django的命令在终端输入：python manage.py 查看</p>
 
             </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://imenghu.github.io/tag/2MJtm3v-A" class="tag">
-                    mysql
-                  </a>
-                
-              </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://imenghu.github.io/post/hello-gridea">
+                <a href="https://imenghu.github.io/post/mysql-shu-ju-ku-shi-yong-zong-jie">
                   <h3 class="post-title">
-                    Hello imenghu
+                    mysql数据库使用总结
                   </h3>
                 </a>
               </div>

@@ -2,13 +2,34 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-11-01T06:10:05.548Z</updated>
+    <updated>2019-11-01T06:16:23.614Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[Django2.0入门教程:Django常用命令]]></title>
+        <id>https://imenghu.github.io/post/django20-ru-men-jiao-cheng-django-chang-yong-ming-ling</id>
+        <link href="https://imenghu.github.io/post/django20-ru-men-jiao-cheng-django-chang-yong-ming-ling">
+        </link>
+        <updated>2019-11-01T06:16:02.000Z</updated>
+        <content type="html"><![CDATA[<p>安装Django：	pip install django  指定版本 pip3 install django==2.0</p>
+<p>新建项目：	django-admin.py startproject mysite</p>
+<p>新建APP :	python manage.py startapp blog</p>
+<p>启动：python manage.py runserver 8080</p>
+<p>同步或者更改生成 数据库：</p>
+<p>python manage.py makemigrations</p>
+<p>python manage.py migrate</p>
+<p>清空数据库：	python manage.py flush</p>
+<p>创建管理员：	python manage.py createsuperuser</p>
+<p>修改用户密码： python manage.py changepassword username</p>
+<p>Django项目环境终端： python manage.py shell</p>
+<p>这个命令和 直接运行 python 进入 shell 的区别是：你可以在这个 shell 里面调用当前项目的 models.py 中的 API，对于操作数据的测试非常方便。</p>
+<p>更多关于Django的命令在终端输入：python manage.py 查看</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[mysql数据库使用总结]]></title>
         <id>https://imenghu.github.io/post/mysql-shu-ju-ku-shi-yong-zong-jie</id>
@@ -512,29 +533,6 @@ end</p>
 <p>use   master<br>
 exec   killspid   '出问题的数据库名'</p>
 <p>再删除就ok了</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[演讲汇报的6条技巧，学了你就能够在领导面前一炮而红]]></title>
-        <id>https://imenghu.github.io/post/yan-jiang-hui-bao-de-6-tiao-ji-qiao-xue-liao-ni-jiu-neng-gou-zai-ling-dao-mian-qian-yi-pao-er-hong</id>
-        <link href="https://imenghu.github.io/post/yan-jiang-hui-bao-de-6-tiao-ji-qiao-xue-liao-ni-jiu-neng-gou-zai-ling-dao-mian-qian-yi-pao-er-hong">
-        </link>
-        <updated>2019-10-15T08:53:04.000Z</updated>
-        <content type="html"><![CDATA[<p>演讲报告是高度熟练的。让老板知道你的成绩，一个好的工作报告，对你另眼相看；相反，老板会无情地否定你的工作和成就，甚至你的能力。很显然，学习如何报告他们的工作是一个非常严肃和重要的一部分。</p>
-<p>怎样才能更好地报告我们的工作？主要应注意以下几个方面：</p>
-<p>一、调整心理状态，营造和谐氛围</p>
-<p>向老板报告，以减轻和创造一个有利于报告的气氛。在报告之前，你可以在一些容易的话题上做一个简单的对话。它不仅是必要的，而且可以报告礼仪，采取的机会，明确情绪的稳定，一般报告，打好主意。这些看似普通，但非常有用。</p>
-<p>二、从线到面，从抽象到具体</p>
-<p>报告工作要注意逻辑层次，不要眉毛胡子抓的地方在哪里。一般来说，报告要抓住一条线，即总体思路和中心工作；一个表面，这是单独描述的措施，相关的工作做法，关键环节，遇到问题，处置的结果，收到的效果。这就是所谓的“如果网在课堂上，有一个相当动荡。”</p>
-<p>三、职场箴言</p>
-<p>不要让自己陷入这些困难，不要做一些可能会导致误解别人的骚扰，恐吓，威胁或行动。要在与异性接触时，应保持适当的距离，不要用太亲切的电话。避免穿着，身体或外观的异性。</p>
-<p>四、突出中心，抛出“王牌”</p>
-<p>一般说来没有报告，看起来很肤浅。通常情况下，报告人可以把自己的主管或更熟悉的情况，掌握全面的工作作为一个突破，抓住工作过程和典型的例子来分析，总结和改进。在报告中的“王牌”可以最能反映本单位工作的特点。</p>
-<p>五、弥补不足，努力完成</p>
-<p>下属向老板报告，往往会有一些错误，如一些情况不确定，或缺少的内容的一部分，总结是不适当的，等等。对于错误，可以采取向老板提供一些背景信息，组织访问活动，使用其他联系人和老板的交流交流等方法来报告的补充和修正，使其更深入和完整。</p>
-<p>六、最有说服力的表现</p>
-<p>一个人要想得到提升，一个人的嘴巴的修辞远远不够，必须要产生结果，可以吃几盎司米饭放在桌子上，让大家看看，为了达到减肥的目的。</p>
-<p>这些技巧你悟到了吗？</p>
 ]]></content>
     </entry>
 </feed>
