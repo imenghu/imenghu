@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>演讲汇报的6条技巧，学了你就能够在领导面前一炮而红 | i萌虎</title>
+<title>HTTP请求流程 | i萌虎</title>
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -122,42 +122,50 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">演讲汇报的6条技巧，学了你就能够在领导面前一炮而红</h2>
-            <div class="post-date">2019-10-15</div>
+            <h2 class="post-title">HTTP请求流程</h2>
+            <div class="post-date">2019-11-01</div>
             
             <div class="post-content">
-              <p>演讲报告是高度熟练的。让老板知道你的成绩，一个好的工作报告，对你另眼相看；相反，老板会无情地否定你的工作和成就，甚至你的能力。很显然，学习如何报告他们的工作是一个非常严肃和重要的一部分。</p>
-<p>怎样才能更好地报告我们的工作？主要应注意以下几个方面：</p>
-<p>一、调整心理状态，营造和谐氛围</p>
-<p>向老板报告，以减轻和创造一个有利于报告的气氛。在报告之前，你可以在一些容易的话题上做一个简单的对话。它不仅是必要的，而且可以报告礼仪，采取的机会，明确情绪的稳定，一般报告，打好主意。这些看似普通，但非常有用。</p>
-<p>二、从线到面，从抽象到具体</p>
-<p>报告工作要注意逻辑层次，不要眉毛胡子抓的地方在哪里。一般来说，报告要抓住一条线，即总体思路和中心工作；一个表面，这是单独描述的措施，相关的工作做法，关键环节，遇到问题，处置的结果，收到的效果。这就是所谓的“如果网在课堂上，有一个相当动荡。”</p>
-<p>三、职场箴言</p>
-<p>不要让自己陷入这些困难，不要做一些可能会导致误解别人的骚扰，恐吓，威胁或行动。要在与异性接触时，应保持适当的距离，不要用太亲切的电话。避免穿着，身体或外观的异性。</p>
-<p>四、突出中心，抛出“王牌”</p>
-<p>一般说来没有报告，看起来很肤浅。通常情况下，报告人可以把自己的主管或更熟悉的情况，掌握全面的工作作为一个突破，抓住工作过程和典型的例子来分析，总结和改进。在报告中的“王牌”可以最能反映本单位工作的特点。</p>
-<p>五、弥补不足，努力完成</p>
-<p>下属向老板报告，往往会有一些错误，如一些情况不确定，或缺少的内容的一部分，总结是不适当的，等等。对于错误，可以采取向老板提供一些背景信息，组织访问活动，使用其他联系人和老板的交流交流等方法来报告的补充和修正，使其更深入和完整。</p>
-<p>六、最有说服力的表现</p>
-<p>一个人要想得到提升，一个人的嘴巴的修辞远远不够，必须要产生结果，可以吃几盎司米饭放在桌子上，让大家看看，为了达到减肥的目的。</p>
-<p>这些技巧你悟到了吗？</p>
+              <p>名词解析：</p>
+<p>1：AppDomain—应用程序域，它是一个应用程序在其中执行的独立环境</p>
+<p>2：w3wp.exe和aspnet_wp.exe—IIS6.0/IIS5.0 ASP.NET程序运行的必须进程</p>
+<p>3：aspnet_isapi.dll—处理aspx等文件的执行文件</p>
+<p>4：Managed Modules—托管模块</p>
+<p>5: Handlers—处理程序</p>
+<p>一：在操作系统启动的时候 ，IIS首先在HTTP.SYS中注册自己的虚拟路径</p>
+<p>1：访问不到的URL或者文件，出现404错误，将错误信息返回给客户端。</p>
+<p>2：如果请求可访问的URL，HTTP.SYS将请求交给IIS工作者进程w3wp.exe</p>
+<figure data-type="image" tabindex="1"><img src="https://images.cnblogs.com/cnblogs_com/freegarden/clip_image002.gif" alt=""></figure>
+<p>二：ISAPI（INTERNET SERVER APPLICATION PROGRAME INTERFACE）</p>
+<pre><code>互联网服务器应用程序接口的工作如下：
+</code></pre>
+<p>1：映射文件与其对应的处理程序</p>
+<p>1：从HTTP.SYS获取当期请求的信息，保存在HttpWorkerRequest类中</p>
+<p>2：在相互隔离的AppDoamin中加载HttpRuntime</p>
+<p>3：调用HttpRunTime的ProcessRequest(HttpWorkerRequest wr)方法</p>
+<p>三：当请求进入HttpRunTime后，管道由Managed Modules和Handler组成，由它们处理这个HTTP请求</p>
+<ol>
+<li>
+<p>HttpRuntime将Http请求转交给 HttpApplication，HttpApplication代表着程序员创建的Web应用程序。HttpApplication创建针对此Http请求的 HttpContext对象，这些对象包含了关于此请求的诸多其他对象，主要是HttpRequest、HttpResponse、HttpSessionState等。这些对象在程序中可以通过Page类或者Context类进行访问。、</p>
+</li>
+<li>
+<p>接下来Http请求通过一系列Module，这些Module对Http请求具有完全的控制权。这些Module可以做一些执行某个实际工作前的事情。</p>
+</li>
+<li>
+<p>Http请求经过所有的Module之后，它会被HttpHandler处理。在这一步，执行实际的一些操作，通常也就是.aspx页面所完成的业务逻辑。可能你会觉得在创建.aspx页面并没有体会到这一过程，但是，你一定知道，.aspx 页面继承自Page类，我们看一下Page类的签名： public class Page : TemplateControl, IHttpHandler{ // 代码省略}</p>
+</li>
+</ol>
+<p>4：Handler处理完以后，请求再一次回到Module，此时Module可以做工作之后的事情</p>
+<p>四:运行程序员编写的代码完成工作，IIS接收返回的数据流，交给HTTP.SYS，由HTTP.SYS将数据返回给客户端,整个请求完成。</p>
 
             </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://imenghu.github.io/tag/ZlTQ8uj2u" class="tag">
-                    工作
-                  </a>
-                
-              </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://imenghu.github.io/post/ru-he-pan-duan-liang-ge-ip-shi-bu-shi-zai-tong-yi-ge-wang-duan-nei">
+                <a href="https://imenghu.github.io/post/python-lian-jie-sqlserver">
                   <h3 class="post-title">
-                    如何判断两个IP是不是在同一个网段内
+                    Python 连接sqlserver
                   </h3>
                 </a>
               </div>

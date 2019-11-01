@@ -2,13 +2,52 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-11-01T07:42:53.298Z</updated>
+    <updated>2019-11-01T09:24:51.026Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[HTTP请求流程]]></title>
+        <id>https://imenghu.github.io/post/http-qing-qiu-liu-cheng</id>
+        <link href="https://imenghu.github.io/post/http-qing-qiu-liu-cheng">
+        </link>
+        <updated>2019-11-01T09:23:42.000Z</updated>
+        <content type="html"><![CDATA[<p>名词解析：</p>
+<p>1：AppDomain—应用程序域，它是一个应用程序在其中执行的独立环境</p>
+<p>2：w3wp.exe和aspnet_wp.exe—IIS6.0/IIS5.0 ASP.NET程序运行的必须进程</p>
+<p>3：aspnet_isapi.dll—处理aspx等文件的执行文件</p>
+<p>4：Managed Modules—托管模块</p>
+<p>5: Handlers—处理程序</p>
+<p>一：在操作系统启动的时候 ，IIS首先在HTTP.SYS中注册自己的虚拟路径</p>
+<p>1：访问不到的URL或者文件，出现404错误，将错误信息返回给客户端。</p>
+<p>2：如果请求可访问的URL，HTTP.SYS将请求交给IIS工作者进程w3wp.exe</p>
+<figure data-type="image" tabindex="1"><img src="https://images.cnblogs.com/cnblogs_com/freegarden/clip_image002.gif" alt=""></figure>
+<p>二：ISAPI（INTERNET SERVER APPLICATION PROGRAME INTERFACE）</p>
+<pre><code>互联网服务器应用程序接口的工作如下：
+</code></pre>
+<p>1：映射文件与其对应的处理程序</p>
+<p>1：从HTTP.SYS获取当期请求的信息，保存在HttpWorkerRequest类中</p>
+<p>2：在相互隔离的AppDoamin中加载HttpRuntime</p>
+<p>3：调用HttpRunTime的ProcessRequest(HttpWorkerRequest wr)方法</p>
+<p>三：当请求进入HttpRunTime后，管道由Managed Modules和Handler组成，由它们处理这个HTTP请求</p>
+<ol>
+<li>
+<p>HttpRuntime将Http请求转交给 HttpApplication，HttpApplication代表着程序员创建的Web应用程序。HttpApplication创建针对此Http请求的 HttpContext对象，这些对象包含了关于此请求的诸多其他对象，主要是HttpRequest、HttpResponse、HttpSessionState等。这些对象在程序中可以通过Page类或者Context类进行访问。、</p>
+</li>
+<li>
+<p>接下来Http请求通过一系列Module，这些Module对Http请求具有完全的控制权。这些Module可以做一些执行某个实际工作前的事情。</p>
+</li>
+<li>
+<p>Http请求经过所有的Module之后，它会被HttpHandler处理。在这一步，执行实际的一些操作，通常也就是.aspx页面所完成的业务逻辑。可能你会觉得在创建.aspx页面并没有体会到这一过程，但是，你一定知道，.aspx 页面继承自Page类，我们看一下Page类的签名： public class Page : TemplateControl, IHttpHandler{ // 代码省略}</p>
+</li>
+</ol>
+<p>4：Handler处理完以后，请求再一次回到Module，此时Module可以做工作之后的事情</p>
+<p>四:运行程序员编写的代码完成工作，IIS接收返回的数据流，交给HTTP.SYS，由HTTP.SYS将数据返回给客户端,整个请求完成。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Python 连接sqlserver]]></title>
         <id>https://imenghu.github.io/post/python-lian-jie-sqlserver</id>
@@ -477,51 +516,6 @@ list2.append(list1)
         <content type="html"><![CDATA[<p>1 搜索aa这个模块并将里面的内容全部导入<br>
 2 给个模块起一个别名aa,然后后面就可以使用aa.xx来调用模块里面的东西了。<br>
 3 给import 取as 的别名的时候就是为了防止跟本地的变量名称冲突。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[接触互联网这么久，才知道搜索引擎这么用！]]></title>
-        <id>https://imenghu.github.io/post/jie-hong-hu-lian-wang-zhe-me-jiu-cai-zhi-dao-sou-suo-yin-qing-zhe-me-yong</id>
-        <link href="https://imenghu.github.io/post/jie-hong-hu-lian-wang-zhe-me-jiu-cai-zhi-dao-sou-suo-yin-qing-zhe-me-yong">
-        </link>
-        <updated>2019-10-22T06:36:58.000Z</updated>
-        <content type="html"><![CDATA[<p>日常生活中，我们用的最多的可能就是搜索引擎了，不管是在电脑还是手机，追星、看新闻、搜索问题甚至疑难杂症，都需要搜索引擎的帮助。而我们一般使用的搜索引擎就是百度和Google了，当然在国内的科技圈，百度应该就是受众最广影响力最大的搜索引擎了。</p>
-<p>可是，圈圈君问一句，“百度一下”了这么久，你真的确定会使用搜索引擎吗？学会了圈圈君今天整理的搜索引擎技巧，保证让你事半功倍！</p>
-<p>1、双引号把搜索词放在双引号中，代表完全匹配搜索，也就是说搜索结果返回的页面包含双引号中出现的所有的词，连顺序也必须完全匹配。百度和Google 都支持这个指令。例如搜索： “电脑桌面壁纸”</p>
-<p>2、减号</p>
-<p>减号代表搜索不包含减号后面的词的页面。使用这个指令时减号前面必须是空格，减号后面没有空格，紧跟着需要排除的词。Google 和bd都支持这个指令。</p>
-<p>例如：搜索 -引擎</p>
-<p>返回的则是包含“搜索”这个词，却不包含“引擎”这个词的结果</p>
-<p>3、inurl</p>
-<p>inurl: 指令用于搜索查询词出现在url 中的页面。百度和Google 都支持inurl 指令。inurl 指令支持中文和英文。</p>
-<p>比如搜索：inurl:情人节</p>
-<p>返回的结果都是网址url 中包含“父亲节”的页面。由于关键词出现在url 中对排名有一定影响，使用inurl:搜索可以更准确地找到竞争对手。</p>
-<p>表示搜索出来的链接里面带有关键词。</p>
-<p>4、intitle</p>
-<p>intitle: 指令返回的是页面title 中包含关键词的页面。Google 和百度都支持intitle 指令。</p>
-<p>使用intitle 指令找到的文件是更准确的竞争页面。如果关键词只出现在页面可见文字中，而没有出现在title 中，大部分情况是并没有针对关键词进行优化，所以也不是有力的竞争对手。</p>
-<p>表示搜索出来的标题里面带有关键词。</p>
-<p>5、filetype</p>
-<p>用于搜索特定文件格式。Google 和百度都支持filetype 指令。</p>
-<p>比如搜索filetype:pdf 父亲节</p>
-<p>返回的就是包含父亲节 这个关键词的所有pdf 文件。</p>
-<p>6、site</p>
-<p>site:是SEO 最熟悉的高级搜索指令，用来搜索某个域名下的所有文件。</p>
-<p>你可以用这几种命令组合，例如site:.com inurl:blog “post a comment” -”comments closed” -”you must be logged in” “输入你的关键词“，</p>
-<p>site:.com 是 指， 只显示.com的网站。 如果你想要 org的链接，就换成 site:.org，inurl:blog 是指博客。</p>
-<p>7、星号</p>
-<p>星号<em>是常用的通配符，也可以用在搜索中。百度不支持</em>号搜索指令。</p>
-<p>比如在Google 中搜索：搜索*擎</p>
-<p>其中的*号代表任何文字。返回的结果就不仅包含“搜索引擎”，还包含了“搜索收擎”，“搜索巨擎”等内容。</p>
-<p>8、allintitle</p>
-<p>allintitle:搜索返回的是页面标题中包含多组关键词的文件。</p>
-<p>例如 ：allintitle:SEO 搜索引擎优化</p>
-<p>就相当于：intitle:SEO intitle:搜索引擎优化</p>
-<p>返回的是标题中中既包含“SEO”，也包含“搜索引擎优化”的页面</p>
-<p>9、related</p>
-<p>related:指令只适用于Google，返回的结果是与某个网站有关联的页面。比如搜索</p>
-<p>related:http://cnseotool.com我们就可以得到Google 所认为的与点石网站有关联的其他页面。 这种关联到底指的是什么，Google 并没有明确说明，一般认为指的是有共同外部链接的网站。</p>
-<p>上面介绍的这几个高级搜索指令，单独使用可以找到不少资源，或者可以更精确地定位竞争对手。把这些指令混合起来使用则更强大。</p>
 ]]></content>
     </entry>
 </feed>
