@@ -2,13 +2,28 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-11-01T09:24:51.026Z</updated>
+    <updated>2019-11-04T09:54:24.246Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[修改python ide 自动补全的间隔时间]]></title>
+        <id>https://imenghu.github.io/post/xiu-gai-python-ide-zi-dong-bu-quan-de-jian-ge-shi-jian</id>
+        <link href="https://imenghu.github.io/post/xiu-gai-python-ide-zi-dong-bu-quan-de-jian-ge-shi-jian">
+        </link>
+        <updated>2019-11-04T09:54:07.000Z</updated>
+        <content type="html"><![CDATA[<p>修改python ide  自动补全的间隔时间:</p>
+<p>改 Python\Python36\Lib\idlelib\ config-extensions.def 的</p>
+<p>[AutoComplete]</p>
+<p>popupwait= 2000</p>
+<p>为:</p>
+<p>[AutoComplete]</p>
+<p>popupwait= 500</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[HTTP请求流程]]></title>
         <id>https://imenghu.github.io/post/http-qing-qiu-liu-cheng</id>
@@ -505,17 +520,6 @@ list2.append(list1)
 2、局部变量：在函数内、在class的方法（构造、类方法、静态方法、实例方法）内（变量未加self修饰），这就是局部变量<br>
 3、 静态变量（类变量）：在class内的，但不在class的方法内的，这就是静态变量（类变量）<br>
 4、 实例变量：在class的方法内的，用self修饰的变量，这就是实例变量</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[import aa 导入时做的事情]]></title>
-        <id>https://imenghu.github.io/post/import-aa-dao-ru-shi-zuo-de-shi-qing</id>
-        <link href="https://imenghu.github.io/post/import-aa-dao-ru-shi-zuo-de-shi-qing">
-        </link>
-        <updated>2019-10-26T00:55:15.000Z</updated>
-        <content type="html"><![CDATA[<p>1 搜索aa这个模块并将里面的内容全部导入<br>
-2 给个模块起一个别名aa,然后后面就可以使用aa.xx来调用模块里面的东西了。<br>
-3 给import 取as 的别名的时候就是为了防止跟本地的变量名称冲突。</p>
 ]]></content>
     </entry>
 </feed>
