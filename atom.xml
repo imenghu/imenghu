@@ -2,13 +2,32 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-11-05T01:17:46.199Z</updated>
+    <updated>2019-11-06T10:51:55.984Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[sql语句之case when null 解决方法]]></title>
+        <id>https://imenghu.github.io/post/sql-yu-ju-zhi-case-when-null-jie-jue-fang-fa</id>
+        <link href="https://imenghu.github.io/post/sql-yu-ju-zhi-case-when-null-jie-jue-fang-fa">
+        </link>
+        <updated>2019-11-06T10:51:34.000Z</updated>
+        <content type="html"><![CDATA[<p>//判断空值,成功!!<br>
+select case<br>
+when 项目名称  IS NULL<br>
+then '空值'<br>
+when 项目名称 ='北二环'<br>
+then 'A'<br>
+when 项目名称 ='北三环'<br>
+then 'B'<br>
+else 'C'<br>
+END  项目名称<br>
+from   物件设计数量统计表</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[修改python ide 自动补全的间隔时间]]></title>
         <id>https://imenghu.github.io/post/xiu-gai-python-ide-zi-dong-bu-quan-de-jian-ge-shi-jian</id>
@@ -508,18 +527,6 @@ list2.append(list1)
 <p>1.手动垃圾回收</p>
 <p>2.调高垃圾回收阈值</p>
 <p>3.避免循环引用（手动解循环引用和使用弱引用）</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Python大盘点：全局变量、局部变量、类变量、实例变量]]></title>
-        <id>https://imenghu.github.io/post/python-da-pan-dian-quan-ju-bian-liang-ju-bu-bian-liang-lei-bian-liang-shi-li-bian-liang</id>
-        <link href="https://imenghu.github.io/post/python-da-pan-dian-quan-ju-bian-liang-ju-bu-bian-liang-lei-bian-liang-shi-li-bian-liang">
-        </link>
-        <updated>2019-10-28T02:51:47.000Z</updated>
-        <content type="html"><![CDATA[<p>1、全局变量：在模块内、在所有函数外面、在class外面，这就是全局变量。<br>
-2、局部变量：在函数内、在class的方法（构造、类方法、静态方法、实例方法）内（变量未加self修饰），这就是局部变量<br>
-3、 静态变量（类变量）：在class内的，但不在class的方法内的，这就是静态变量（类变量）<br>
-4、 实例变量：在class的方法内的，用self修饰的变量，这就是实例变量</p>
 ]]></content>
     </entry>
 </feed>
