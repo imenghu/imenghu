@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Sql Server中查询当天，最近三天，本周，本月，最近一个月，本季度的数据的sql语句 | i萌虎</title>
+<title>函数作用域的LEGB顺序 | i萌虎</title>
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -128,39 +128,66 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">Sql Server中查询当天，最近三天，本周，本月，最近一个月，本季度的数据的sql语句</h2>
-            <div class="post-date">2019-10-30</div>
+            <h2 class="post-title">函数作用域的LEGB顺序</h2>
+            <div class="post-date">2019-11-07</div>
             
             <div class="post-content">
-              <p>当天：</p>
-<pre><code class="language-sql">select * from T_news where datediff(day,addtime,getdate())=0
-</code></pre>
-<p>最近三天：</p>
-<pre><code class="language-sql">select * from T_news where datediff(day,addtime,getdate())&lt;= 2 and datediff(day,addtime,getdate())&gt;= 0
-</code></pre>
-<p>本周：</p>
-<pre><code class="language-sql">select * from T_news WHERE (DATEPART(wk, addtime) = DATEPART(wk, GETDATE())) AND (DATEPART(yy, addtime) = DATEPART(yy, GETDATE()))
-注意：此时不能用 datediff 差值为7,因为，datediff只表示间隔数
-</code></pre>
-<p>本月：</p>
-<pre><code class="language-sql">select * from T_news WHERE (DATEPART(yy, addtime) = DATEPART(yy, GETDATE())) AND (DATEPART(mm, addtime) = DATEPART(mm, GETDATE()))
-</code></pre>
-<p>最近一个月：</p>
-<pre><code class="language-sql">select * from T_news WHERE (DATEPART(yy, addtime) = DATEPART(yy, GETDATE())) 
-AND ((DATEPART(mm, addtime) = DATEPART(mm, GETDATE())) OR (31-DATEPART(DD,addtime)+DATEPART(DD, GETDATE()))&lt;=31)
-</code></pre>
-<p>本季度：</p>
-<pre><code class="language-sql">select * from T_news where DATEPART(qq, addtime) = DATEPART(qq, GETDATE()) and DATEPART(yy, addtime) = DATEPART(yy, GETDATE())
-</code></pre>
+              <p>1.什么是LEGB？<br>
+L:local 函数内部作用域<br>
+E:enclosing 函数内部与内嵌函数之间<br>
+G:global 全局作用域<br>
+B:build-in 内置作用域</p>
+<p>2.它们是作什么用的<br>
+为什么非要介绍这个呢?或者说它们的作用是什么?<br>
+原因是因为我们的在学习Python函数的时候，经常会遇到很多定义域的问题，全部变量，内部变量，内部嵌入的函数，等等，Python是如何查找的呢？以及Python又是按照什么顺序来查找的呢？这里做一个顺序的说明</p>
+<p>3.顺序是什么<br>
+跟名字一样，Python在函数里面的查找分为4种，称之为LEGB，也正是按照这种顺序来查找的。</p>
+<p>首先，是local,先查找函数内部<br>
+然后，是enclosing，再查找函数内部与嵌入函数之间（是指在函数内部再次定义一个函数）<br>
+其次，是global，查找全局<br>
+最后，是build-in，内置作用域</p>
+<p>4.举例说明<br>
+ex1</p>
+<p>复制代码<br>
+1 passline = 60<br>
+2<br>
+3 def func(val):<br>
+4     if val &gt;= passline:<br>
+5         print('pass')<br>
+6     else:<br>
+7         print('failed')<br>
+8<br>
+9 func(89)<br>
+10<br>
+11 ''''''''''''<br>
+12 pass<br>
+13 [Finished in 0.2s]<br>
+14 ''''''''''''<br>
+复制代码</p>
+<p>Python函数首先查找local，在局部变量作用域里并没有passline的定义，然后发现函数内部并没有内嵌函数，这时Python开始查找global，在全局里查找到passline的定义，被调用。</p>
+<p>ex2</p>
+<p>复制代码<br>
+1 def Max(val1, val2):<br>
+2     return max(val1, val2)<br>
+3<br>
+4 print(Max(90, 100))<br>
+5<br>
+6 '''''''''<br>
+7 100<br>
+8 [Finished in 0.1s]<br>
+9 '''''''''<br>
+复制代码</p>
+<p>Max函数里面直接调用另外一个函数，调用的max()（注意两个函数的大小写不一样）,该函数并没有被定义，但是却属于我们上述的第四种，属于build-in函数，既是在python标准库里的函数，内置的，可以直接调用的。最后一步才会查找到这里</p>
+<p>关于第二种，属于内嵌函数，即使在函数里面再次定义一个函数，这时会首先查找local函数里面是否有定义，然后才会查找函数里面内嵌函数里面有没有定义，这一种有专门的名词，叫做闭包，闭包将在另外文章里专门写到</p>
 
             </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://imenghu.github.io/post/bie-jiang-di-dui-zi-ji-de-yao-qiu-yin-wei-hui-bian-ben-jia-li">
+                <a href="https://imenghu.github.io/post/python-zhong-lei-de-zuo-yong-yu-wen-ti">
                   <h3 class="post-title">
-                    别降低对自己的要求，因为会变本加厉
+                    Python 中类的作用域问题
                   </h3>
                 </a>
               </div>
