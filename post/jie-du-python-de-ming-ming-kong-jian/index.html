@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>解读Python的命名空间 | i萌虎</title>
+<meta name="description" content="">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://imenghu.github.io/favicon.ico?v=1573181619273">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://imenghu.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://imenghu.github.io">
+        <img src="https://imenghu.github.io/images/avatar.png?v=1573181619273" class="site-logo">
+        <h1 class="site-title">i萌虎</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+        
+          <a href="/Learning/Python" class="site-nav" target="_blank">
+            Python
+          </a>
+        
+      
+        
+          <a href="\Learning\Django" class="site-nav" target="_blank">
+            Django
+          </a>
+        
+      
+        
+          <a href="\Learning\redis" class="site-nav" target="_blank">
+            Redis
+          </a>
+        
+      
+        
+          <a href="\Learning\前端课件" class="site-nav" target="_blank">
+            前端
+          </a>
+        
+      
+        
+          <a href="\Learning\Spider" class="site-nav" target="_blank">
+            爬虫
+          </a>
+        
+      
+        
+          <a href="\Learning\DTA" class="site-nav" target="_blank">
+            数据分析
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://imenghu.github.io" target="_blank">萌虎</a> | <a class="rss" href="https://imenghu.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">解读Python的命名空间</h2>
+            <div class="post-date">2019-11-08</div>
+            
+            <div class="post-content">
+              <p>前面我们理解了变量、函数的作用域，现在我们再深入讨论一下Python是如何给变量、函数划分作用域的。</p>
+<p>我们在编写Python程序的过程中，如果要使用变量和函数，都需要先对变量和函数命名后才能使用。Python会把命名后的变量和函数分配到不同的命名空间，并通过名称来识别它们。Python为什么要区分不同的命名空间呢？它有两个作用：一个作用是不同的命名空间对应不同的作用域；另外一个作用是防止命名冲突。</p>
+<p>我们先来看第一个作用。前面我们已经知道了在函数内部声明的变量属于局部变量，在模块内部声明的变量属于全局变量。Python是如何确定哪个变量是属于全局还是局部呢？这就需要用到命名空间概念了。</p>
+<p>Python会把在函数内部声明的变量放置到局部命名空间，把在模块声明的变量放置到全局命名空间。在局部命名空间的变量其作用域只能是在函数内部范围，在全局命名空间的变量其作用域为整个模块。函数的命名也同样适用于局部命名空间和全局命名空间，嵌套函数的命名是放置在局部命名空间的，因此其作用域只能在父函数范围；而父函数的命名是放置在全局命名空间的，因此其作用域适用于整个模块。</p>
+<p>关于命名空间的作用域，这里面还有一个问题。那就是在模块或函数中使用的Python自身提供的内建函数，它是属于哪个命名空间呢？因为这些内建函数在模块中随意使用，没有作用域的限制。其实Python还为自己的函数、程序提供了一个命名空间，这个命名空间是内置命名空间，在内置命名空间放置的变量、函数，在整个Python程序模块中都可以被访问，其作用域是整个程序。</p>
+<p>小结一下，在Python程序执行过程中，会有局部命名空间、全局命名空间和内建命名空间同时存在。局部命名空间记录函数内部的变量、传入函数的参数、嵌套函数等被命名的对象；全局命名空间记录模块的变量、函数、类及其它导入的模块等被命名的对象；内建命名空间记录Python自身提供的函数、模块等被命名的对象。</p>
+<p>我们再来看命名空间的第二个作用。命名空间可以预防变量和函数的命名冲突。前面我们知道了Python有三类命名空间，分别是局部命名空间、全局命名空间和内建命名空间。Python在编译和解释执行Python代码的过程中，会为每个模块建立一个全局命名空间，为模块中的每个函数建立局部命名空间。相当于Python为程序的每个模块和函数提供了一个封闭的命名空间，在这个封闭的命名空间中，函数及变量命名互相不受影响，在不同的模块中可以声明相同名称的函数，在不同的函数中可以声明相同名称的变量，虽然它们的名称相同，但它们之间没有任何联系。</p>
+<p>那么Python如何把已命名的变量及函数的作用域和命名空间联系起来了呢？它所要做的就是在命名空间查询变量或函数的名称。Python访问一个已命名的变量或函数时，它会从三个命名空间中查询。首先从局部命名空间开始，如果没有找到，它就会继续查找全局命名空间，如果在全局命名空间中也没找到，它将在内建命名空间里查找。如果这些查找都失败了，它将会报出下面的错误。</p>
+<figure data-type="image" tabindex="1"><img src="https://imenghu.github.io/post-images/1573181566780.jpg" alt=""></figure>
+<p>在Python解释器中，我们输入了foo，没有给foo进行赋值（声明变量时需要进行赋值）。解释器会从命名空间中查找foo，它先从局部空间查找，如果找到了它就会使用局部命名空间的变量foo，即使全局命名空间也有变量foo。这就很容易理解为什么在函数内部声明的局部变量会覆盖掉在模块中声明的同名变量。</p>
+<p>Python提供了内建函数可以输出命名空间里面的内容。输出局部命名空间的内容使用locals()函数，输出全局命名空间的的内容使用globals()函数。</p>
+<figure data-type="image" tabindex="2"><img src="https://imenghu.github.io/post-images/1573181560065.jpg" alt=""></figure>
+<p>上面的代码给出了如何访问局部命名空间和全局命名空间的内容，命名空间的内容以字典形式给出，字典的key是已命名的变量或函数名称，value是这些变量或函数的值。从输出内容可以看出，局部变量的π覆盖了全局变量的π。下图是输出结果。</p>
+<figure data-type="image" tabindex="3"><img src="https://imenghu.github.io/post-images/1573181574655.jpg" alt=""></figure>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://imenghu.github.io/post/yi-pian-wen-zhang-rang-ni-che-di-gao-qing-chu-python-zhong-self-de-han-yi">
+                  <h3 class="post-title">
+                    一篇文章让你彻底搞清楚Python中self的含义
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
