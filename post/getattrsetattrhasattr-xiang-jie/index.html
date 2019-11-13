@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>常用工具网址大全 | i萌虎</title>
+<title>getattr,setattr,hasattr详解 | i萌虎</title>
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -128,38 +128,39 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">常用工具网址大全</h2>
-            <div class="post-date">2019-10-09</div>
+            <h2 class="post-title">getattr,setattr,hasattr详解</h2>
+            <div class="post-date">2019-11-13</div>
             
             <div class="post-content">
               <ol>
-<li><a href="http://tool.oschina.net">常用在线查询工具</a>  常用在线查询工具</li>
-<li><a href="http://tampermonkey.net/scripts.php?ext=dhdg">油猴插件</a>  油猴插件</li>
-<li><a href="http://www.box3.cn/#">开发人员工具箱</a></li>
-<li><a href="http://www.sowang.com/bbs/forum.php?mod=viewthread&amp;tid=132294">搜索大全</a></li>
-<li><a href="https://dwz.cn">百度短网址生成</a></li>
-<li><a href="http://baijiahao.baidu.com/s?id=1603886666150544094&amp;wfr=spider&amp;for=pc">VLOOKUP函数的使用</a></li>
-<li><a href="https://720yun.com/">720全景图</a></li>
-<li><a href="http://www.yxc3.com/888.php">邮箱批量购买</a></li>
-<li><a href="http://blog.zhaojie.me">.net博客</a></li>
+<li><strong>hasattr(object, name)</strong></li>
 </ol>
+<p>判断一个对象里面是否有name属性或者name方法，返回BOOL值，有name特性返回True， 否则返回False。<br>
+需要注意的是name要用括号括起来。</p>
+<p>实例：<br>
+<img src="https://img-blog.csdn.net/20181015192304290?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JvdGVtYW4xMjM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
+<ol start="2">
+<li><strong>getattr(object, name[,default])</strong></li>
+</ol>
+<p>获取对象object的属性或者方法，如果存在打印出来，如果不存在，打印出默认值，默认值可选。<br>
+需要注意的是，如果是返回的对象的方法，返回的是方法的内存地址，如果需要运行这个方法，<br>
+可以在后面添加一对括号。</p>
+<p>实例：<br>
+<img src="https://img-blog.csdn.net/20181015192352956?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JvdGVtYW4xMjM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
+<ol start="3">
+<li><strong>setattr(object, name, values)</strong></li>
+</ol>
+<p>给对象的属性赋值，若属性不存在，先创建再赋值。<br>
+<img src="https://img-blog.csdn.net/20181015192503188?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JvdGVtYW4xMjM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
 
             </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://imenghu.github.io/tag/ZlTQ8uj2u" class="tag">
-                    工作
-                  </a>
-                
-              </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://imenghu.github.io/post/mysql5722-an-zhuang-jiao-cheng">
+                <a href="https://imenghu.github.io/post/python-zhong-de-liang-ge-han-shu">
                   <h3 class="post-title">
-                    MYSQL5.7.22安装教程
+                    python 中的两个函数dir,help
                   </h3>
                 </a>
               </div>

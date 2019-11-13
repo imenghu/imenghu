@@ -2,13 +2,51 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-11-12T01:19:27.057Z</updated>
+    <updated>2019-11-13T01:31:28.429Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[getattr,setattr,hasattr详解]]></title>
+        <id>https://imenghu.github.io/post/getattrsetattrhasattr-xiang-jie</id>
+        <link href="https://imenghu.github.io/post/getattrsetattrhasattr-xiang-jie">
+        </link>
+        <updated>2019-11-13T01:25:12.000Z</updated>
+        <content type="html"><![CDATA[<ol>
+<li><strong>hasattr(object, name)</strong></li>
+</ol>
+<p>判断一个对象里面是否有name属性或者name方法，返回BOOL值，有name特性返回True， 否则返回False。<br>
+需要注意的是name要用括号括起来。</p>
+<p>实例：<br>
+<img src="https://img-blog.csdn.net/20181015192304290?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JvdGVtYW4xMjM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
+<ol start="2">
+<li><strong>getattr(object, name[,default])</strong></li>
+</ol>
+<p>获取对象object的属性或者方法，如果存在打印出来，如果不存在，打印出默认值，默认值可选。<br>
+需要注意的是，如果是返回的对象的方法，返回的是方法的内存地址，如果需要运行这个方法，<br>
+可以在后面添加一对括号。</p>
+<p>实例：<br>
+<img src="https://img-blog.csdn.net/20181015192352956?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JvdGVtYW4xMjM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
+<ol start="3">
+<li><strong>setattr(object, name, values)</strong></li>
+</ol>
+<p>给对象的属性赋值，若属性不存在，先创建再赋值。<br>
+<img src="https://img-blog.csdn.net/20181015192503188?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JvdGVtYW4xMjM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[python 中的两个函数dir,help]]></title>
+        <id>https://imenghu.github.io/post/python-zhong-de-liang-ge-han-shu</id>
+        <link href="https://imenghu.github.io/post/python-zhong-de-liang-ge-han-shu">
+        </link>
+        <updated>2019-11-12T01:57:04.000Z</updated>
+        <content type="html"><![CDATA[<p><strong>1. dir(对象名) 查看该对象的属性和方法。</strong><br>
+<strong>2. help(对象名.属性名)  查看该对象属性(方法)的具体实现</strong></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Git记忆图]]></title>
         <id>https://imenghu.github.io/post/git-ji-yi-tu</id>
@@ -297,57 +335,6 @@ from   物件设计数量统计表</p>
 </ol>
 <p>4：Handler处理完以后，请求再一次回到Module，此时Module可以做工作之后的事情</p>
 <p>四:运行程序员编写的代码完成工作，IIS接收返回的数据流，交给HTTP.SYS，由HTTP.SYS将数据返回给客户端,整个请求完成。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Python 连接sqlserver]]></title>
-        <id>https://imenghu.github.io/post/python-lian-jie-sqlserver</id>
-        <link href="https://imenghu.github.io/post/python-lian-jie-sqlserver">
-        </link>
-        <updated>2019-11-01T07:41:31.000Z</updated>
-        <content type="html"><![CDATA[<pre><code class="language-python">import pymssql
-class linkDB():
-    def linkdb():
-        #数据库远程连接
-        conn = pymssql.connect(host=&quot;数据库IP地址:端口号&quot;,user=&quot;用户名&quot;,password=&quot;密码&quot;,database=&quot;数据库名&quot;,charset=&quot;utf8&quot;)
-        #使用cursor()方法获取操作游标
-        cursor = conn.cursor()
-        #查询语句
-        sql = &quot;这里面是sql语句&quot;
-        try:
-            cursor.execute(sql)  #游标
-            result = cursor.fetchall() #查询
-            print(result)
-        except:
-            print(&quot;连接数据库报错了！&quot;)
-        #关闭数据库连接
-        conn.close()
-
-if __name__ == '__main__':
-    linkDB.linkdb()
-
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Django2.0入门教程:Django常用命令]]></title>
-        <id>https://imenghu.github.io/post/django20-ru-men-jiao-cheng-django-chang-yong-ming-ling</id>
-        <link href="https://imenghu.github.io/post/django20-ru-men-jiao-cheng-django-chang-yong-ming-ling">
-        </link>
-        <updated>2019-11-01T06:16:02.000Z</updated>
-        <content type="html"><![CDATA[<p>安装Django：	pip install django  指定版本 pip3 install django==2.0</p>
-<p>新建项目：	django-admin.py startproject mysite</p>
-<p>新建APP :	python manage.py startapp blog</p>
-<p>启动：python manage.py runserver 8080</p>
-<p>同步或者更改生成 数据库：</p>
-<p>python manage.py makemigrations</p>
-<p>python manage.py migrate</p>
-<p>清空数据库：	python manage.py flush</p>
-<p>创建管理员：	python manage.py createsuperuser</p>
-<p>修改用户密码： python manage.py changepassword username</p>
-<p>Django项目环境终端： python manage.py shell</p>
-<p>这个命令和 直接运行 python 进入 shell 的区别是：你可以在这个 shell 里面调用当前项目的 models.py 中的 API，对于操作数据的测试非常方便。</p>
-<p>更多关于Django的命令在终端输入：python manage.py 查看</p>
 ]]></content>
     </entry>
 </feed>
