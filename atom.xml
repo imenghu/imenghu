@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-11-14T05:37:05.188Z</updated>
+    <updated>2019-11-14T05:40:51.214Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
@@ -130,6 +130,7 @@ resetIPC(sys.argv[1], sys.argv[2], sys.argv[3])
 </code></pre>
 <p>上面的python脚本实现的是重启IPC设备，测试功能成功。</p>
 <p><strong>调用包含第三方模块的python脚本时，尝试过使用path.append()方式，调试有各种问题，最终放弃了，没有研究。</strong></p>
+<p>(git地址)[git@github.com:imenghu/CSharpCallPython.git]</p>
 ]]></content>
     </entry>
     <entry>
