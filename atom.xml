@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-11-14T00:56:12.563Z</updated>
+    <updated>2019-11-14T00:57:22.192Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
@@ -270,7 +270,7 @@ python 中的属性获取存在一个向上查找的机制。<br>
 <ol>
 <li>类名. 类属性</li>
 <li>对象.类属性(不推荐)<br>
-** 注意 **</li>
+<strong>注意</strong></li>
 </ol>
 </li>
 <li>如果使用 <em><strong>对象.类属性 = 值 赋值语句</strong></em>，<strong>只会给对象添加一个属性</strong>，而不会影响到类属性的值</li>
