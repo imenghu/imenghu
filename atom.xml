@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-11-13T01:33:23.592Z</updated>
+    <updated>2019-11-14T00:56:12.563Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
@@ -260,8 +260,21 @@ NameError: name 'a' is not defined<br>
 很显然报了 NameError 错误，我错误地认为 <strong>init</strong> 方法里面是可以直接拿到类中定义的变量 a 的，实际上并不可以。<br>
 如大家所知，Python 的作用域查找顺序是 LEGB，即局部作用域、外部作用域、全局作用域和内置作用域，这里面并不包含 C（类作用域）。<br>
 下面引用来自《Python 学习手册》第 859 页的一段话来说明这一点：</p>
-<p>** 尽管类能够访问外层函数的作用域，但它们不能作为类中其它代码的外层作用域：Python 搜索外层函数来访问被引用的名称，但从来不会搜索外层类。也就是说，类是一个可以访问其外层作用域的局部作用域，但其本身却不能作为一个外层作用域被访问。因为方法函数中对名称的搜索跳过了外层的类，所以类属性必须作为对象属性并使用继承来访问。***</p>
+<p>** 尽管类能够访问外层函数的作用域，但它们不能作为类中其它代码的外层作用域：Python 搜索外层函数来访问被引用的名称，但从来不会搜索外层类。也就是说，类是一个可以访问其外层作用域的局部作用域，但其本身却不能作为一个外层作用域被访问。因为方法函数中对名称的搜索跳过了外层的类，所以类属性必须作为对象属性并使用继承来访问。**</p>
 <p>所以在上面如果要访问到 a 的话，只能通过点号取属性访问，比如 self.<strong>class</strong>.a。</p>
+<p>** 二、属性的获取机制 **<br>
+python 中的属性获取存在一个向上查找的机制。<br>
+<img src="https://imenghu.github.io/post-images/1573692965568.png" alt=""></p>
+<ul>
+<li>因此要访问类属性的方式有两种：
+<ol>
+<li>类名. 类属性</li>
+<li>对象.类属性(不推荐)<br>
+** 注意 **</li>
+</ol>
+</li>
+<li>如果使用 <em><strong>对象.类属性 = 值 赋值语句</strong></em>，<strong>只会给对象添加一个属性</strong>，而不会影响到类属性的值</li>
+</ul>
 ]]></content>
     </entry>
     <entry>
