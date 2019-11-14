@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>SqlServer：此数据库处于单用户模式，导致数据库无法删除的处理 | i萌虎</title>
+<title>SQL | i萌虎</title>
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -127,69 +127,43 @@
 
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
-          <div class="post-detail">
-            <h2 class="post-title">SqlServer：此数据库处于单用户模式，导致数据库无法删除的处理</h2>
-            <div class="post-date">2019-10-15</div>
-            
-            <div class="post-content">
-              <p>今天在删除一个数据库时，一直报错，大意是：此数据库处理单用户模式，尚在连接当中，无法删除（既使将SQLServer停止后再启动也是如此）</p>
-<p>百度之后找到了解决办法，备份于此:</p>
-<p>USE [master]<br>
-GO</p>
-<p>/****** Object:  StoredProcedure [dbo].[killspid]    Script Date: 03/28/2011 11:01:32 ******/<br>
-SET ANSI_NULLS ON<br>
-GO</p>
-<p>SET QUOTED_IDENTIFIER ON<br>
-GO</p>
-<p>--建一个存储过程，断开所有用户连接。<br>
-create   proc   [dbo].[killspid]   (@dbname   varchar(20))<br>
-as<br>
-begin<br>
-declare   @sql   nvarchar(500)<br>
-declare   @spid   int<br>
-set   @sql='declare   getspid   cursor   for<br>
-select   spid   from   sysprocesses   where   dbid=db_id('''+@dbname+''')'<br>
-exec   (@sql)<br>
-open   getspid<br>
-fetch   next   from   getspid   into   @spid<br>
-while   @@fetch_status&lt;&gt;-1<br>
-begin<br>
-exec('kill   '+@spid)<br>
-fetch   next   from   getspid   into   @spid<br>
-end<br>
-close   getspid<br>
-deallocate   getspid<br>
-end</p>
-<p>GO</p>
-<p>先在master中创建一个存储过程，用于干掉所有连接，然后调用</p>
-<p>use   master<br>
-exec   killspid   '出问题的数据库名'</p>
-<p>再删除就ok了</p>
-
-            </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://imenghu.github.io/tag/6LYU5xIUl" class="tag">
-                    数据库
-                  </a>
-                
-              </div>
-            
-            
-              <div class="next-post">
-                <div class="next">下一篇</div>
-                <a href="https://imenghu.github.io/post/yan-jiang-hui-bao-de-6-tiao-ji-qiao-xue-liao-ni-jiu-neng-gou-zai-ling-dao-mian-qian-yi-pao-er-hong">
-                  <h3 class="post-title">
-                    演讲汇报的6条技巧，学了你就能够在领导面前一炮而红
-                  </h3>
+          <h2 class="current-tag">标签: SQL</h2>
+          
+            <article class="post-item">
+              <div class="left">
+                <a href="https://imenghu.github.io/post/python-lian-jie-sqlserver">
+                  <h2 class="post-title">Python 连接sqlserver</h2>
                 </a>
+                <div class="post-date">
+                  2019-11-01
+                </div>
+                <div class="post-abstract">
+                  
+                </div>
               </div>
-            
+              
+            </article>
+          
+            <article class="post-item">
+              <div class="left">
+                <a href="https://imenghu.github.io/post/sql-server-zhong-cha-xun-dang-tian-zui-jin-san-tian-ben-zhou-ben-yue-zui-jin-yi-ge-yue-ben-ji-du-de-shu-ju-de-sql-yu-ju">
+                  <h2 class="post-title">Sql Server中查询当天，最近三天，本周，本月，最近一个月，本季度的数据的sql语句</h2>
+                </a>
+                <div class="post-date">
+                  2019-10-30
+                </div>
+                <div class="post-abstract">
+                  
+                </div>
+              </div>
+              
+            </article>
+          
 
-            
-
-          </div>
+          <div class="pagination-container">
+  
+  
+</div>
 
         </div>
       </div>

@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://imenghu.github.io/favicon.ico?v=1573711074150">
+<link rel="shortcut icon" href="https://imenghu.github.io/favicon.ico?v=1573728370176">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://imenghu.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://imenghu.github.io">
-        <img src="https://imenghu.github.io/images/avatar.png?v=1573711074150" class="site-logo">
+        <img src="https://imenghu.github.io/images/avatar.png?v=1573728370176" class="site-logo">
         <h1 class="site-title">i萌虎</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -132,7 +132,8 @@
             <div class="post-date">2019-10-28</div>
             
             <div class="post-content">
-              <h2 id="一-什么是内存管理和垃圾回收">一 、什么是内存管理和垃圾回收</h2>
+              <!-- more -->
+<h2 id="一-什么是内存管理和垃圾回收">一 、什么是内存管理和垃圾回收</h2>
 <p>Python GC主要使用<strong>引用计数（reference counting）<strong>来跟踪和回收垃圾。在引用计数的基础上，通过“<strong>标记-清除</strong>”（mark and sweep）解决容器对象可能产生的循环引用问题，通过</strong>“分代回收”</strong>（generation collection）以空间换时间的方法提高垃圾回收效率。</p>
 <p>现在的高级语言如java，c#等，都采用了垃圾收集机制，而不再是c，c++里用户自己管理维护内存的方式。自己管理内存极其自由，可以任意申请内存，但如同一把双刃剑，为大量内存泄露，悬空指针等bug埋下隐患。</p>
 <p>对于一个字符串、列表、类甚至数值都是对象，且定位简单易用的语言，自然不会让用户去处理如何分配回收内存的问题。</p>
@@ -262,6 +263,14 @@ list2.append(list1)
 <p>3.避免循环引用（手动解循环引用和使用弱引用）</p>
 
             </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://imenghu.github.io/tag/Fu9esguuE" class="tag">
+                    Python
+                  </a>
+                
+              </div>
             
             
               <div class="next-post">
