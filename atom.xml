@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-11-14T00:58:01.857Z</updated>
+    <updated>2019-11-14T01:18:15.054Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
@@ -84,67 +84,78 @@
         <link href="https://imenghu.github.io/post/yi-pian-wen-zhang-rang-ni-che-di-gao-qing-chu-python-zhong-self-de-han-yi">
         </link>
         <updated>2019-11-07T05:40:20.000Z</updated>
-        <content type="html"><![CDATA[<p>刚开始学习Python的类写法的时候觉得很是麻烦，为什么定义时需要而调用时又不需要，为什么不能内部简化从而减少我们敲击键盘的次数？<br>
+        <summary type="html"><![CDATA[<p>刚开始学习Python的类写法的时候觉得很是麻烦，为什么定义时需要而调用时又不需要，为什么不能内部简化从而减少我们敲击键盘的次数？<br>
 你看完这篇文章后就会明白所有的疑问。</p>
 <p>self代表类的实例，而非类。<br>
 实例来说明</p>
-<p>class Test:<br>
-def prt(self):<br>
-print(self)<br>
-print(self.<strong>class</strong>)</p>
-<p>t = Test()<br>
-t.prt()<br>
+<pre><code class="language-python">class Test:
+    def prt(self):
+        print(self)
+        print(self.__class__)
+
+t = Test()
+t.prt()
+</code></pre>
+<p>'''<br>
 执行结果如下</p>
 <p>&lt;<strong>main</strong>.Test object at 0x000000000284E080&gt;<br>
 &lt;class '<strong>main</strong>.Test'&gt;<br>
+'''<br>
 从上面的例子中可以很明显的看出，self代表的是类的实例。而self.__class__则指向类。</p>
 <p>self不必非写成self<br>
 有很多童鞋是先学习别的语言然后学习Python的，所以总觉得self怪怪的，想写成this，可以吗？<br>
 当然可以，还是把上面的代码改写一下。</p>
-<p>class Test:<br>
-def prt(this):<br>
-print(this)<br>
-print(this.<strong>class</strong>)</p>
-<p>t = Test()<br>
-t.prt()<br>
-改成this后，运行结果完全一样。<br>
+<pre><code class="language-python">class Test:
+    def prt(this):
+        print(this)
+        print(this.__class__)
+
+t = Test()
+t.prt()
+</code></pre>
+<p>改成this后，运行结果完全一样。<br>
 当然，最好还是尊重约定俗成的习惯，使用self。</p>
 <p>self可以不写吗<br>
 在Python的解释器内部，当我们调用t.prt()时，实际上Python解释成Test.prt(t)，也就是说把self替换成类的实例。<br>
 有兴趣的童鞋可以把上面的t.prt()一行改写一下，运行后的实际结果完全相同。<br>
 实际上已经部分说明了self在定义时不可以省略，如果非要试一下，那么请看下面：</p>
-<p>class Test:<br>
-def prt():<br>
-print(self)</p>
-<p>t = Test()<br>
-t.prt()<br>
-运行时提醒错误如下：prt在定义时没有参数，但是我们运行时强行传了一个参数。<br>
+<pre><code class="language-python">class Test:
+    def prt():
+        print(self)
+
+t = Test()
+t.prt()
+</code></pre>
+<p>运行时提醒错误如下：prt在定义时没有参数，但是我们运行时强行传了一个参数。<br>
 由于上面解释过了t.prt()等同于Test.prt(t)，所以程序提醒我们多传了一个参数t。</p>
 <p>Traceback (most recent call last):<br>
 File &quot;h.py&quot;, line 6, in <module><br>
 t.prt()<br>
 TypeError: prt() takes 0 positional arguments but 1 was given<br>
 当然，如果我们的定义和调用时均不传类实例是可以的，这就是类方法。</p>
-<p>class Test:<br>
-def prt():<br>
-print(<strong>class</strong>)<br>
-Test.prt()<br>
-运行结果如下</p>
+<pre><code class="language-python">class Test:
+    def prt():
+        print(__class__)
+Test.prt()
+</code></pre>
+<p>运行结果如下</p>
 <p>&lt;class '<strong>main</strong>.Test'&gt;<br>
 在继承时，传入的是哪个实例，就是那个传入的实例，而不是指定义了self的类的实例。<br>
 先看代码</p>
-<p>class Parent:<br>
-def pprt(self):<br>
-print(self)</p>
-<p>class Child(Parent):<br>
-def cprt(self):<br>
-print(self)<br>
-c = Child()<br>
-c.cprt()<br>
-c.pprt()<br>
-p = Parent()<br>
-p.pprt()<br>
-运行结果如下</p>
+<pre><code class="language-python">class Parent:
+    def pprt(self):
+        print(self)
+
+class Child(Parent):
+    def cprt(self):
+        print(self)
+c = Child()
+c.cprt()
+c.pprt()
+p = Parent()
+p.pprt()
+</code></pre>
+<p>运行结果如下</p>
 <p>&lt;<strong>main</strong>.Child object at 0x0000000002A47080&gt;<br>
 &lt;<strong>main</strong>.Child object at 0x0000000002A47080&gt;<br>
 &lt;<strong>main</strong>.Parent object at 0x0000000002A47240&gt;<br>
@@ -153,18 +164,19 @@ p.pprt()<br>
 但是在运行c.pprt()时，等同于Child.pprt(c)，所以self指的依然是Child类的实例，由于self中没有定义pprt()方法，所以沿着继承树往上找，发现在父类Parent中定义了pprt()方法，所以就会成功调用。</p>
 <p>在描述符类中，self指的是描述符类的实例<br>
 不太容易理解，先看实例：</p>
-<p>class Desc:<br>
-def <strong>get</strong>(self, ins, cls):<br>
-print('self in Desc: %s ' % self )<br>
-print(self, ins, cls)<br>
-class Test:<br>
-x = Desc()<br>
-def prt(self):<br>
-print('self in Test: %s' % self)<br>
-t = Test()<br>
-t.prt()<br>
-t.x<br>
-运行结果如下：</p>
+<pre><code class="language-python">class Desc:
+    def __get__(self, ins, cls):
+        print('self in Desc: %s ' % self )
+        print(self, ins, cls)
+class Test:
+    x = Desc()
+    def prt(self):
+        print('self in Test: %s' % self)
+t = Test()
+t.prt()
+t.x
+</code></pre>
+<p>运行结果如下：</p>
 <p>self in Test: &lt;<strong>main</strong>.Test object at 0x0000000002A570B8&gt;<br>
 self in Desc: &lt;<strong>main</strong>.Desc object at 0x000000000283E208&gt;<br>
 &lt;<strong>main</strong>.Desc object at 0x000000000283E208&gt; &lt;<strong>main</strong>.Test object at 0x0000000002A570B8&gt; &lt;class '<strong>main</strong>.Test'&gt;<br>
@@ -181,6 +193,117 @@ self在定义时需要定义，但是在调用时会自动传入。<br>
 self的名字并不是规定死的，但是最好还是按照约定是用self<br>
 self总是指调用时的类的实例。<br>
 以上所有代码在Python3.4中均测试通过。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>刚开始学习Python的类写法的时候觉得很是麻烦，为什么定义时需要而调用时又不需要，为什么不能内部简化从而减少我们敲击键盘的次数？<br>
+你看完这篇文章后就会明白所有的疑问。</p>
+<p>self代表类的实例，而非类。<br>
+实例来说明</p>
+<pre><code class="language-python">class Test:
+    def prt(self):
+        print(self)
+        print(self.__class__)
+
+t = Test()
+t.prt()
+</code></pre>
+<p>'''<br>
+执行结果如下</p>
+<p>&lt;<strong>main</strong>.Test object at 0x000000000284E080&gt;<br>
+&lt;class '<strong>main</strong>.Test'&gt;<br>
+'''<br>
+从上面的例子中可以很明显的看出，self代表的是类的实例。而self.__class__则指向类。</p>
+<p>self不必非写成self<br>
+有很多童鞋是先学习别的语言然后学习Python的，所以总觉得self怪怪的，想写成this，可以吗？<br>
+当然可以，还是把上面的代码改写一下。</p>
+<pre><code class="language-python">class Test:
+    def prt(this):
+        print(this)
+        print(this.__class__)
+
+t = Test()
+t.prt()
+</code></pre>
+<p>改成this后，运行结果完全一样。<br>
+当然，最好还是尊重约定俗成的习惯，使用self。</p>
+<p>self可以不写吗<br>
+在Python的解释器内部，当我们调用t.prt()时，实际上Python解释成Test.prt(t)，也就是说把self替换成类的实例。<br>
+有兴趣的童鞋可以把上面的t.prt()一行改写一下，运行后的实际结果完全相同。<br>
+实际上已经部分说明了self在定义时不可以省略，如果非要试一下，那么请看下面：</p>
+<pre><code class="language-python">class Test:
+    def prt():
+        print(self)
+
+t = Test()
+t.prt()
+</code></pre>
+<p>运行时提醒错误如下：prt在定义时没有参数，但是我们运行时强行传了一个参数。<br>
+由于上面解释过了t.prt()等同于Test.prt(t)，所以程序提醒我们多传了一个参数t。</p>
+<p>Traceback (most recent call last):<br>
+File &quot;h.py&quot;, line 6, in <module><br>
+t.prt()<br>
+TypeError: prt() takes 0 positional arguments but 1 was given<br>
+当然，如果我们的定义和调用时均不传类实例是可以的，这就是类方法。</p>
+<pre><code class="language-python">class Test:
+    def prt():
+        print(__class__)
+Test.prt()
+</code></pre>
+<p>运行结果如下</p>
+<p>&lt;class '<strong>main</strong>.Test'&gt;<br>
+在继承时，传入的是哪个实例，就是那个传入的实例，而不是指定义了self的类的实例。<br>
+先看代码</p>
+<pre><code class="language-python">class Parent:
+    def pprt(self):
+        print(self)
+
+class Child(Parent):
+    def cprt(self):
+        print(self)
+c = Child()
+c.cprt()
+c.pprt()
+p = Parent()
+p.pprt()
+</code></pre>
+<p>运行结果如下</p>
+<p>&lt;<strong>main</strong>.Child object at 0x0000000002A47080&gt;<br>
+&lt;<strong>main</strong>.Child object at 0x0000000002A47080&gt;<br>
+&lt;<strong>main</strong>.Parent object at 0x0000000002A47240&gt;<br>
+解释：<br>
+运行c.cprt()时应该没有理解问题，指的是Child类的实例。<br>
+但是在运行c.pprt()时，等同于Child.pprt(c)，所以self指的依然是Child类的实例，由于self中没有定义pprt()方法，所以沿着继承树往上找，发现在父类Parent中定义了pprt()方法，所以就会成功调用。</p>
+<p>在描述符类中，self指的是描述符类的实例<br>
+不太容易理解，先看实例：</p>
+<pre><code class="language-python">class Desc:
+    def __get__(self, ins, cls):
+        print('self in Desc: %s ' % self )
+        print(self, ins, cls)
+class Test:
+    x = Desc()
+    def prt(self):
+        print('self in Test: %s' % self)
+t = Test()
+t.prt()
+t.x
+</code></pre>
+<p>运行结果如下：</p>
+<p>self in Test: &lt;<strong>main</strong>.Test object at 0x0000000002A570B8&gt;<br>
+self in Desc: &lt;<strong>main</strong>.Desc object at 0x000000000283E208&gt;<br>
+&lt;<strong>main</strong>.Desc object at 0x000000000283E208&gt; &lt;<strong>main</strong>.Test object at 0x0000000002A570B8&gt; &lt;class '<strong>main</strong>.Test'&gt;<br>
+大部分童鞋开始有疑问了，为什么在Desc类中定义的self不是应该是调用它的实例t吗？怎么变成了Desc类的实例了呢？<br>
+注意：此处需要睁大眼睛看清楚了，这里调用的是t.x，也就是说是Test类的实例t的属性x，由于实例t中并没有定义属性x，所以找到了类属性x，而该属性是描述符属性，为Desc类的实例而已，所以此处并没有顶用Test的任何方法。<br>
+那么我们如果直接通过类来调用属性x也可以得到相同的结果。<br>
+下面是把t.x改为Test.x运行的结果。</p>
+<p>self in Test: &lt;<strong>main</strong>.Test object at 0x00000000022570B8&gt;<br>
+self in Desc: &lt;<strong>main</strong>.Desc object at 0x000000000223E208&gt;<br>
+&lt;<strong>main</strong>.Desc object at 0x000000000223E208&gt; None &lt;class '<strong>main</strong>.Test'&gt;<br>
+题外话：由于在很多时候描述符类中仍然需要知道调用该描述符的实例是谁，所以在描述符类中存在第二个参数ins，用来表示调用它的类实例，所以t.x时可以看到第三行中的运行结果中第二项为&lt;main.Test object at 0x0000000002A570B8&gt;。而采用Test.x进行调用时，由于没有实例，所以返回None。</p>
+<p>总结<br>
+self在定义时需要定义，但是在调用时会自动传入。<br>
+self的名字并不是规定死的，但是最好还是按照约定是用self<br>
+self总是指调用时的类的实例。<br>
+以上所有代码在Python3.4中均测试通过。</p>
+<!-- more -->
 ]]></content>
     </entry>
     <entry>
@@ -205,35 +328,32 @@ B:build-in 内置作用域</p>
 最后，是build-in，内置作用域</p>
 <p>4.举例说明<br>
 ex1</p>
-<p>复制代码<br>
-1 passline = 60<br>
-2<br>
-3 def func(val):<br>
-4     if val &gt;= passline:<br>
-5         print('pass')<br>
-6     else:<br>
-7         print('failed')<br>
-8<br>
-9 func(89)<br>
-10<br>
-11 ''''''''''''<br>
-12 pass<br>
-13 [Finished in 0.2s]<br>
-14 ''''''''''''<br>
+<pre><code class="language-python">  passline = 60
+  
+  def func(val):
+      if val &gt;= passline:
+          print('pass')
+      else:
+          print('failed')
+  
+  func(89)    
+</code></pre>
+<p>''''''''''''<br>
+pass<br>
+[Finished in 0.2s]<br>
+''''''''''''<br>
 复制代码</p>
 <p>Python函数首先查找local，在局部变量作用域里并没有passline的定义，然后发现函数内部并没有内嵌函数，这时Python开始查找global，在全局里查找到passline的定义，被调用。</p>
 <p>ex2</p>
-<p>复制代码<br>
-1 def Max(val1, val2):<br>
-2     return max(val1, val2)<br>
-3<br>
-4 print(Max(90, 100))<br>
-5<br>
-6 '''''''''<br>
-7 100<br>
-8 [Finished in 0.1s]<br>
-9 '''''''''<br>
-复制代码</p>
+<pre><code class="language-python"> def Max(val1, val2):
+     return max(val1, val2)
+ 
+ print(Max(90, 100))
+</code></pre>
+<p>'''''''''<br>
+100<br>
+[Finished in 0.1s]<br>
+'''''''''</p>
 <p>Max函数里面直接调用另外一个函数，调用的max()（注意两个函数的大小写不一样）,该函数并没有被定义，但是却属于我们上述的第四种，属于build-in函数，既是在python标准库里的函数，内置的，可以直接调用的。最后一步才会查找到这里</p>
 <p>关于第二种，属于内嵌函数，即使在函数里面再次定义一个函数，这时会首先查找local函数里面是否有定义，然后才会查找函数里面内嵌函数里面有没有定义，这一种有专门的名词，叫做闭包，闭包将在另外文章里专门写到</p>
 ]]></content>
@@ -269,11 +389,13 @@ python 中的属性获取存在一个向上查找的机制。<br>
 <li>因此要访问类属性的方式有两种：
 <ol>
 <li>类名. 类属性</li>
-<li>对象.类属性(不推荐)<br>
-<strong>注意</strong></li>
+<li>对象.类属性(不推荐)</li>
 </ol>
 </li>
-<li>如果使用 <em><strong>对象.类属性 = 值 赋值语句</strong></em>，<strong>只会给对象添加一个属性</strong>，而不会影响到类属性的值</li>
+</ul>
+<p><strong>注意</strong></p>
+<ul>
+<li>如果使用 <em><strong>对象.类属性 = 值 赋值语句</strong></em>,   <strong>只会给对象添加一个属性</strong>，而不会影响到类属性的值</li>
 </ul>
 ]]></content>
     </entry>
@@ -283,17 +405,19 @@ python 中的属性获取存在一个向上查找的机制。<br>
         <link href="https://imenghu.github.io/post/sql-yu-ju-zhi-case-when-null-jie-jue-fang-fa">
         </link>
         <updated>2019-11-06T10:51:34.000Z</updated>
-        <content type="html"><![CDATA[<p>//判断空值,成功!!<br>
-select case<br>
-when 项目名称  IS NULL<br>
-then '空值'<br>
-when 项目名称 ='北二环'<br>
-then 'A'<br>
-when 项目名称 ='北三环'<br>
-then 'B'<br>
-else 'C'<br>
-END  项目名称<br>
-from   物件设计数量统计表</p>
+        <content type="html"><![CDATA[<p>//判断空值,成功!!</p>
+<pre><code class="language-sql">   select case  
+          when 项目名称  IS NULL  
+          then '空值'  
+          when 项目名称 ='北二环'  
+          then 'A'  
+          when 项目名称 ='北三环'  
+          then 'B'  
+          else 'C'  
+          END  项目名称  
+   from   物件设计数量统计表
+
+</code></pre>
 ]]></content>
     </entry>
     <entry>

@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://imenghu.github.io/favicon.ico?v=1573693074823">
+<link rel="shortcut icon" href="https://imenghu.github.io/favicon.ico?v=1573694284121">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://imenghu.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://imenghu.github.io">
-        <img src="https://imenghu.github.io/images/avatar.png?v=1573693074823" class="site-logo">
+        <img src="https://imenghu.github.io/images/avatar.png?v=1573694284121" class="site-logo">
         <h1 class="site-title">i萌虎</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -197,7 +197,116 @@
                   2019-11-07
                 </div>
                 <div class="post-abstract">
-                  
+                  <p>刚开始学习Python的类写法的时候觉得很是麻烦，为什么定义时需要而调用时又不需要，为什么不能内部简化从而减少我们敲击键盘的次数？<br>
+你看完这篇文章后就会明白所有的疑问。</p>
+<p>self代表类的实例，而非类。<br>
+实例来说明</p>
+<pre><code class="language-python">class Test:
+    def prt(self):
+        print(self)
+        print(self.__class__)
+
+t = Test()
+t.prt()
+</code></pre>
+<p>'''<br>
+执行结果如下</p>
+<p>&lt;<strong>main</strong>.Test object at 0x000000000284E080&gt;<br>
+&lt;class '<strong>main</strong>.Test'&gt;<br>
+'''<br>
+从上面的例子中可以很明显的看出，self代表的是类的实例。而self.__class__则指向类。</p>
+<p>self不必非写成self<br>
+有很多童鞋是先学习别的语言然后学习Python的，所以总觉得self怪怪的，想写成this，可以吗？<br>
+当然可以，还是把上面的代码改写一下。</p>
+<pre><code class="language-python">class Test:
+    def prt(this):
+        print(this)
+        print(this.__class__)
+
+t = Test()
+t.prt()
+</code></pre>
+<p>改成this后，运行结果完全一样。<br>
+当然，最好还是尊重约定俗成的习惯，使用self。</p>
+<p>self可以不写吗<br>
+在Python的解释器内部，当我们调用t.prt()时，实际上Python解释成Test.prt(t)，也就是说把self替换成类的实例。<br>
+有兴趣的童鞋可以把上面的t.prt()一行改写一下，运行后的实际结果完全相同。<br>
+实际上已经部分说明了self在定义时不可以省略，如果非要试一下，那么请看下面：</p>
+<pre><code class="language-python">class Test:
+    def prt():
+        print(self)
+
+t = Test()
+t.prt()
+</code></pre>
+<p>运行时提醒错误如下：prt在定义时没有参数，但是我们运行时强行传了一个参数。<br>
+由于上面解释过了t.prt()等同于Test.prt(t)，所以程序提醒我们多传了一个参数t。</p>
+<p>Traceback (most recent call last):<br>
+File &quot;h.py&quot;, line 6, in <module><br>
+t.prt()<br>
+TypeError: prt() takes 0 positional arguments but 1 was given<br>
+当然，如果我们的定义和调用时均不传类实例是可以的，这就是类方法。</p>
+<pre><code class="language-python">class Test:
+    def prt():
+        print(__class__)
+Test.prt()
+</code></pre>
+<p>运行结果如下</p>
+<p>&lt;class '<strong>main</strong>.Test'&gt;<br>
+在继承时，传入的是哪个实例，就是那个传入的实例，而不是指定义了self的类的实例。<br>
+先看代码</p>
+<pre><code class="language-python">class Parent:
+    def pprt(self):
+        print(self)
+
+class Child(Parent):
+    def cprt(self):
+        print(self)
+c = Child()
+c.cprt()
+c.pprt()
+p = Parent()
+p.pprt()
+</code></pre>
+<p>运行结果如下</p>
+<p>&lt;<strong>main</strong>.Child object at 0x0000000002A47080&gt;<br>
+&lt;<strong>main</strong>.Child object at 0x0000000002A47080&gt;<br>
+&lt;<strong>main</strong>.Parent object at 0x0000000002A47240&gt;<br>
+解释：<br>
+运行c.cprt()时应该没有理解问题，指的是Child类的实例。<br>
+但是在运行c.pprt()时，等同于Child.pprt(c)，所以self指的依然是Child类的实例，由于self中没有定义pprt()方法，所以沿着继承树往上找，发现在父类Parent中定义了pprt()方法，所以就会成功调用。</p>
+<p>在描述符类中，self指的是描述符类的实例<br>
+不太容易理解，先看实例：</p>
+<pre><code class="language-python">class Desc:
+    def __get__(self, ins, cls):
+        print('self in Desc: %s ' % self )
+        print(self, ins, cls)
+class Test:
+    x = Desc()
+    def prt(self):
+        print('self in Test: %s' % self)
+t = Test()
+t.prt()
+t.x
+</code></pre>
+<p>运行结果如下：</p>
+<p>self in Test: &lt;<strong>main</strong>.Test object at 0x0000000002A570B8&gt;<br>
+self in Desc: &lt;<strong>main</strong>.Desc object at 0x000000000283E208&gt;<br>
+&lt;<strong>main</strong>.Desc object at 0x000000000283E208&gt; &lt;<strong>main</strong>.Test object at 0x0000000002A570B8&gt; &lt;class '<strong>main</strong>.Test'&gt;<br>
+大部分童鞋开始有疑问了，为什么在Desc类中定义的self不是应该是调用它的实例t吗？怎么变成了Desc类的实例了呢？<br>
+注意：此处需要睁大眼睛看清楚了，这里调用的是t.x，也就是说是Test类的实例t的属性x，由于实例t中并没有定义属性x，所以找到了类属性x，而该属性是描述符属性，为Desc类的实例而已，所以此处并没有顶用Test的任何方法。<br>
+那么我们如果直接通过类来调用属性x也可以得到相同的结果。<br>
+下面是把t.x改为Test.x运行的结果。</p>
+<p>self in Test: &lt;<strong>main</strong>.Test object at 0x00000000022570B8&gt;<br>
+self in Desc: &lt;<strong>main</strong>.Desc object at 0x000000000223E208&gt;<br>
+&lt;<strong>main</strong>.Desc object at 0x000000000223E208&gt; None &lt;class '<strong>main</strong>.Test'&gt;<br>
+题外话：由于在很多时候描述符类中仍然需要知道调用该描述符的实例是谁，所以在描述符类中存在第二个参数ins，用来表示调用它的类实例，所以t.x时可以看到第三行中的运行结果中第二项为&lt;main.Test object at 0x0000000002A570B8&gt;。而采用Test.x进行调用时，由于没有实例，所以返回None。</p>
+<p>总结<br>
+self在定义时需要定义，但是在调用时会自动传入。<br>
+self的名字并不是规定死的，但是最好还是按照约定是用self<br>
+self总是指调用时的类的实例。<br>
+以上所有代码在Python3.4中均测试通过。</p>
+
                 </div>
               </div>
               

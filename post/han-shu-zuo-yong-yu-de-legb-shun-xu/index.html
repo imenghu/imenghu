@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://imenghu.github.io/favicon.ico?v=1573693074823">
+<link rel="shortcut icon" href="https://imenghu.github.io/favicon.ico?v=1573694284121">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://imenghu.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://imenghu.github.io">
-        <img src="https://imenghu.github.io/images/avatar.png?v=1573693074823" class="site-logo">
+        <img src="https://imenghu.github.io/images/avatar.png?v=1573694284121" class="site-logo">
         <h1 class="site-title">i萌虎</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -148,35 +148,32 @@ B:build-in 内置作用域</p>
 最后，是build-in，内置作用域</p>
 <p>4.举例说明<br>
 ex1</p>
-<p>复制代码<br>
-1 passline = 60<br>
-2<br>
-3 def func(val):<br>
-4     if val &gt;= passline:<br>
-5         print('pass')<br>
-6     else:<br>
-7         print('failed')<br>
-8<br>
-9 func(89)<br>
-10<br>
-11 ''''''''''''<br>
-12 pass<br>
-13 [Finished in 0.2s]<br>
-14 ''''''''''''<br>
+<pre><code class="language-python">  passline = 60
+  
+  def func(val):
+      if val &gt;= passline:
+          print('pass')
+      else:
+          print('failed')
+  
+  func(89)    
+</code></pre>
+<p>''''''''''''<br>
+pass<br>
+[Finished in 0.2s]<br>
+''''''''''''<br>
 复制代码</p>
 <p>Python函数首先查找local，在局部变量作用域里并没有passline的定义，然后发现函数内部并没有内嵌函数，这时Python开始查找global，在全局里查找到passline的定义，被调用。</p>
 <p>ex2</p>
-<p>复制代码<br>
-1 def Max(val1, val2):<br>
-2     return max(val1, val2)<br>
-3<br>
-4 print(Max(90, 100))<br>
-5<br>
-6 '''''''''<br>
-7 100<br>
-8 [Finished in 0.1s]<br>
-9 '''''''''<br>
-复制代码</p>
+<pre><code class="language-python"> def Max(val1, val2):
+     return max(val1, val2)
+ 
+ print(Max(90, 100))
+</code></pre>
+<p>'''''''''<br>
+100<br>
+[Finished in 0.1s]<br>
+'''''''''</p>
 <p>Max函数里面直接调用另外一个函数，调用的max()（注意两个函数的大小写不一样）,该函数并没有被定义，但是却属于我们上述的第四种，属于build-in函数，既是在python标准库里的函数，内置的，可以直接调用的。最后一步才会查找到这里</p>
 <p>关于第二种，属于内嵌函数，即使在函数里面再次定义一个函数，这时会首先查找local函数里面是否有定义，然后才会查找函数里面内嵌函数里面有没有定义，这一种有专门的名词，叫做闭包，闭包将在另外文章里专门写到</p>
 
