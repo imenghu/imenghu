@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>关于 | i萌虎</title>
+<title>python中的类属性和对象属性的作用域 | i萌虎</title>
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -128,14 +128,121 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">关于</h2>
-            <div class="post-date">2019-10-05</div>
+            <h2 class="post-title">python中的类属性和对象属性的作用域</h2>
+            <div class="post-date">2019-11-19</div>
             
             <div class="post-content">
-              <p>这是关于的页面，可以在这里向世界介绍你！</p>
+              <figure data-type="image" tabindex="1"><img src="https://imenghu.github.io/post-images/1574139587626.png" alt=""></figure>
+<pre><code class="language-python">class Test:
+    num=100 
+    def __init__(self):
+        self.age=18     
+
+test1=Test()
+test2=Test()
+print(test1.num)    
+test1.num=200  
+&quot;&quot;&quot;
+只是修改了这个对象作用域下的属性    
+
+类中的num不会发生改变
+&quot;&quot;&quot;
+print(test1.num)   
+print(Test.num)    
+del test1.num       
+print(test1.num)
+</code></pre>
+<p>def __init__方法的作用域限制在实例化出的对象<br>
+self.age=18<br>
+这里的age属性是对象的特有属性，类访问不到<br>
+跟 p=person()<br>
+p.age=18<br>
+是一样的效果<br>
+只有p能访问到这个age，person访问不到<br>
+如果person中也有这个age，是在两个区域，互不影响<br>
+除非在p中的age属性删除之后，p会向person中找相关的属性</p>
+<pre><code class="language-python">class a:
+    def __init__(self):
+        self.name=&quot;a&quot;
+        self.age=12
+        self.score=23
+    def test():
+        print(&quot;类方法测试&quot;)
+print(a.name)
+&quot;&quot;&quot;
+这里会报错，因为def __init__构造函数之内的属性只能通过
+实例化对象之后，通过对象进行访问，类没有办法直接访问
+如果是对象中再增加属性，或者修改属性的值，这些都跟类的属性没有关系
+因为两种属性是在两个区域内创建的
+&quot;&quot;&quot;
+a.test()
+</code></pre>
+<p>对于类：</p>
+<ol>
+<li>
+<p>类可以直接访问类属性</p>
+</li>
+<li>
+<p>类不可以直接访问实例方法，必须通过实例化之后的对象来访问实例方法</p>
+</li>
+<li>
+<p>类不可以访问对象特有的属性（比如：def __init__中定义的属性）</p>
+</li>
+<li>
+<p>类可以直接访问类方法</p>
+</li>
+<li>
+<p>类可以直接访问静态方法</p>
+</li>
+</ol>
+<p>所以存在：如果对象中的属性跟类中的属性相同，改变对象中的属性值，不会影响类中的属性值</p>
+<p>对于对象：</p>
+<ol>
+<li>
+<p>对象可以直接访问类的属性（实例化过程中，类已经将属性赋给对象）</p>
+</li>
+<li>
+<p>对象可以直接访问自己私有的属性</p>
+</li>
+<li>
+<p>对象可以直接访问类方法</p>
+</li>
+<li>
+<p>对象可以直接访问静态方法</p>
+</li>
+<li>
+<p>对象可以直接访问实例方法</p>
+</li>
+</ol>
+<pre><code class="language-python">class a:
+    def __init__(self,name):
+        self.name=name
+        print(self.name)
+    age=&quot;这是类属性&quot;
+    def test(self):
+        self.name=&quot;name已经修改&quot;
+        self.age=&quot;age已经修改&quot;
+        print(self.age)
+        print(self.name)
+a1=a(&quot;这是对象属性&quot;)
+print(a.age)
+print(a1.name)
+print(a1.age)
+a1.test()
+</code></pre>
+<p>这里所有的带有self的方法都是实例方法，只能由对象才能访问到，且实例方法中可以访问对象的属性。</p>
 
             </div>
             
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://imenghu.github.io/post/cdiao-yong-python-jiao-ben">
+                  <h3 class="post-title">
+                    C#调用python脚本
+                  </h3>
+                </a>
+              </div>
             
 
             
