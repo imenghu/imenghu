@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>常用工具网址大全 | i萌虎</title>
+<title>javascript 作用域详解 | i萌虎</title>
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -128,39 +128,78 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">常用工具网址大全</h2>
-            <div class="post-date">2019-10-09</div>
+            <h2 class="post-title">javascript 作用域详解</h2>
+            <div class="post-date">2019-11-19</div>
             
             <div class="post-content">
-              <ol>
-<li><a href="http://tool.oschina.net">常用在线查询工具</a>  常用在线查询工具</li>
-<li><a href="http://tampermonkey.net/scripts.php?ext=dhdg">油猴插件</a>  油猴插件</li>
-<li><a href="http://www.box3.cn/#">开发人员工具箱</a></li>
-<li><a href="http://www.sowang.com/bbs/forum.php?mod=viewthread&amp;tid=132294">搜索大全</a></li>
-<li><a href="https://dwz.cn">百度短网址生成</a></li>
-<li><a href="http://baijiahao.baidu.com/s?id=1603886666150544094&amp;wfr=spider&amp;for=pc">VLOOKUP函数的使用</a></li>
-<li><a href="https://720yun.com/">720全景图</a></li>
-<li><a href="http://www.yxc3.com/888.php">邮箱批量购买</a></li>
-<li><a href="http://blog.zhaojie.me">.net博客</a><br>
-10.<a href="http://www.divcss5.com/peise/">配色表</a></li>
-</ol>
+              <p>作用域理解：定义的变量、函数生效的范围。javascript 有全局作用域和函数作用域两种。</p>
+<p>注：es6实现let 块级作用域不是js原生的，底层同样是通过var实现的。如果想了解具体细节，请访问babel官方 对es6中let 进行解析。</p>
+<p>执行上下文<br>
+范围：一段内或者一个函数内；<br>
+全局：函数声明、变量声明 。范围：；<br>
+函数：函数声明、变量声明、this、arguments。范围：一个函数内部；</p>
+<p><strong>函数、变量声明提升</strong></p>
+<pre><code class="language-javascript">&lt;script&gt;
 
+        foo(); //打印a
+
+        var foo = 1;
+
+        function foo (){
+
+            console.log(’a‘)
+
+        }；
+
+        console.log(foo); //1
+
+&lt;/script&gt;
+
+//实际的执行顺序为
+
+&lt;script&gt;
+
+        function foo(){  //函数声明优先于变量的声明
+
+            console.log(&quot;a&quot;);
+
+        }
+
+        //var a ;  重复声明，这儿被省略了。
+
+        foo(); //打印a
+
+        foo = 1;  //给foo赋值为1
+
+        console.log(foo); //1
+
+&lt;/script&gt;
+</code></pre>
+<p>当js引擎执行一个 执行上下文代码块时，执行顺序为：</p>
+<ol>
+<li>函数声明 function a(){};(函数优先) 注：let a = function (){}; 这是变量的声明和赋值，不是函数的声明。</li>
+<li>变量声明 var a; 注：刚开始只对变量进行声明，没有进行赋值，如果 在赋值之前使用到这个变量 值为：undefined。</li>
+<li>执行上下文为函数作用域时：确定this和arguments。</li>
+<li>按照js单线程和异步策略依次执行 作用域中的代码。</li>
+</ol>
+<p>我们习惯将 var a = 2; 看作一个声明，而实际上 JavaScript 引擎并不这么认为。它将 var a和 a = 2 当作两个单独的声明，第一个是编译阶段的任务，而第二个则是执行阶段的任务。这意味着无论作用域中的声明出现在什么地方，都将在代码本身被执行前首先进行处理。可以将这个过程形象地想象成所有的声明（变量和函数）都会被“移动”到各自作用域的最顶端，这个过程被称为提升。要注意避免重复声明，特别是当普通的 var 声明和函数声明混合在一起的时候，否则会引起很多危险的问题！</p>
+<p><strong>作用域链</strong><br>
+自由变量：当前作用域没有定义的变量，但是上层作用域定义了，可以在此层作用域中使用的变量。<br>
+作用域链：当使用一个变量时候，先在自己的作用域里找，如果没有找到，再到父级作用域找，一直找到全局作用域，如果都没有找到即报错。</p>
+<p><strong>块级作用域</strong><br>
+js无块级作用域，仅有全局作用域和函数作用域两种作用域。<br>
+ES6 通过对全局作用域的特殊实现，实现了js的块级作用域 let；<br>
+let 的生效范围为 { }；<br>
+const 为定义常量。注：定义的常量的值存储的内存地址不可变动，值是可变的比如常量中定义的是数组 或者对象时候，可以通过数组或对象方法操作原数据，只要不重新赋值就没问题</p>
+<center>-END-</center>
             </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://imenghu.github.io/tag/ZlTQ8uj2u" class="tag">
-                    工作
-                  </a>
-                
-              </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://imenghu.github.io/post/mysql5722-an-zhuang-jiao-cheng">
+                <a href="https://imenghu.github.io/post/python-zhong-de-lei-shu-xing-he-dui-xiang-shu-xing-de-zuo-yong-yu">
                   <h3 class="post-title">
-                    MYSQL5.7.22安装教程
+                    python中的类属性和对象属性的作用域
                   </h3>
                 </a>
               </div>
