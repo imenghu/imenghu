@@ -2,13 +2,156 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-11-19T07:03:04.407Z</updated>
+    <updated>2019-11-21T08:49:48.900Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[windows常用cmd命令]]></title>
+        <id>https://imenghu.github.io/post/windows-chang-yong-cmd-ming-ling</id>
+        <link href="https://imenghu.github.io/post/windows-chang-yong-cmd-ming-ling">
+        </link>
+        <updated>2019-11-21T08:47:29.000Z</updated>
+        <content type="html"><![CDATA[<p>windows常用cmd命令</p>
+<ul>
+<li>常用基本命令</li>
+<li>辅助符号或命令</li>
+<li>常用工具</li>
+<li>验证考核<br>
+常用基本命令：netstat，find，ping，cd，辅助符号或命令：Ctrl+C、cls、|、&gt;、向上的箭头键等，常用工具: Process Explorer。</li>
+</ul>
+<p>建议掌握这些命令获取帮助的方式，一般都是 ”命令 /?“ 或者“命令 -help”，如“cd /?”，能看懂命令帮助提示(根据帮助尝试使用)。</p>
+<p>常用基本命令<br>
+1，列出所有任务及进程号，杀进程</p>
+<pre><code> tasklist
+
+ tasklist /?  获取使用帮助
+
+ taskkill
+
+ taskkill /?  获取使用帮助
+</code></pre>
+<p>2，cd 切换目录</p>
+<pre><code> cd /？ 获取使用帮助
+
+ 跳转到当前驱动器的根目录
+
+      cd [当前驱动器盘符]:\    例如： cd c:\ ，或者更简单的   cd\
+
+ 跳转到当前驱动器的其他文件夹
+
+      以C盘下的WINDOWS文件夹为例，输入：cd C:\WINDOWS
+
+ 跳转到其他驱动器
+
+      以从C盘跳转到D盘为例 在任意目录下直接输入：  D:
+
+ 跳转到其他驱动器的其他文件夹
+
+      假设当前在C盘，要跳转到E的software目录    cd /d e:\software
+
+      注意此处必须加/d参数。否则无法跳转。
+
+ 跳转到上一层目录
+
+      cd..
+</code></pre>
+<p>3，netstat 查看网络连接状态</p>
+<pre><code> 显示协议统计信息和当前 TCP/IP 网络连接。该命令可以查看当前机器建立的所有网络链接状态，以及对应哪个进程。
+
+ netstat -help 获取命令行使用帮助信息
+
+ 例子:netstat -ano  查看网络连接、状态以及对应的进程id
+</code></pre>
+<p>4，find</p>
+<pre><code> 常用于某个命令输出结果太多，需要模糊搜索我们关心的内容时使用，一般辅助|使用（|代表前一个输出作为后一个的输入）
+
+ find /？获取使用帮助
+
+ 如果是linux就是grep，搜索特定字符
+
+ 例子：netstat -ano|find &quot;.8&quot;
+</code></pre>
+<p>5，ping</p>
+<pre><code> ping -help
+</code></pre>
+<p>6，tracert</p>
+<pre><code> tracert也被称为Windows路由跟踪实用程序，在命令提示符（cmd）中使用tracert命令可以用于确定IP数据包访问目标时所选择的路径。
+
+ tracert /? 获取使用帮助
+
+ 例子：tracert www.baidu.com
+</code></pre>
+<p>辅助符号或命令<br>
+7，“|”cmd命令中|代表前一个的输出代表后一个的输入</p>
+<pre><code> 查找特定ip的网络连接及进程号：netstat -ano|find &quot;192.168.1.10&quot;  
+</code></pre>
+<p>8，重定向输出符号&gt; &gt;&gt;</p>
+<pre><code> 将原本输出到命令窗口的内容，转存到文件中，如jstack 12912 &gt;d:/s.txt  打印线程到指定文件
+
+ cmd &gt;重定向输出并覆盖源文件。
+
+      例如
+
+      echo hello &gt;c:\1.txt
+
+      1.txt的文件内容先被清空，然后写入hello。
+
+ cmd &gt;&gt;重定向输出追加到文件末尾
+
+      例如：
+
+      echo hello &gt;c:\1.txt
+
+      在1.txt文件末尾加上hello
+</code></pre>
+<p>9，重定向输入符号&lt; &lt;&lt;</p>
+<pre><code> cmd &lt; file
+
+      使cmd命令从file读入
+
+ cmd &lt;&lt; text
+
+      从命令行读取输入，直到一个与text相同的行结束。除非使用引号把输入括起来，此模式将对输入内容进行shell变量替换。如果使用 &lt;&lt;- ，则会忽略接下来输入行首的tab，结束行也可以是一堆tab再加上一个与text相同的内容，可以参考后面的例子。
+
+ cmd &lt;&lt;&lt; word
+
+      把word（而不是文件word）和后面的换行作为输入提供给cmd。
+
+ cmd &lt;&gt; file
+
+      以读写模式把文件file重定向到输入，文件file不会被破坏。仅当应用程序利用了这一特性时，它才是有意义的。
+
+ cmd &gt;| file
+
+      功能同&gt;，但即便在设置了noclobber时也会覆盖file文件，注意用的是|而非一些书中说的!，目前仅在csh中仍沿用&gt;!实现这一功能。 
+</code></pre>
+<p>10，终止一直在运行的命令ctrl+c</p>
+<pre><code> 有时某个命令一直打印输出结果(如ping 192.168.1.10 -t)，我们想终止这个命令的执行，直接按ctrl+c即可。
+</code></pre>
+<p>11，清空cmd窗口内容命令cls</p>
+<pre><code> 有时cmd内容太多，滚动费尽，需要清空屏幕内容，直接输入cls即可
+</code></pre>
+<p>12，cmd命令中，按键盘的向上箭头可以直接复制前一个命令</p>
+<p>常用工具<br>
+13，常用工具</p>
+<pre><code> Process Explorer，查询进程的详细信息，如查询java进程启动参数，运行环境，线程信息、网络连接信息、使用了哪些dll，打开了什么句柄。包含注册表、Socket、文件等等。
+
+ 下载地址：https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://imenghu.github.io/post-images/1574326094006.png" alt=""></figure>
+<p>验证考核<br>
+1，浏览器访问任何一个域名网站（如百度），然后使用cmd命令查找到本机到这个网站的网络连接状态</p>
+<pre><code> 2，持续ping100次www.baidu.com,并且输出到d:/pingbaidu.txt
+
+ 3，假如不通过环境变量中的java相关命令如jps、java， 而是希望使用你机器上装的某个版本jdk中命令jstack.exe（如装在D:\Program Files\java\jdk1.8.0_101），你会怎么做？
+
+ 4，你机器上已经启动了一个smartbi，请告知如何确认jvm所有启动参数</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[javascript 作用域详解]]></title>
         <id>https://imenghu.github.io/post/javascript-zuo-yong-yu-xiang-jie</id>
@@ -542,47 +685,6 @@ pass<br>
 '''''''''</p>
 <p>Max函数里面直接调用另外一个函数，调用的max()（注意两个函数的大小写不一样）,该函数并没有被定义，但是却属于我们上述的第四种，属于build-in函数，既是在python标准库里的函数，内置的，可以直接调用的。最后一步才会查找到这里</p>
 <p>关于第二种，属于内嵌函数，即使在函数里面再次定义一个函数，这时会首先查找local函数里面是否有定义，然后才会查找函数里面内嵌函数里面有没有定义，这一种有专门的名词，叫做闭包，闭包将在另外文章里专门写到</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Python 中类的作用域问题]]></title>
-        <id>https://imenghu.github.io/post/python-zhong-lei-de-zuo-yong-yu-wen-ti</id>
-        <link href="https://imenghu.github.io/post/python-zhong-lei-de-zuo-yong-yu-wen-ti">
-        </link>
-        <updated>2019-11-07T03:30:28.000Z</updated>
-        <content type="html"><![CDATA[<p>今天写一段小代码的时候犯傻了，我试图在类中的方法内部直接访问类中的变量，大概是这样写的：</p>
-<pre><code class="language-python">class Test:
-    a = 1
-
-    def __init__(self):
-        print(a)
-
-t = Test()
-
-</code></pre>
-<p>&quot;&quot;&quot;<br>
-NameError: name 'a' is not defined<br>
-&quot;&quot;&quot;<br>
-很显然报了 NameError 错误，我错误地认为 <strong>init</strong> 方法里面是可以直接拿到类中定义的变量 a 的，实际上并不可以。<br>
-如大家所知，Python 的作用域查找顺序是 LEGB，即局部作用域、外部作用域、全局作用域和内置作用域，这里面并不包含 C（类作用域）。<br>
-下面引用来自《Python 学习手册》第 859 页的一段话来说明这一点：</p>
-<p>** 尽管类能够访问外层函数的作用域，但它们不能作为类中其它代码的外层作用域：Python 搜索外层函数来访问被引用的名称，但从来不会搜索外层类。也就是说，类是一个可以访问其外层作用域的局部作用域，但其本身却不能作为一个外层作用域被访问。因为方法函数中对名称的搜索跳过了外层的类，所以类属性必须作为对象属性并使用继承来访问。**</p>
-<p>所以在上面如果要访问到 a 的话，只能通过点号取属性访问，比如 self.<strong>class</strong>.a。</p>
-<p>** 二、属性的获取机制 **<br>
-python 中的属性获取存在一个向上查找的机制。<br>
-<img src="https://imenghu.github.io/post-images/1573692965568.png" alt=""></p>
-<ul>
-<li>因此要访问类属性的方式有两种：
-<ol>
-<li>类名. 类属性</li>
-<li>对象.类属性(不推荐)</li>
-</ol>
-</li>
-</ul>
-<p><strong>注意</strong></p>
-<ul>
-<li>如果使用 <em><strong>对象.类属性 = 值 赋值语句</strong></em>,   <strong>只会给对象添加一个属性</strong>，而不会影响到类属性的值</li>
-</ul>
 ]]></content>
     </entry>
 </feed>
