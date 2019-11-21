@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>删除本地文件后 Git从远程仓库重新获取 | i萌虎</title>
+<title>浅谈Python类命名空间 | i萌虎</title>
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -128,36 +128,55 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">删除本地文件后 Git从远程仓库重新获取</h2>
-            <div class="post-date">2019-10-09</div>
+            <h2 class="post-title">浅谈Python类命名空间</h2>
+            <div class="post-date">2019-11-21</div>
             
             <div class="post-content">
-              <p>删除本地文件后，想从远程仓库中从新Pull最新版文件。</p>
-<p>Git提示：up-to-date，但未得到删除的文件</p>
-<p>原因：当前本地库处于另一个分支中，需将本分支发Head重置至master.</p>
-<p>git checkout master<br>
-git reset --hard</p>
-<p>git 强行pull并覆盖本地文件</p>
-<p>git fetch --all<br>
-git reset --hard origin/master<br>
-git pull</p>
+              <p>前面章节中，已经不只一次提到，所有位于 class 语句中的代码，其实都位于特殊的命名空间中，通常称之为类命名空间。Python 中，编写的整个程序默认处于全局命名空间内，而类体则处于类命名空间内。</p>
+<p>Python 允许在全局范围内放置可执行代码，当 Python 执行该程序时，这些代码就会获得执行的机会。类似地，Python 同样允许在类范围内放置可执行代码，当 Python 执行该类定义肘，这些代码同样会获得执行的机会。</p>
+<p>例如，如下程序测试了类命名空间：<br>
+class Item:</p>
+<h1 id="直接在类空间中放置执行性质代码">直接在类空间中放置执行性质代码</h1>
+<p>print('正在定义Item类')<br>
+for i inrange(10):<br>
+if i %2==0:<br>
+print('偶数:', i)<br>
+else:<br>
+print('奇数:', i)<br>
+运行结果为：<br>
+正在定义Item类<br>
+偶数: 0<br>
+奇数: 1<br>
+偶数: 2<br>
+奇数: 3<br>
+偶数: 4<br>
+奇数: 5<br>
+偶数: 6<br>
+奇数: 7<br>
+偶数: 8<br>
+奇数: 9<br>
+正如从上面代码所看到的，程序直接在 Item 类体中放置普通的输出语句、循环语句、分支语句，这都是合法的。当程序执行 Item 类时，Item 类命名空间中的这些代码都会被执行。</p>
+<p>从执行效果来看，这些可执行代码被放在 Python 类命名空间与全局空间并没有太大的区别。确实如此，这是因为程序并没有定义“成员”（变量或函数），这些代码执行之后就完了，不会留下什么。</p>
+<p>但下面代码就有区别。下面代码示范了在全局空间和类命名空间内分别定义 lambda 表达式：<br>
+global_fn =lambda p:print('执行lambda表达式，p参数: ', p)<br>
+class Category:<br>
+cate_fn =lambda p:print('执行lambda表达式，p参数: ', p)</p>
+<h1 id="调用全局范围内的global_fn为参数p传入参数值">调用全局范围内的global_fn，为参数p传入参数值</h1>
+<p>global_fn('fkit')# ①<br>
+c =Category()</p>
+<h1 id="调用类命名空间内的cate_fnpython自动绑定第一个参数">调用类命名空间内的cate_fn，Python自动绑定第一个参数</h1>
+<p>c.cate_fn()# ②<br>
+上面程序分别在全局空间、类命名空间内定义了两个 lambda 表达式，在全局空间内定义的 lambda 表达式就相当于一个普通函数，因此程序使用调用函数的方式来调用该 lambda 表达式，并显式地为第一个参数绑定参数值，如上面程序中 ① 号代码所示。</p>
+<p>对于在类命名空间内定义的 lambda 表达式，则相当于在该类命名空间中定义了一个函数，这个函数就变成了实例方法，因此程序必须使用调用方法的方式来调用该 lambda 表达式，Python 同样会为该方法的第一个参数（相当于 self 参数）绑定参数值，如上面程序中 ② 号代码所示。</p>
 
             </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://imenghu.github.io/tag/ub89DA2fb" class="tag">
-                    Git
-                  </a>
-                
-              </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://imenghu.github.io/post/chang-yong-gong-ju-wang-zhi-da-quan">
+                <a href="https://imenghu.github.io/post/jie-du-python-bian-cheng-zhong-de-ming-ming-kong-jian-yu-zuo-yong-yu">
                   <h3 class="post-title">
-                    常用工具网址大全
+                    解读Python编程中的命名空间与作用域
                   </h3>
                 </a>
               </div>

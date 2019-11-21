@@ -2,13 +2,57 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-11-21T11:22:28.790Z</updated>
+    <updated>2019-11-21T11:27:05.418Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[浅谈Python类命名空间]]></title>
+        <id>https://imenghu.github.io/post/qian-tan-python-lei-ming-ming-kong-jian</id>
+        <link href="https://imenghu.github.io/post/qian-tan-python-lei-ming-ming-kong-jian">
+        </link>
+        <updated>2019-11-21T11:25:52.000Z</updated>
+        <content type="html"><![CDATA[<p>前面章节中，已经不只一次提到，所有位于 class 语句中的代码，其实都位于特殊的命名空间中，通常称之为类命名空间。Python 中，编写的整个程序默认处于全局命名空间内，而类体则处于类命名空间内。</p>
+<p>Python 允许在全局范围内放置可执行代码，当 Python 执行该程序时，这些代码就会获得执行的机会。类似地，Python 同样允许在类范围内放置可执行代码，当 Python 执行该类定义肘，这些代码同样会获得执行的机会。</p>
+<p>例如，如下程序测试了类命名空间：<br>
+class Item:</p>
+<h1 id="直接在类空间中放置执行性质代码">直接在类空间中放置执行性质代码</h1>
+<p>print('正在定义Item类')<br>
+for i inrange(10):<br>
+if i %2==0:<br>
+print('偶数:', i)<br>
+else:<br>
+print('奇数:', i)<br>
+运行结果为：<br>
+正在定义Item类<br>
+偶数: 0<br>
+奇数: 1<br>
+偶数: 2<br>
+奇数: 3<br>
+偶数: 4<br>
+奇数: 5<br>
+偶数: 6<br>
+奇数: 7<br>
+偶数: 8<br>
+奇数: 9<br>
+正如从上面代码所看到的，程序直接在 Item 类体中放置普通的输出语句、循环语句、分支语句，这都是合法的。当程序执行 Item 类时，Item 类命名空间中的这些代码都会被执行。</p>
+<p>从执行效果来看，这些可执行代码被放在 Python 类命名空间与全局空间并没有太大的区别。确实如此，这是因为程序并没有定义“成员”（变量或函数），这些代码执行之后就完了，不会留下什么。</p>
+<p>但下面代码就有区别。下面代码示范了在全局空间和类命名空间内分别定义 lambda 表达式：<br>
+global_fn =lambda p:print('执行lambda表达式，p参数: ', p)<br>
+class Category:<br>
+cate_fn =lambda p:print('执行lambda表达式，p参数: ', p)</p>
+<h1 id="调用全局范围内的global_fn为参数p传入参数值">调用全局范围内的global_fn，为参数p传入参数值</h1>
+<p>global_fn('fkit')# ①<br>
+c =Category()</p>
+<h1 id="调用类命名空间内的cate_fnpython自动绑定第一个参数">调用类命名空间内的cate_fn，Python自动绑定第一个参数</h1>
+<p>c.cate_fn()# ②<br>
+上面程序分别在全局空间、类命名空间内定义了两个 lambda 表达式，在全局空间内定义的 lambda 表达式就相当于一个普通函数，因此程序使用调用函数的方式来调用该 lambda 表达式，并显式地为第一个参数绑定参数值，如上面程序中 ① 号代码所示。</p>
+<p>对于在类命名空间内定义的 lambda 表达式，则相当于在该类命名空间中定义了一个函数，这个函数就变成了实例方法，因此程序必须使用调用方法的方式来调用该 lambda 表达式，Python 同样会为该方法的第一个参数（相当于 self 参数）绑定参数值，如上面程序中 ② 号代码所示。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[解读Python编程中的命名空间与作用域]]></title>
         <id>https://imenghu.github.io/post/jie-du-python-bian-cheng-zhong-de-ming-ming-kong-jian-yu-zuo-yong-yu</id>
@@ -615,123 +659,6 @@ resetIPC(sys.argv[1], sys.argv[2], sys.argv[3])
 <figure data-type="image" tabindex="2"><img src="https://imenghu.github.io/post-images/1573181560065.jpg" alt=""></figure>
 <p>上面的代码给出了如何访问局部命名空间和全局命名空间的内容，命名空间的内容以字典形式给出，字典的key是已命名的变量或函数名称，value是这些变量或函数的值。从输出内容可以看出，局部变量的π覆盖了全局变量的π。下图是输出结果。</p>
 <figure data-type="image" tabindex="3"><img src="https://imenghu.github.io/post-images/1573181574655.jpg" alt=""></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[一篇文章让你彻底搞清楚Python中self的含义]]></title>
-        <id>https://imenghu.github.io/post/yi-pian-wen-zhang-rang-ni-che-di-gao-qing-chu-python-zhong-self-de-han-yi</id>
-        <link href="https://imenghu.github.io/post/yi-pian-wen-zhang-rang-ni-che-di-gao-qing-chu-python-zhong-self-de-han-yi">
-        </link>
-        <updated>2019-11-07T05:40:20.000Z</updated>
-        <content type="html"><![CDATA[<p>刚开始学习Python的类写法的时候觉得很是麻烦，为什么定义时需要而调用时又不需要，为什么不能内部简化从而减少我们敲击键盘的次数？<br>
-你看完这篇文章后就会明白所有的疑问。</p>
-<p>self代表类的实例，而非类。<br>
-实例来说明</p>
-<pre><code class="language-python">class Test:
-    def prt(self):
-        print(self)
-        print(self.__class__)
-
-t = Test()
-t.prt()
-</code></pre>
-<p>'''<br>
-执行结果如下</p>
-<p>&lt;<strong>main</strong>.Test object at 0x000000000284E080&gt;<br>
-&lt;class '<strong>main</strong>.Test'&gt;<br>
-'''<br>
-从上面的例子中可以很明显的看出，self代表的是类的实例。而self.__class__则指向类。</p>
-<p>self不必非写成self<br>
-有很多童鞋是先学习别的语言然后学习Python的，所以总觉得self怪怪的，想写成this，可以吗？<br>
-当然可以，还是把上面的代码改写一下。</p>
-<pre><code class="language-python">class Test:
-    def prt(this):
-        print(this)
-        print(this.__class__)
-
-t = Test()
-t.prt()
-</code></pre>
-<p>改成this后，运行结果完全一样。<br>
-当然，最好还是尊重约定俗成的习惯，使用self。</p>
-<p>self可以不写吗<br>
-在Python的解释器内部，当我们调用t.prt()时，实际上Python解释成Test.prt(t)，也就是说把self替换成类的实例。<br>
-有兴趣的童鞋可以把上面的t.prt()一行改写一下，运行后的实际结果完全相同。<br>
-实际上已经部分说明了self在定义时不可以省略，如果非要试一下，那么请看下面：</p>
-<pre><code class="language-python">class Test:
-    def prt():
-        print(self)
-
-t = Test()
-t.prt()
-</code></pre>
-<p>运行时提醒错误如下：prt在定义时没有参数，但是我们运行时强行传了一个参数。<br>
-由于上面解释过了t.prt()等同于Test.prt(t)，所以程序提醒我们多传了一个参数t。</p>
-<p>Traceback (most recent call last):<br>
-File &quot;h.py&quot;, line 6, in <module><br>
-t.prt()<br>
-TypeError: prt() takes 0 positional arguments but 1 was given<br>
-当然，如果我们的定义和调用时均不传类实例是可以的，这就是类方法。</p>
-<pre><code class="language-python">class Test:
-    def prt():
-        print(__class__)
-Test.prt()
-</code></pre>
-<p>运行结果如下</p>
-<p>&lt;class '<strong>main</strong>.Test'&gt;<br>
-在继承时，传入的是哪个实例，就是那个传入的实例，而不是指定义了self的类的实例。<br>
-先看代码</p>
-<pre><code class="language-python">class Parent:
-    def pprt(self):
-        print(self)
-
-class Child(Parent):
-    def cprt(self):
-        print(self)
-c = Child()
-c.cprt()
-c.pprt()
-p = Parent()
-p.pprt()
-</code></pre>
-<p>运行结果如下</p>
-<p>&lt;<strong>main</strong>.Child object at 0x0000000002A47080&gt;<br>
-&lt;<strong>main</strong>.Child object at 0x0000000002A47080&gt;<br>
-&lt;<strong>main</strong>.Parent object at 0x0000000002A47240&gt;<br>
-解释：<br>
-运行c.cprt()时应该没有理解问题，指的是Child类的实例。<br>
-但是在运行c.pprt()时，等同于Child.pprt(c)，所以self指的依然是Child类的实例，由于self中没有定义pprt()方法，所以沿着继承树往上找，发现在父类Parent中定义了pprt()方法，所以就会成功调用。</p>
-<p>在描述符类中，self指的是描述符类的实例<br>
-不太容易理解，先看实例：</p>
-<pre><code class="language-python">class Desc:
-    def __get__(self, ins, cls):
-        print('self in Desc: %s ' % self )
-        print(self, ins, cls)
-class Test:
-    x = Desc()
-    def prt(self):
-        print('self in Test: %s' % self)
-t = Test()
-t.prt()
-t.x
-</code></pre>
-<p>运行结果如下：</p>
-<p>self in Test: &lt;<strong>main</strong>.Test object at 0x0000000002A570B8&gt;<br>
-self in Desc: &lt;<strong>main</strong>.Desc object at 0x000000000283E208&gt;<br>
-&lt;<strong>main</strong>.Desc object at 0x000000000283E208&gt; &lt;<strong>main</strong>.Test object at 0x0000000002A570B8&gt; &lt;class '<strong>main</strong>.Test'&gt;<br>
-大部分童鞋开始有疑问了，为什么在Desc类中定义的self不是应该是调用它的实例t吗？怎么变成了Desc类的实例了呢？<br>
-注意：此处需要睁大眼睛看清楚了，这里调用的是t.x，也就是说是Test类的实例t的属性x，由于实例t中并没有定义属性x，所以找到了类属性x，而该属性是描述符属性，为Desc类的实例而已，所以此处并没有顶用Test的任何方法。<br>
-那么我们如果直接通过类来调用属性x也可以得到相同的结果。<br>
-下面是把t.x改为Test.x运行的结果。</p>
-<p>self in Test: &lt;<strong>main</strong>.Test object at 0x00000000022570B8&gt;<br>
-self in Desc: &lt;<strong>main</strong>.Desc object at 0x000000000223E208&gt;<br>
-&lt;<strong>main</strong>.Desc object at 0x000000000223E208&gt; None &lt;class '<strong>main</strong>.Test'&gt;<br>
-题外话：由于在很多时候描述符类中仍然需要知道调用该描述符的实例是谁，所以在描述符类中存在第二个参数ins，用来表示调用它的类实例，所以t.x时可以看到第三行中的运行结果中第二项为&lt;main.Test object at 0x0000000002A570B8&gt;。而采用Test.x进行调用时，由于没有实例，所以返回None。</p>
-<p>总结<br>
-self在定义时需要定义，但是在调用时会自动传入。<br>
-self的名字并不是规定死的，但是最好还是按照约定是用self<br>
-self总是指调用时的类的实例。<br>
-以上所有代码在Python3.4中均测试通过。</p>
 ]]></content>
     </entry>
 </feed>
