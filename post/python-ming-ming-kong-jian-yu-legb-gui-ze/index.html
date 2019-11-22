@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>【Python】 命名空间与LEGB规则 | i萌虎</title>
+<meta name="description" content="">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://imenghu.github.io/favicon.ico?v=1574405481154">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://imenghu.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://imenghu.github.io">
+        <img src="https://imenghu.github.io/images/avatar.png?v=1574405481154" class="site-logo">
+        <h1 class="site-title">i萌虎</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+        
+          <a href="/Learning/Python" class="site-nav" target="_blank">
+            Python
+          </a>
+        
+      
+        
+          <a href="\Learning\Django" class="site-nav" target="_blank">
+            Django
+          </a>
+        
+      
+        
+          <a href="\Learning\redis" class="site-nav" target="_blank">
+            Redis
+          </a>
+        
+      
+        
+          <a href="\Learning\前端课件" class="site-nav" target="_blank">
+            前端
+          </a>
+        
+      
+        
+          <a href="\Learning\Spider" class="site-nav" target="_blank">
+            爬虫
+          </a>
+        
+      
+        
+          <a href="\Learning\DTA" class="site-nav" target="_blank">
+            数据分析
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://imenghu.github.io" target="_blank">萌虎</a> | <a class="rss" href="https://imenghu.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">【Python】 命名空间与LEGB规则</h2>
+            <div class="post-date">2019-11-22</div>
+            
+            <div class="post-content">
+              <p>■　　命名空间</p>
+<p>所谓命名空间，就是指根据代码区域的不同而对变量名做出的划分，在一个命名空间中往往会有一定的变量名和变量内容的对应关系。在值语义的语言中，变量名往往是变量所指代内容在内存中地址的别称，但是在python中，变量名本身就是一个字符串对象，命名空间只不过是把这个字符串对象和对象对应了起来。进一步来说，其实在python中的命名空间就是一个字典，记录了该空间中所有变量名和变量内容的对应。后面会提到如何调用这个字典来查看命名空间。</p>
+<p>■　　LEGB规则</p>
+<p>LEGB是指python中命名空间的四个从低到高不同的层次，分别是Local , Enclosing , Global , Built-in。local指一个函数或者方法的内部的空间，enclosing指的是闭包内部空间，global是整个脚本的全局空间，而built-in是指python最上层的系统自带的一些名字的空间。</p>
+<p>因为python可以提供这么多不同层次的命名空间，所以当我们在程序中写下一个变量名的时候，解释器就会通过一定的顺序来查找这个变量名的具体内容。这个顺序显然就是local --&gt; enclosing --&gt; global --&gt; built-in。如果按照此顺序逐级而上却没有找到相关的变量名的内容的话就表明这个变量名在哪一级命名空间中都不存在，程序就会raise起一个NameError了。</p>
+<p>因为命名空间是可以互相嵌套的，所以在程序中如果碰到很多同名的变量的话，很可能会由于命名关系的问题而使得程序不像我们所想得那样运行。</p>
+<p>●  local和global命名空间<br>
+　　最常见的命名空间的关系是local和global之间的：</p>
+<pre><code class="language-python">var = &quot;global var&quot;
+def test():
+    var = &quot;local var&quot;
+    print var
+test()
+print var
+#结果
+#local var
+#global var
+
+</code></pre>
+<p>显而易见，函数def中的var是个局部命名空间中的变量，所以函数中print var时解释器在局部命名空间中就已经找到了相关的变量名。另一方面在函数外面print var的时候，此时的var属于程序的global命名空间中且其下面的小命名空间中没有相关的变量名定义，最终解释器只能到global命名空间之中去找到这个变量名。假如把函数中的var = &quot;local var&quot;给注释掉那么显然结果会变成两行的global var因为在函数里面的时候解释器也一直到global的命名空间中才找到变量名。另一方面，如果确实想要在函数中对全局变量var做出一定修改的话那么可以用global关键字来声明某个变量必须查找global的命名空间而不是其下层的命名空间。比如：</p>
+<pre><code class="language-python">var = &quot;global var&quot;
+def test():
+    global var
+    var = &quot;local var&quot;
+    print var
+test()
+print var
+#结果
+#local var
+#local var
+</code></pre>
+<p>因为对于解释器来说，下层的命名空间可以覆盖上层命名空间的内容，而同一层级的命名空间中新的内容又可以覆盖旧的变量的内容，所以在实际工作中要注意到命名空间的变化问题。比如在from module import *这种操作的时候就要当心，因为把一个模块中所有变量名导入到全局命名空间中有可能会把目前存在于命名空间中的一些同名变量给覆盖掉的。</p>
+<p>● enclosing命名空间<br>
+　　闭包空间在local和global之间，主要用于在面向函数编程的过程中出现的闭包的情况。比如下面这段代码：</p>
+<pre><code class="language-python">var = 'global value'
+def outer():
+    var = 'enclosed value'
+    def inner():
+        var = 'local value'
+        print(var)
+    inner()
+outer()
+#结果
+#local value
+</code></pre>
+<p>如果把var = 'local value'这句给注释掉那么结果就变成了enclosed value，进一步把var = 'enclosed value'也注释掉那结果就变成了global value了。这一切看起来都是显而易见的。</p>
+<p>和global命名空间类似的，位于enclosed命名空间包裹中的变量名也可以通过关键字来指定其不搜索local，而直接搜索enclosed级别的命名空间。这个关键字是nonlocal。nonlocal目前只能在python3.x中使用，python2.x还不能使用。</p>
+<p>●  built-in命名空间<br>
+python自带很多函数和变量，这些对象的名字都是属于内建命名空间的。假如我们想要自定义一个重名的变量，那么就会对内建空间的变量做出覆盖。比如我可以自定义一个len函数来覆盖掉python原本的len函数。虽然可以这么做，但是不推荐，私自覆盖built-in命名空间的内容可能会引起意想不到的后果，比如在后续的函数调用中可能在我们想不到的某个第三方库中调用了len函数的话就会引起混乱了。</p>
+<p>●  命名空间内容的查看<br>
+python自带了locals()和globals()两个函数，分别返回调用此函数的当前位置所在的local命名空间中所有变量名和值的关系（以字典的形式）以及global命名空间中所有变量名和值的关系。例如：</p>
+<pre><code class="language-python">var1 = 1
+def test():
+    var2 = 2
+    print locals()
+    print globals()
+test()
+#结果
+#{'var2': 2}
+#{'var1': 1, '__builtins__': &lt;module '__builtin__' (built-in)&gt;, '__file__': 'D:/PycharmProjects/TestProject/test.py', '__package__': None, 'test': &lt;function test at 0x000000000383FB38&gt;, '__name__': '__main__', '__doc__': None}
+</code></pre>
+<p>■　　一些补充</p>
+<p>以上说到的包括命名空间也好，LEGB规则也好，借助常识和在其他语言中得到的知识，在实际应用过程中稍微脑补一下总还是能解决的。但是python中有时候也有一些出人意料的情况（至少目前对我来说是这样，我还没办法找到清晰自洽的说法来解释这些出人意料）。下面针对这些情况做出说明，这也是这篇文章的重要之处。</p>
+<p>●  不要轻易到下层命名空间中去改变全局变量的值<br>
+　　虽然前面说到了，通过global关键字的提前声明可以在函数中也对全局变量做出修改，但是这不是很好。会引起很多乱七八糟的错误，解决的一个方法是通过函数参数的形式把全局变量的值传递到函数中来，然后返回通过函数处理后的值。函数定义结束后回到global命名空间之后在调用函数，以返回值赋值给全局变量：</p>
+<pre><code class="language-ptthon">var = 1
+def test():
+  global var
+  var = 2
+test()
+####上面这样不好，改成下面这样####
+var = 1
+def test(para):
+  para = 2
+  return para
+var = test(var)
+</code></pre>
+<p>●  赋值语句的默认行为<br>
+　　下面这段代码会报错：</p>
+<pre><code class="language-python">var = 1
+def test():
+    var += 1
+test()
+
+#错误信息
+#UnboundLocalError: local variable 'var' referenced before assignment
+</code></pre>
+<p>在一般认知中，var += 1等价于 var = var + 1，这个认识没有问题。但是在python中,赋值语句的默认行为是“只要在当前local命名空间中无同名变量且没有global,nonlocal等关键字的声明的话，就一定创建一个该名字的新局部变量”，然后在进行赋值语句等号右边的运算，把运算所得对象约束到这个局部变量上来。在这个例子中，新建了一个名为var的局部变量，因为var这个名字已经存在于当前的local命名空间中了所以解释器不会再向上层命名空间中去寻找变量。但是这个var在此时还没有具体的对象约束，所以在等号右边运算时导致报错。</p>
+<p>如果把上述代码中的var += 1换成var + 1，没有了赋值操作的话，解释器就不会认为var是个新建出来的局部变量，然后查找到全局变量var取它的值来进行运算，这样就不报错了。</p>
+<p>另外，如果把var换成另外一种可以通过非赋值手段来改变的类型的话（其实换句话说，就是所有可变类型）：</p>
+<pre><code class="language-python">var = [1]
+def test():
+    var.append(2)
+test()
+print var
+#结果
+#[1,2]
+</code></pre>
+<p>这样子的话，由于避开了创建一个新局部变量的步骤，就可以做到改变全局变量而不报错了。</p>
+<p>进一步，一个比较容易混淆的，就是把上面这个例子中的append方法再改成var[0] += 1。这样一个语句乍一看还是一个赋值语句，似乎还是会报错，但是实际上并不。因为它的等号左边不是一个变量名了，通过这个变量名创建一个新局部变量也就无从谈起了。因为它没有办法创建新局部变量，所以也就不会有等号右边变量名存在却没有实际值的变量引起的计算错误了。所以var[0] += 1这个语句最终还是会改变全局变量的var，var从[1]变成了[2]。</p>
+<p>●  类中命名空间的特殊性<br>
+　　以上说到的命名空间规则，基本上都是在面向函数编程的这个前提下的，在面向对象的编程中，有时候也会遇到一些奇奇怪怪的，类似于命名空间的问题。实际上这些问题应该是属于面向对象机制框架中的一些规律。关于这方面的一些内容我写了一点在python类机制那篇文章中，这里做一点补充。</p>
+<p>比如类变量和实例变量之间的命名冲突问题：</p>
+<pre><code class="language-python">class Test():
+  var = 1
+  def __init__(self):
+    self.var = 2
+
+t = Test()
+print t.var
+</code></pre>
+<p>在这种情况下因为实例变量存在，所以引用var属性的时候取到的是实例变量的var。但是如果在初始化方法中没有提到self.var的话，那么t.var就直接取向类变量的var。</p>
+<p>另一方面，如果在没有实例变量var的情况下，在其他属性方法（除了__init__方法的其他方法）中引用self.var则会指向类变量的var。在有实例变量var的情况下，其他属性方法中的self.var自然是指向实例属性var的。如果实例变量var存在时想要引用类变量var可以通过类名Test.var来引用或者self.<strong>class</strong>.var来引用。</p>
+<p>想要提到一点类中命名空间比较特殊的一点，如果把上例代码中的self.var = 2改成self.var += 1，从形式上来说似乎和之前提到过没有用global关键字声明而直接对全局变量进行赋值操作的样子差不多，当时那个情况的结果是报错UnboundLocalError。但是在这里，并不报错。一来，等号左边的self.var本身不是一个变量名，就好比之前提到的var[0] += 1一样，不会创建新的局部变量；二来，在类的属性方法中似乎有一种特别的机制就是会自动把赋值语句等号左边的self.xxx识别成当前实例的一个属性，如果之前没有这个属性就自动创建一个新属性，基于这种推断，在类中的赋值语句中，等号左边如果是self.xxx的话，创建的不是一个新的局部变量而是一个新的实例的属性。从结果来看，这里发生的，是等号右边self.var取到类变量的var，进行+1操作之后赋值给一个新的实例变量的var，自此之后通过这个初始化方法得到的实例就有了一个self.var的实例变量，其值是类变量var+1。由于这种混乱出现的可能，所以在类的方法中想要引用类变量的话请尽量通过类名来引用。比如上面提到的self.var += 1改成Test.var += 1就可以做到每个实例创建后类变量var都+1。</p>
+<p>●  for循环的变量名会污染外部命名空间<br>
+　　在c，java里面，for循环的第一子句中可以声明一个仅限本次循环使用的变量比如for(int i,i=0;i&lt;10;i++)这样子，再循环结束之后这个i所占的空间就被释放了。</p>
+<p>python中这个for表达式更加简洁 for i in range(10)，但是这里的i是会影响本次循环之后的代码的。也就是说在pythonfor循环语句的循环头中的那个变量不是循环语句中的局部变量，而是会泄露到外部命名空间中的变量：</p>
+<pre><code class="language-python">for i in range(10):
+    if i == 9:
+        print locals()
+print locals()
+#结果
+#{'__builtins__': &lt;module '__builtin__' (built-in)&gt;, '__file__': 'D:/PycharmProjects/TestProject/test.py', '__package__': None, 'i': 9, '__name__': '__main__', '__doc__': None}
+#{'__builtins__': &lt;module '__builtin__' (built-in)&gt;, '__file__': 'D:/PycharmProjects/TestProject/test.py', '__package__': None, 'i': 9, '__name__': '__main__', '__doc__': None}
+</code></pre>
+<p>第二个locals函数返回的命名空间信息中依然存在i是9这一项，表明i这个变量被泄露了出来，污染了外部的命名空间。这点需要注意一下。</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://imenghu.github.io/post/qian-tan-python-lei-ming-ming-kong-jian">
+                  <h3 class="post-title">
+                    浅谈Python类命名空间
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
