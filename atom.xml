@@ -2,13 +2,370 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-11-22T06:54:17.473Z</updated>
+    <updated>2019-11-22T07:12:08.121Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[【Python&数据结构】 抽象数据类型 Python类机制和异常]]></title>
+        <id>https://imenghu.github.io/post/pythonandshu-ju-jie-gou-chou-xiang-shu-ju-lei-xing-python-lei-ji-zhi-he-yi-chang</id>
+        <link href="https://imenghu.github.io/post/pythonandshu-ju-jie-gou-chou-xiang-shu-ju-lei-xing-python-lei-ji-zhi-he-yi-chang">
+        </link>
+        <updated>2019-11-22T07:01:44.000Z</updated>
+        <content type="html"><![CDATA[<p>抽象数据类型</p>
+<p>最开始的计算机语言，关注的都是如何更加有效率地计算，可以说其目的是计算层面的抽象。然而随着这个行业的不断发展，计算机不仅仅用于计算，开发也不仅只关注计算过程了，数据层面的抽象也变得同样重要。虽然计算机语言一开始就有对数据的抽象，但是那些都只是对一些最基本的数据类型而不包括我们想要用的，多种多样的数据。</p>
+<p>数据类型：<br>
+　　　　程序处理的数据，通常是不同的类型的。只有事先约定好的不同类型的数据的存储方式，计算机才能正确理解逻辑上不同的数据类型。所有编程语言都会有一组内置的基本数据类型。另外在实际工作过程中，或早或晚总会碰到一些没法用现有数据类型解决的问题，这时就需要自定义一些数据类型来解决。像Python这样比较高级的语言的话，在基本类型的基础上还添加了一些额外的数据结构如tuple,list,dict（这些广义上来说也算是Python的数据类型）。</p>
+<p>■　　抽象数据类型</p>
+<p>以上基本数据类型都是比较simple，naive的结构，而且有一点很违和的是，以上数据结构都把数据暴露在外。如果一个人有了对某个变量的权限的话他就可以看到这个变量代表的数据结构中的所有数据。为了解决这个问题，必须要有一种数据类型，它可以让使用者只需要考虑如何使用这种类型的对象，而不需要（或者根本不能）去关注对象内部的实现方式以及数据的表示等等。这样的对象和类型从概念上来说就是抽象数据对象和抽象数据类型了。</p>
+<p>抽象数据类型的基本想法是把数据定义为抽象的数据对象集合，只为他们定义可用的合法操作而不暴露内部实现的具体细节，不论是操作细节还是数据的存储细节。在这样的思想指导下，一般而言的抽象数据类型应该具有下列三种操作：</p>
+<p>1. 构造操作（比如python类中的__init__方法）</p>
+<p>2. 解析操作（getxx方法）</p>
+<p>3. 变动操作（setxx方法）</p>
+<p>看到这三种操作之后，根据这三个性质可以区分出数据类型的变动性。如果一个类型只有1和2两种操作那么就是不可变的类型，如果一个类型具备三种操作，那么就是一个可变的类型。在Python中，对象分成可变和不可变的，从抽象数据类型的角度来看就是看这个类型有没有变动操作的一个判断。</p>
+<p>■　　Python的类</p>
+<p>Python中的类就是一种抽象数据类型的实现，定义好的一个类就像是一个系统内部类型，可以产生该类型的对象（或者也可以叫它实例），实例具有这个类所描述的行为。实际上，Python的内置类型也都可以看做是类的一种从而进行一些类似“类”的操作。</p>
+<p>关于类如何定义，一些基本的方法看下基本教程就懂了。之前有接触过一点java，总体来说，python的类的定义方法和java是类似的，而且比java要简单一点（比如python中定义类和类中的方法时不必指出类的公用性有多大，比如是public,private还是其他什么标志）</p>
+<p>下面讲些稍微高端一点的类定义的规范和方法</p>
+<p>●  关于内部使用的属性和方法<br>
+　　在java里面，在类内部使用的方法和属性通常要加上修饰符private使得外部的调用者没办法直接访问这些方法和属性。Python中也有类似的机制，分成两种形式。一是把这种只提供给内部使用的属性（方法）的名字前面加上一个下划线以提示其私有的性质，这样的写法并不是语言规定而是人们约定俗成的，也就是说如果你想要通过实例直接访问一个下划线开头的属性或者属性方法也是可行的只不过不鼓励这么做。第二种形式是以两个下划线开头作为属性（方法）的名字，当然它不能同时以两个下划线结尾，这样就变成了魔法方法了。这种两个下划线的形式的属性是和java中的private一样的，如果从类的外部去访问这个属性的话会抛出AttributeError提示找不到相关属性。</p>
+<p>●  关于类属独立属性（类变量）<br>
+　　有时候，可以在类中的所有属性方法外面添加一些属性。这些严格来说都已经不算是类的属性了，因为他们和类的实例是完全不搭界的，有点像Java中的static类变量。对于这类“属性”几点想说：</p>
+<p>1. 因为这些属性常常写在类的最上面，有时候可能会受到java的影响而下意识的以为这些属性是跟实例关联的，实则不然。就像函数参数的默认值一样，在函数被定义好的时候就被初始化好并保存在内存中的特定地址里不会随着调用函数次数的变化而变化一样，类属独立属性是在类被定义好的时候就被保存了起来，不会因为类被实例化了多少次而被初始化多少次，而且不论通过类名还是实例去调用它它的值都是一样的（也就是说python中的“类变量”是自带static属性的）。所以在比如类需要统计一共被实例化了多少次的场景中，可以在类中的所有方法外写一个count = 0然后在类的__init__方法中添加一句count+=1。这样每次实例化调用__init__的时候会让count加上1而不是初始化回0的状态。</p>
+<p>2. 这种属性也不能理解成类的局部变量。在这个类的方法中我们不能直呼其名地调用这些属性，而是得像在类外面一样通过圆点的形式来调用相关属性。比如：</p>
+<pre><code class="language-python">class Counter():
+  count = 0
+  def __init__(self):
+    count += 1    #这会报错
+    Counter.count += 1    #必须这么写
+</code></pre>
+<p>当然如果是类方法的话可以在方法中用cls.attribute的形式调用相关属性。下面也会有提到。</p>
+<p>注意：在类的属性方法中是可以通过self.attribute的形式来调用类属独立属性的，在类定义外面也可以通过o.attribute来调用类属独立属性，但是要明确一点，类在实例化时，将类独立属性的名字告诉实例并把地址赋给它。但是之后实例所得到的类独立属性已经和原来的类独立属性有了区别，如果属性值是可变对象，那么实例对它自身的类独立属性修改会反映到类调用类独立属性时的值，如果是不可变对象，那么实例对它自身的类独立属性修改是不影响类调用类独立属性时的值的，比如（写得有些凌乱。。可以参考下面写的【对python类实例化时操作的一些思考】）：</p>
+<pre><code class="language-python">class Test(object):
+    num = 1
+    lst = [1]
+    lst2 = [1]
+
+t = Test()
+t.num = 2
+t.lst.append(2)
+t.lst2 = [2]
+print Test.num,Test.lst,Test.lst2
+
+#得到结果是1 [1, 2] [1]
+</code></pre>
+<p>另外成功调用还要建立在一个基础上，即这么调用的那个实例本身没有和类属独立属性重名的属性存在。比如：</p>
+<pre><code class="language-python">class Test(object):
+    count = 1
+    def __init__(self):
+        self.count = 2
+
+    def get_count(self):
+        print self.count
+t = Test()
+t.get_count()
+del(t.count)　　#可以通过del函数解除一个属性和实例的关系，即删除属性的操作。
+t.get_count()
+#结果
+#2
+#1
+#第一次调用get方法的时候，t先找自身哟没有名为count的属性，找到就返回了。但是第二回的时候，在自身没有找到而在类中找到了一个独立属性名为count，而它也是可以调用的，所以就返回了那个count
+</code></pre>
+<p>如果无论如何都有同名的变量的话，那么可以通过t.<strong>class</strong>.count来指定访问属于类的类变量。另外就上面给出的那个Counter.count+=1的例子而言，这里如果换成了self.count += 1的话可能达不到目的。原因在之前的某篇文章中也提到过，即python中的赋值语句还兼顾了声明变量的功能。这里的self.count = self.count + 1，右边的self.count确实引用了类属独立属性的count，然而左边的self.count被解释成为实例自身添加一个count的属性。因此如果写成self.count +=1的话，作为类属独立属性的count始终是0而每个被初始化出来的Counter的实例里面会有一个count的属性覆盖了类属独立属性，其值是1。</p>
+<p>3. self.attribute是不能写在外面的！总是把self误认为是类对象，其实应该是调用时的实例对象。换句话说，在所有方法外面写self.attribute的话，self是什么东西解释器是不知道的。唯有在写方法中（which的第一个参数是self），在调用方法的时候解释器可以把调用方法的实例作为参数约束给self，这样self才会有意义。</p>
+<p>●  关于静态方法<br>
+　　在java中，可以用提示符static来表明某个方法是独立于其他同一个类中其他方法的静态方法。所谓静态方法就是说要调用这个方法可以不必通过类的实例而直接通过类名来调用。在Python中，类本身也是一个对象，通过类名本身来调用一个方法看起来似乎合情合理，为了满足这种需求，Python的类中可以通过添加修饰符@staticmethod来使得一个方法变成类的静态方法。静态方法的参数中没有self并且也可以通过类的实例来调用。从某种意义上说，静态方法其实算是类里面定义的普通函数，是一个类的局部函数。</p>
+<p>●  关于类方法<br>
+　　和静态方法类似的，类方法用@classmethod修饰符来表示。类方法和普通的属性方法一样，一般自带一个参数叫cls，在方法中代表调用这个类方法的类对象（通常是正在定义的这个类或者其父类或子类），然后在方法体中就可以用cls</p>
+<p>来refer to这个类本身啦。比如书上有这样一个例子</p>
+<pre><code class="language-python">class Counter(object):
+    count = 0
+    def __init__(self):
+        Counter.count += 1
+
+    @classmethod
+    def get_count(cls):
+        return cls.count
+
+x = Counter()
+print x.get_count()
+y = Counter()
+print y.get_count()
+
+######结果是
+1
+2
+</code></pre>
+<p>这个例子说明了两个问题。一，对于类方法而言，其参数cls在调用时确实约束到了调用它的那个类对象上。二，对于属于类本身的独立属性，其并不根据实例的初始化而初始化。</p>
+<p>●  类中的魔法方法<br>
+　　关于魔法方法的说明可以参考魔法方法那篇笔记，这里不多提。想说的是一个小技巧，比如在一个类中要定义一个比大小的魔法方法，而比较的类的一个属性的时候，下意识的总会写</p>
+<pre><code class="language-python">def __lt__(self,another):
+  if self._attribute &lt; another._attribute:
+    return True
+  else:
+    return False
+　　但是实际上可以这么写更简洁，而且因为拿来作比较外部实例的不一定也有_attribute这个属性，最好还能加上一个异常排除的过程：
+
+def __lt__(self,another):
+  try:
+    return self._attribute &lt; another._attribute
+  except AttributeError as e:
+    raise e
+</code></pre>
+<p>●  关于__init__和构造方法<br>
+　　如果一个类中定义了__init__方法，那么在创建这个类的实例时解释器后自动调用这个方法初始化这个对象。之前一直认为python类中的__init__方法就是java中的构造方法。其实这两者还是有些微妙的区别的。比如java的一个类中不能没有构造方法（好像是这样吧= =），但是python的一个类中可以没有__init__方法，没有__init__方法时所有基于这个类创建实例的动作都会创建出一个空实例，此时解释器实际上调用的是object()方法，而object是Python中所有类的父类。</p>
+<p>*关于python类实例化时操作的一点探索：python类在实例化的时候，会把类的所有成员对象（包括类独立属性和类方法）复制一个副本给实例，而这些成员对象的引用都指向类定义中成员对象的值。由于是副本，所以我们可以对实例的成员对象做出引用迁移，即用等号赋值以改变其引用，这样的话实例做出的属性改变就和类无关。如果我们通过实例改变一些可变的成员对象的值，那么会引起类中成员对象的变化。这就导致了下次实例化时，本次的变化会体现在下个实例中。请看下面的例子：</p>
+<pre><code class="language-python">class Test(object):
+  num = 1
+  lst = [1]
+  def __init__(self):
+    pass
+  def method_in_class(self):
+    print &quot;in_class_method is called&quot;
+
+def method_out_class():
+  print &quot;out_class_method is called&quot;
+
+t = Test()
+t.num = 2
+t.lst.append(2)
+t.method_in_class = method_out_class
+t.method_in_class()    #打印结果 out_class_method is called
+k = Test()
+print k.num,k.lst    #打印结果  1 [1,2],可以看到因为lst是可变对象，t对lst做出的改变反映在了k里
+k.method_in_class()     #打印结果 in_class_method is called。函数也是对象，不过t做出的改变是赋值，相当于改变了t.method_in_class方法的引用，不影响类定义中的method_in_class。所以k是不受影响
+</code></pre>
+<p>●  关于一般成员方法的属性化<br>
+　　在java中，常常会在类中声明一个private变量var，然后再类中设计getVar()和setVar(value)方法来通过方法的包装实现对var的改变。当在python中进行面向对象编程时，也偶尔会用到这种模式，比如：</p>
+<pre><code class="language-python">class Test():
+  def __init__(self):
+    self.var = None
+  def getVar(self):
+    return self.var
+  def setVar(self,value):
+    self.var = value
+</code></pre>
+<p>但是这样做有一个问题，在类的实例被初始化之后，我们可以直接通过实例名.var的方式对var做出改变，这使得setVar和getVar两个方法显得没有意义而且不安全。java中有private这种关键字可以解决这个问题，有人会说python中可以把var改成_var可以提示这是个私有变量。不过_var只是一个提示性而不是强制性的，更重要的是用setVar和getVar方法来做这件事略显麻烦，不符合python一切从简的原则。基于这样一种思想，python提供了@property这种装饰器，其作用是自动把类似于setVar,getVar这种样子的变量变更机制转换成更加简洁的调用形式同时不绕开setVar和getVar的代码。一个典型的例子：</p>
+<pre><code class="language-python">class Test(object):
+    def __init__(self):
+        self._var = None
+
+    @property
+    def var(self):
+        raise Exception(&quot;var is not a readable attribute&quot;)
+
+    @var.setter
+    def var(self,value):
+        if isinstance(value,str):
+            self._var = value
+
+t,k = Test(),Test()
+t.var,k.var = 123,&quot;abc&quot;
+print t.var,k.var
+#结果是None abc
+</code></pre>
+<p>从根本上看，@property装饰的函数可以被看成是一个类的属性，通过 “实例.函数名”的方式就可以调用其返回的值。另一方面，引申出了@函数名.setter这个装饰器，其装饰的函数可以看做是setVar方法，只不过可以直接通过赋值语句调用。在这个例子中可以看到，@var.setter装饰的函数检查要设置的值是否为字符串类型，只有字符串类型才设置上去，所以t.var = 123并不成功，但k.var = &quot;abc&quot;成功了。如此可以让调用属性变得简洁，同时实际上我们是隐形地调用了类似于setVar,getVar的方法，可以在方法中加上一些控制条件以完善安全性或其他性能。</p>
+<p>另外需要注意的是@property下的函数名、@xxx.setter中的xxx以及被它修饰的函数的函数名最好都能一致，以体现他们都是为同一个类的成员属性服务的。</p>
+<p>■　　类的使用和对象（实例）</p>
+<p>某个程序基于类C创建了实例o然后用o以调用属性方法的形式调用了方法m，前半个过程中python解释器的工作原理可能是跟我上面说的【关于python类实例化时操作的一点探索】有关，而这后半个过程中，python解释器是这样工作的。创建一个空方法对象，约束对象o和方法m到这个方法对象上去。正如大家所知，类中的属性方法在定义的时候通常第一个参数是self，这是因为需要把一个实例作为一个参数传递到方法中去这就是为什么方法对象约束的不仅仅是m还有o的原因。当o被作为第一个参数传递给m之后，m里面的self指的就是o这个实例了。</p>
+<p>对于静态方法，在定义的时候就没有要写self，所以自然就没必要约束调用它的实例，这也是为什么它可以用类名直接调用的原因了。</p>
+<p>其实从上面的说明中已经不难看出，一般属性方法调用时的o.m()其实等价于C.m(o)</p>
+<p>●  关于增删属性和属性的赋值语句<br>
+　　python的类的实例属性都维护在实例的__dict__这个隐藏属性中。因为它本身就是一个字典，所有我们可以动态地对某个实例的属性做出增删操作。操作具体不用通过__dict__这个变量，而是直接通过o.new_attribute = &quot;new_value&quot;的形式。当o已经存在new_attribute这个名称的属性的时候，这个属性的内容会被新的赋值语句覆盖掉。而删除操作可以通过del(o.attribute)来实现。</p>
+<p>至于在类定义的内部，可以在任何一个方法中通过self.new_attribute = xxx来实现为类添加一个新属性。这就出现了一个很有意思的现象，所有类似于self.new_attribute=xxx都会被看做是为类添加新属性或者改变现有属性值的行为。</p>
+<p>●  在一个属性方法中调用另一个属性方法<br>
+　　同一个类中如果出现这种情况，就可以通过self.another_method()的形式来调用实现，而不是直接another_method()。另外，如果调用这个语句的不是本类的实例而是一个子类的实例，然后这个子类还没有重写这个语句所在的方法但是却重写了another_method这个方法的话，这就导致了一个问题（我靠我都晕了，实例看下）：我应该执行哪个类中的another_method，是父类还是子类的。</p>
+<pre><code class="language-python">class Parent():
+  def f(self):
+    self.g()
+  def g(self):
+    print &quot;this is method g in Parent&quot;
+
+class Child(Parent):
+  def g(self):
+    print &quot;this is method g in Child&quot;
+
+
+c = Child()
+c.f()
+
+##结果是
+#this is method g in Child
+</code></pre>
+<p>这种现象说好听一点叫动态约束，因为c在调用方法f的时候传递给f的参数self的是c实例本身，而通过self调用的g自然是通过实例c调用的g，也就是类Child中定义的g方法了。</p>
+<p></p>
+<p>■　　类的继承</p>
+<p>上面这个例子其实已经提到了类的继承了。python中类的继承机制和java也都差不多，不同的是python中支持多类继承一类也支持一类继承多类，后者在java中好像是不行的吧（记不太清了。。）。还是讲一下在实际运用过程中可能会碰到的一些问题</p>
+<p>●  issubclass和isinstance<br>
+　　isinstance函数用来检查某个对象是不是某个类的实例，issubclass用来检查一个类是不是另一个类的子类。对于多层继承，比如class A(),class B(A), class C(B)的情况，issubclass(C,A)返回True。同时子类的实例也被默认为也是父类的实例，所以isinstance(C(),A)和isinstance(C(),B)也都是返回True的。</p>
+<p>●  在子类中调用父类的初始化方法 super函数<br>
+　　在java中，似乎是用super()指代父类的构造方法的。python中也有super方法不过用法不太一样：在python中如果想要在子类中调用父类的初始化构造方法有两种写法，分别是</p>
+<p>Parent.<strong>init</strong>(self,...)和super().<strong>init</strong>(...)。前一种很好理解，相当于是通过父类对象来调用其初始化方法，把子类初始化时的那个实例作为父类初始化方法的参数来执行。至于第二个，在python中的super函数其实是返回一个父类的实例，通过实例来调用自然就不用self参数了。就调用父类的初始化方法而言，还是建议用前面一种，因为毕竟用一个创建后立刻销毁的对象作为父类初始化方法的self参数总感觉有点不太对劲。而对于父类中的其他方法，如果想要调用那么可以super().method(...)这样是很自然的。（这部分存疑。。书上是这么说的但是实验一下通不过，报错说在python2中super()必须要有一个参数，而书上用的是python3）当然也可以通过Parent.method(self,...)的形式来调用。已经证实，super()只是Python3中的写法。</p>
+<p>super函数还有另外一种写法，就是super(Class,object).method(...)，这个语句可以出现在程序的任何地方而不一定要是在类的属性方法定义中。这个语句的意思是从Class类的父类开始逐级向上搜索前辈类，在类中找到属性方法method之后把object这个Class的实例作为method的self参数传递过去，然后执行method。比如上面那个动态约束的例子，在Child类中重写一下f方法：</p>
+<pre><code class="language-python"> def f(self):
+   super(Child,self).g()
+
+#这样运行的结果就变成了
+#this is method g in Parent
+　　在这个f方法中，通过super函数强行把g方法关联到父类中的g方法而不是动态约束到子类中的g方法。
+</code></pre>
+<p>●  关于super的具体机理<br>
+　　上面关于super函数的工作原理非常不细致。。“从Class类的父类开始逐级向上搜索前辈类”这句话不严谨。很明显的一个漏洞是，Python中存在着多重继承的情况，如果一个类继承了多个类那么Class类的父类该选择哪个呢？也就是说，super函数返回了一个父类实例，究竟是不是父类的实例，又是哪个父类，是怎么决定的。</p>
+<p>首先要了解，Python中的类有一个魔法属性叫做__mro__，MRO的全称是Method Resolution Order即方法解析顺序。其值是一个元组，元组嘛自然是有0-n的顺序的。这个元组的内容就是以本类为0号位，object这个最高的基类作为最后一位，中间是按照一定算法排列的本类的所有先辈类，这样一个元组。比如一个class A(object)的__mro__就是(&lt;class '<strong>main</strong>.A'&gt;, &lt;type 'object'&gt;)，而如果再来个class B(A)，那么就是(&lt;class '<strong>main</strong>.B'&gt;, &lt;class '<strong>main</strong>.A'&gt;, &lt;type 'object'&gt;)。</p>
+<p>知道了__mro__之后，其实super(cls,inst)函数的本意是在inst对象的__mro__元组中，寻找cls类的后一个类，返回的是这个类，然后如果后面还跟了调用方法的操作，那么此时通过这个类以及super中inst参数的值作为一个实例来调用的。对于刚提到的B，super(B,self)，由于self就是自身类的实例，__mro__如上面提到的那样，而cls参数值是B，即&lt;class '<strong>main</strong>'.B&gt;，寻找它的下一个类即A类，所以super最终返回了A类。</p>
+<p>虽然看起来大多数情况下super就是返回了父类的实例，但是实际上super函数和父类没啥关系，它寻找下一个类的依据是__mro__属性这个元组，并且返回的不是这个类的实例而是这个类本身!</p>
+<p>比如下面这段代码很好地说明了这点：</p>
+<pre><code class="language-python">class A(object):
+  def go(self):
+    print 'AAA GO'
+
+class B(A):
+  def go(self):
+    super(B,self).go()
+    print 'BBB GO'
+
+class C(A):
+  def go(self):
+    super(C,self).go()
+    print 'CCC GO'
+
+class D(B,C):
+  def go(self):
+    super(D,self).go()
+    print 'DDD GO'
+
+print D.__mro__
+d = D()
+d.go()
+
+'''
+结果是
+(&lt;class '__main__.D'&gt;, &lt;class '__main__.B'&gt;, &lt;class '__main__.C'&gt;, &lt;class '__main__.A'&gt;, &lt;type 'object'&gt;)
+AAA GO
+CCC GO
+BBB GO
+DDD GO
+'''
+</code></pre>
+<p>首先看到了D的__mro__顺序是D、B、C、A，这个顺序是Python内部通过一种叫做C3算法的广度优先算法计算出来的。</p>
+<p>实例化D后调用D的go方法，进入方法之后，第一次调用了super，此时inst参数是self即D类实例，cls参数是D类，所以super返回的B类。变成了B类调用go方法，然后go中要求的self参数用的就是第一次调用super时的那个inst参数即一个d类实例，好，进入B类的go方法。现在第二次调用super，此时inst参数的值是self，但是注意！self还是刚才的d类实例！于是神奇的一幕发生了，__mro__还是刚才那个mro，但是第一个参数由D变成了B，B的下一个类是C而不是A。因此，继续调用go方法时，调用的主体不是A类而是C类！进入C类的go方法之后同理，mro还是同一个，找到下一个是A类。A类没啥说的，直接print，完了返回之后回到C类go方法。所以stdout中第二行输出是C，第三行输出是B，而不是我们所想当然的反过来的情况。</p>
+<p>python异常</p>
+<p>Python中的所有异常都是作为一种类而存在的，Python系统给出了很多系统自带的常用的异常。一般如果用户需要自定义异常的话可以选择某一个异常作为父类来衍生出一个自定义异常。所有异常的总父类是Exception类。</p>
+<p>所有的异常类在初始化的时候都可以接受一个字符串作为错误信息,比如在自定义一个异常类的时候可以：</p>
+<pre><code class="language-python">class MyException(Exception):
+  def __init__(self):
+    Exception.__init__(self,&quot;My Exception is Raised&quot;)
+
+raise MyException
+
+#结果
+# Traceback (most recent call last):
+#   File &quot;D:/PycharmProjects/TestProject/test.py&quot;, line 8, in &lt;module&gt;
+#     raise MyException
+# __main__.MyException: My Excpetion is Raised
+</code></pre>
+<p>如果对错误判断没有太多要求的话可以方便地raise Exception(&quot;some error message&quot;)来抛出一个有提示文字的错误。但是在更多情况下，我们可能会根据具体的业务要求来对代码运行做一些逻辑判断，比如某些情况下可以抛出我们的自定义异常，然后在调用这些代码的时候except我们的自定义异常，这样就可以做到符合业务逻辑的异常捕获和处理了。</p>
+<p>●  异常的传播和捕获<br>
+　　如果异常发生在一个try语句块里面，那么解释器将按照顺序先检查这个try语句块相应的except语句块有没有为这个异常准备好处理器，如果没有的话那么就把这个异常交给更外层的try语句（如果有的话），这样逐层传播异常，如一直传播到这个异常所在的函数的最外层也没能找到相关的处理器的话那么这个函数就将异常中止运行，程序也因此整个中止。</p>
+<p>如果在搜索过程中找到了相关的异常处理器的话，那么把执行点从异常语句的地方跳到处理器头部（也就是说跳过了try语句块中从异常位置到最后部分的所有代码）。在处理器的代码中还可能遇到新的异常，也可以在处理器代码中抛出异常。</p>
+<p>●  实例<br>
+　　书中提到了实现一个大学人事管理系统框架的实例，当然是一个很简朴的东西，逻辑也不复杂，不过其中有些面向对象编程的常识性的知识和技巧值得一看。我决定照样子把这段代码全部都抄过来，在有价值的 地方注释一下。</p>
+<p>其基本思路是这样的：</p>
+<p>实现一个公共人员的类，包含一些人的基本信息属性</p>
+<p>创建学生和教职人员两个类，分别继承公共人员类。再根据学生和教职人员的属性不同来实现不同的类。</p>
+<p>首先是两个本例中可能会用到的异常类型：</p>
+<pre><code class="language-python">class PersonTypeError(TypeError):
+    pass
+
+class PersonValueError(ValueError):
+    pass
+ 
+</code></pre>
+<p>然后是公共人员类：</p>
+<pre><code class="language-python">class Person(object):  #实现一个公共的人员类
+    _num = 0    #用来记录创建过的总人数
+    def __init__(self,name,sex,birthday,ident):
+        if not (isinstance(name,str)) and sex in (&quot;女&quot;,&quot;男&quot;):
+            raise PersonValueError
+        try:
+            birth = datetime.date(*birthday)
+        except:
+            raise PersonTypeError(&quot;Wrong Date:{0}&quot;.format(birthday))
+        self._name = name
+        self._sex = sex
+        self._id = ident
+        self._birthday = birth
+        Person._num += 1
+
+    def id(self): return self._id
+    def name(self): return self._name
+    def sex(self): return self._sex
+    def birthday(self): return self._birthday
+    def age(self):
+        return datetime.date.today() - self._birthday.year
+    def set_name(self,new_name):
+        if not isinstance(new_name,str):
+            raise PersonValueError(&quot;Wrong New Name:{0}&quot;.format(new_name))
+        self._name = new_name
+    #其他的set方法不一一列举了，反正都是差不多的
+
+    def __lt__(self,other):
+        #定义一个比较魔法方法，当两个人员对象比较时默认比较他们的id号的大小
+        if not isinstance(other,Person):
+            raise PersonTypeError(other)
+        return self._id &lt; other._id
+
+    @classmethod
+    def num(cls):   #定义一个获取目前为止总的注册人数的方法
+        return cls._num
+
+    def __str__(self):  #定义当print此类对象时的操作
+        return &quot; &quot;.join((self._id,self._name,self._sex,self._birthday))
+</code></pre>
+<p>然后是学生类，学生类中需要有学号这个id，但是学号应该有一套生成的规则，这个规则应该放在Student这个类中维护，所以这个类中应该额外加一个学号生成的方法：</p>
+<pre><code class="language-python">class Student(Person):
+    &quot;&quot;&quot;学生类主要考虑增加院系，入学年份以及课程情况的三种信息
+    &quot;&quot;&quot;
+    _id_num = 0
+
+    @classmethod
+    def _id_gen(cls):
+        cls._id_num += 1
+        year = datetime.date.today().year
+        return &quot;1{:04}{:05}&quot;.format(year, cls._id_num)  # 生成一个类似于 1201300001的学号，1代表学生，2013是入学年份，00001是学生编号
+
+    def __init__(self, name, sex, birthday, depart):
+        Person.__init__(self, name, sex, birthday, self._id_gen())
+        self._department = depart
+        self._enroll_year = datetime.date.today().year
+        self._courses = {}
+
+    def set_course(self, course):  # 模拟选课，选课刚开始还没有成绩
+        self._courses[course] = None
+
+    def set_score(self, course, score): #模拟给分
+        if course not in self._courses:
+            raise PersonValueError(&quot;The Course is not Selected:{0}&quot;.format(course))
+        elif not isinstance(score, float) or score &gt; 100.0 or score &lt; 0.0:
+            raise PersonValueError(&quot;Score for Course {0} is Invalid&quot;.format(course))
+        self._courses[course] = score
+
+    def scores(self):   #获得一个学生全部课程分数情况
+        return [(course,self._courses[course]) for course in self._courses]
+</code></pre>
+<p>最后是实现教职人员的类，教职人员相比于公共人员类要增加院系，员工号，工资等。操作和学生类是类似的就不再重复了。只是在它的set_salary方法中我看到了一个以前没想到的表达。。</p>
+<pre><code class="language-python">if type(amount) is not int:
+  xxxxx
+#这句判断的意图在于判断所给参数是不是一个合法的int类型，之前没想过直接用is关键字+int类型名就能够进行判断了。。我之前都是这样做的：
+if type(amount) is not type(1)：
+  xxxxx
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[【Python】 命名空间与LEGB规则]]></title>
         <id>https://imenghu.github.io/post/python-ming-ming-kong-jian-yu-legb-gui-ze</id>
@@ -763,15 +1120,6 @@ resetIPC(sys.argv[1], sys.argv[2], sys.argv[3])
         <content type="html"><![CDATA[<p><strong>1. dir(对象名) 查看该对象的属性和方法。</strong><br>
 <strong>2. help(对象名.属性名)  查看该对象属性(方法)的具体实现</strong><br>
 <strong>3. print(C.<strong>mro</strong>) MRO 是 method resolution order，主要用于 在多继承时判断 方法、属性 的调用 路径</strong></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Git记忆图]]></title>
-        <id>https://imenghu.github.io/post/git-ji-yi-tu</id>
-        <link href="https://imenghu.github.io/post/git-ji-yi-tu">
-        </link>
-        <updated>2019-11-12T01:18:13.000Z</updated>
-        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://imenghu.github.io/post-images/1573521529589.png" alt=""></figure>
 ]]></content>
     </entry>
 </feed>
