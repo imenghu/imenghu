@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-11-22T07:20:51.680Z</updated>
+    <updated>2019-11-27T06:11:38.115Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
@@ -1119,7 +1119,8 @@ resetIPC(sys.argv[1], sys.argv[2], sys.argv[3])
         <updated>2019-11-12T01:57:04.000Z</updated>
         <content type="html"><![CDATA[<p><strong>1. dir(对象名) 查看该对象的属性和方法。</strong><br>
 <strong>2. help(对象名.属性名)  查看该对象属性(方法)的具体实现</strong><br>
-<strong>3. print(C.<strong>mro</strong>) MRO 是 method resolution order，主要用于 在多继承时判断 方法、属性 的调用 路径</strong></p>
+<strong>3. print(C.<strong>mro</strong>) MRO 是 method resolution order，主要用于 在多继承时判断 方法、属性的调用路径</strong><br>
+<strong>4. <strong>dict</strong> 查看该对象命名空间的属性</strong></p>
 ]]></content>
     </entry>
 </feed>
