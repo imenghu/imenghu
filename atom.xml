@@ -2,13 +2,155 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-11-27T06:11:38.115Z</updated>
+    <updated>2019-11-27T09:51:53.984Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[自定义可迭代对象]]></title>
+        <id>https://imenghu.github.io/post/zi-ding-yi-ke-die-dai-dui-xiang</id>
+        <link href="https://imenghu.github.io/post/zi-ding-yi-ke-die-dai-dui-xiang">
+        </link>
+        <updated>2019-11-27T09:32:29.000Z</updated>
+        <content type="html"><![CDATA[<pre><code class="language-python">class Square():
+    def __init__(self, start, stop):
+
+        self.value = start - 1
+        self.stop = stop
+
+
+    def __iter__(self):
+
+        return self
+
+
+    def __next__(self):
+
+        if self.value == self.stop:
+            raise StopIteration
+        self.value += 1
+        return self.value ** 2
+
+
+print('---' * 100)
+
+for i in Square(1, 10):
+    print(i)
+
+
+结果：
+1
+4
+9
+16
+25
+36
+49
+64
+81
+100
+</code></pre>
+<p>** 解读：**</p>
+<ol>
+<li>可迭代对象的本质就是可以向我们提供一个这样的中间“人”即迭代器帮助我们对其进行迭代遍历使用。<br>
+可迭代对象通过__iter__方法向我们提供一个迭代器，我们在迭代一个可迭代对象的时候，实际上就是先获取该对象提供的一个迭代器，然后通过这个迭代器来依次获取对象中的每一个数据。<br>
+那么也就是说，一个具备了__iter__方法的对象，就是一个可迭代对象。</li>
+</ol>
+<pre><code class="language-python">class MyList(object):
+     def __init__(self):
+             self.container = []
+     def add(self, item):
+             self.container.append(item)
+     def __iter__(self):
+             &quot;&quot;&quot;返回一个迭代器&quot;&quot;&quot;
+             # 我们暂时忽略如何构造一个迭代器对象
+             pass
+
+mylist = MyList()
+from collections import Iterable
+isinstance(mylist, Iterable)
+True
+
+# 这回测试发现添加了__iter__方法的mylist对象已经是一个可迭代对象了
+</code></pre>
+<ol start="2">
+<li>iter()函数与next()函数</li>
+</ol>
+<p>ist、tuple等都是可迭代对象，我们可以通过iter()函数获取这些可迭代对象的迭代器。然后我们可以对获取到的迭代器不断使用next()函数来获取下一条数据。iter()函数实际上就是调用了可迭代对象的__iter__方法。</p>
+<pre><code class="language-python">&gt;&gt;&gt; li = [11, 22, 33, 44, 55]
+&gt;&gt;&gt; li_iter = iter(li)
+&gt;&gt;&gt; next(li_iter)
+11
+&gt;&gt;&gt; next(li_iter)
+22
+&gt;&gt;&gt; next(li_iter)
+33
+&gt;&gt;&gt; next(li_iter)
+44
+&gt;&gt;&gt; next(li_iter)
+55
+&gt;&gt;&gt; next(li_iter)
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+StopIteration
+&gt;&gt;&gt;
+</code></pre>
+<p>** 注意，当我们已经迭代完最后一个数据之后，再次调用next()函数会抛出StopIteration的异常，来告诉我们所有数据都已迭代完成，不用再执行next()函数了。**</p>
+<ol start="3">
+<li>一个实现了__iter__方法和__next__方法的对象，就是迭代器。</li>
+</ol>
+<pre><code class="language-python">class MyList(object):
+    &quot;&quot;&quot;自定义的一个可迭代对象&quot;&quot;&quot;
+    def __init__(self):
+        self.items = []
+
+    def add(self, val):
+        self.items.append(val)
+
+    def __iter__(self):
+        myiterator = MyIterator(self)
+        return myiterator
+
+
+class MyIterator(object):
+    &quot;&quot;&quot;自定义的供上面可迭代对象使用的一个迭代器&quot;&quot;&quot;
+    def __init__(self, mylist):
+        self.mylist = mylist
+        # current用来记录当前访问到的位置
+        self.current = 0
+
+    def __next__(self):
+        if self.current &lt; len(self.mylist.items):
+            item = self.mylist.items[self.current]
+            self.current += 1
+            return item
+        else:
+            raise StopIteration
+
+    def __iter__(self):
+        return self
+
+
+if __name__ == '__main__':
+    mylist = MyList()
+    mylist.add(1)
+    mylist.add(2)
+    mylist.add(3)
+    mylist.add(4)
+    mylist.add(5)
+    for num in mylist:
+        print(num)
+
+</code></pre>
+<ol start="4">
+<li>for...in...循环的本质<br>
+<strong>for item in Iterable 循环的本质就是先通过iter()函数获取可迭代对象Iterable的迭代器，然后对获取到的迭代器不断调用next()方法来获取下一个值并将其赋值给item，当遇到StopIteration的异常后循环结束。</strong></li>
+</ol>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[【Python&数据结构】 抽象数据类型 Python类机制和异常]]></title>
         <id>https://imenghu.github.io/post/pythonandshu-ju-jie-gou-chou-xiang-shu-ju-lei-xing-python-lei-ji-zhi-he-yi-chang</id>
@@ -1109,18 +1251,6 @@ resetIPC(sys.argv[1], sys.argv[2], sys.argv[3])
 </ol>
 <p>给对象的属性赋值，若属性不存在，先创建再赋值。<br>
 <img src="https://img-blog.csdn.net/20181015192503188?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JvdGVtYW4xMjM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[python 中的两个函数dir,help]]></title>
-        <id>https://imenghu.github.io/post/python-zhong-de-liang-ge-han-shu</id>
-        <link href="https://imenghu.github.io/post/python-zhong-de-liang-ge-han-shu">
-        </link>
-        <updated>2019-11-12T01:57:04.000Z</updated>
-        <content type="html"><![CDATA[<p><strong>1. dir(对象名) 查看该对象的属性和方法。</strong><br>
-<strong>2. help(对象名.属性名)  查看该对象属性(方法)的具体实现</strong><br>
-<strong>3. print(C.<strong>mro</strong>) MRO 是 method resolution order，主要用于 在多继承时判断 方法、属性的调用路径</strong><br>
-<strong>4. <strong>dict</strong> 查看该对象命名空间的属性</strong></p>
 ]]></content>
     </entry>
 </feed>
