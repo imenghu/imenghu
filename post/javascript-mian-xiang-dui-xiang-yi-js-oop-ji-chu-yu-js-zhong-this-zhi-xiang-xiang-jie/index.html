@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>JavaScript面向对象(一)——JS OOP基础与JS 中This指向详解 | i萌虎</title>
+<meta name="description" content="">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://imenghu.github.io/favicon.ico?v=1575013200345">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://imenghu.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://imenghu.github.io">
+        <img src="https://imenghu.github.io/images/avatar.png?v=1575013200345" class="site-logo">
+        <h1 class="site-title">i萌虎</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+        
+          <a href="/Learning/Python" class="site-nav" target="_blank">
+            Python
+          </a>
+        
+      
+        
+          <a href="\Learning\Django" class="site-nav" target="_blank">
+            Django
+          </a>
+        
+      
+        
+          <a href="\Learning\redis" class="site-nav" target="_blank">
+            Redis
+          </a>
+        
+      
+        
+          <a href="\Learning\前端课件" class="site-nav" target="_blank">
+            前端
+          </a>
+        
+      
+        
+          <a href="\Learning\Spider" class="site-nav" target="_blank">
+            爬虫
+          </a>
+        
+      
+        
+          <a href="\Learning\DTA" class="site-nav" target="_blank">
+            数据分析
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://imenghu.github.io" target="_blank">萌虎</a> | <a class="rss" href="https://imenghu.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">JavaScript面向对象(一)——JS OOP基础与JS 中This指向详解</h2>
+            <div class="post-date">2019-11-29</div>
+            
+            <div class="post-content">
+              <p><strong>前  言</strong></p>
+<p>学过程序语言的都知道，我们的程序语言进化是从“面向机器”、到“面向过程”、再到“面向对象”一步步的发展而来。类似于汇编语言这样的面向机器的语言，随着时代的发展已经逐渐淘汰；而面向过程的语言也只有C语言老大哥依然坚挺；现在主流的语言(例如Java、C++、PHP等)都是面向对象的语言。 而我们的JavaScript语言，恰恰介于面向过程与面向对象之间，我们称它为“基于对象”的语言。但是，JS中的OOP依然是我们学习JS的重要一环，当然像“继承”“封装”这样的面向对象特征，都是由模拟实现的。今天，我们就一起来探讨一下JS中的面向对象吧！</p>
+<h2 id="一-面向对象概述">一、面向对象概述</h2>
+<ol>
+<li>面向过程与面向对象</li>
+</ol>
+<p>面向过程：专注于如何去解决一个问题的过程。编程特点是用一个个函数去实现过程操作，没有类与对象的概念；</p>
+<p>[举个栗子]</p>
+<p>当你想吃一个鸡蛋灌饼的时候，面向过程的思维需要你掌握购买食材、和面、烙饼、煎蛋等一系列的方法，然后按照顺序一个一个方法的去执行。</p>
+<p>面向对象：专注于有哪一个对象实体去解决这个问题。编程特点是：出现了一个个的类，由类去生成对象。</p>
+<p>[举个栗子]</p>
+<p>还是想吃鸡蛋灌饼，按照面向对象的思维，你需要去找一个买鸡蛋灌饼的阿姨，让他给你做一个。这时候，这个阿姨就是我们解决这个问题的对象。</p>
+<ol start="2">
+<li>面向对象三大特征</li>
+</ol>
+<p>继承、封装、多态</p>
+<ol start="3">
+<li>类&amp;对象的关系</li>
+</ol>
+<p>① 类：一群有相同特征(属性)和行为(方法)的集合。</p>
+<p>eg： 人类  属性：身高、体重、年龄   方法：吃饭、说话、敲代码</p>
+<p>② 对象：从类中，拿出的具有确定属性值和方法的个体；</p>
+<p>eg： 张三  属性：身高180体重180方法：说话--我叫张三</p>
+<p>③ 类和对象的关系：</p>
+<p>类是抽象的，对象是具体的。(类是对象的抽象化，对象是类的具体化)</p>
+<p>通俗的来讲：类是一个抽象的概念，表示具有相同属性和行为的集合，但是类仅仅表明这类群体具有相同的属性，但是没有具体的属性值。而对象是对类的属性进行具体赋值后，而得到的一个具体的个体；</p>
+<p>[举个栗子]</p>
+<p>人类有身高、体重、年龄，但是不能说人类的身高是多少。而张三，是人类的一个具体个体，身高、体重都有具体值，那么张三就是人类的一个对象</p>
+<h2 id="二-javascript中的面向对象">二、JavaScript中的面向对象</h2>
+<ol>
+<li>创建类和对象的步骤</li>
+</ol>
+<p>① 创建一个类(构造函数)。 类名，必须要每个单词的首字母都大写</p>
+<pre><code class="language-javascript">funtion 类名(属性一){
+　　this.属性=属性一;
+　　this.方法=function(){}//this指向谁？ -- 即将调用当前构造函数的对象。
+}
+</code></pre>
+<p>② 通过类，实例化出一个新的对象；</p>
+<pre><code class="language-javascript">var obj =new类名(属性一的Value);//原构造函数中this，指向新创建的obj对象；
+obj.方法(); 调用方法
+obj.属性; 调用属性
+</code></pre>
+<p>2.2内创建类和对象代码示例</p>
+<pre><code class="language-javascript">//① 定义一个类(构造函数)
+
+functionPerson(name,age,sex){
+
+　　//类的属性
+
+　　this.name =name;
+
+　　this.age =age;
+
+　　this.sex =sex;
+
+　　//类的方法
+
+　　this.say =function(){
+
+　　　　alert(&quot;我叫&quot;+this.name+&quot;;今年&quot;+this.age+&quot;岁；是一个&quot;+this.sex+&quot;生&quot;);
+
+　　}
+
+}
+
+//从类中，实例化出一个对象。并给对象的属性赋值
+
+var zhangsan =newPerson(&quot;张三&quot;,18,&quot;男&quot;);//
+
+zhangsan.say();
+
+var lisi =newPerson(&quot;李二狗&quot;,16,&quot;男&quot;);//
+
+lisi.say();
+</code></pre>
+<h2 id="三-javascript中的this指向问题">三、JavaScript中的this指向问题</h2>
+<p>在上一部分中，我们创建了一个类，并通过这个类new出了一个对象。 但是，这里面出现了大量的this。 很多同学就要懵逼了，this不是“这个”的意思吗？为什么我在函数里面写的this定义的属性，最后到了函数new出的对象呢？？</p>
+<p>今天，就让我们拨开迷雾，牢牢记住“杰小瑞this五大准则”。帮你缕清关于JS中this指向的一切谜团。</p>
+<ol>
+<li>谁最终调用函数，this指向谁</li>
+</ol>
+<p>首先来明白this指向的基本概念，“this永远指向函数的最终调用者”，理解这句话，我们先明确三个基本要素：</p>
+<p><strong>①this指向的，永远只可能是对象！！！！！</strong></p>
+<p><strong>②this指向谁，永远不取决于this写在哪！！而是取决于函数在哪调用。</strong></p>
+<p><strong>③this指向的对象，我们称之为函数的上下文context，也叫函数的调用者</strong></p>
+<p>可能有同学要说了，我明确了这三个要素了，我也看不懂this的指向啊。var obj = new function();第二部分的这句话，怎么就让函数(类)中的this指向obj了啊？一脸懵逼ing。。。</p>
+<p>那么，接下来，就让我们祭出“杰小瑞this五大法宝”吧！记住这5条，所有this指向手到擒来！</p>
+<ol start="2">
+<li><strong>※※※this指向的规律(杰小瑞this五大准则)</strong></li>
+</ol>
+<p>首先，我们写这样的一个函数：</p>
+<pre><code>functionfunc(){
+
+　　console.log(this);
+
+}
+</code></pre>
+<p>Question：请问this指向谁？</p>
+<p>如果面试有人这么问你！你可以直接甩他一个大嘴巴！然后大声告诉他“this指向谁，取决于谁调用函数！而不取决于函数写在哪里！只有函数声明，没有函数调用语句。我不知道this指向谁！”</p>
+<p>然后，面试官一定会捂着脸告诉你，“你被录用了/(ㄒoㄒ)/~~”</p>
+<p>哈哈，开完玩笑，我们来研究一下，下面那个函数中的this，到底有可能指向谁？杰小瑞老师总结了5大准则，一起来看看吧~~</p>
+<p>①通过函数名()直接调用：this指向window</p>
+<pre><code class="language-javascript">func();//this---&gt;window
+
+//【解释】 我们直接用一个函数名()调用，函数里面的this，永远指向window。
+　　② 通过对象.函数名()调用的：this指向这个对象
+</code></pre>
+<pre><code class="language-javascript">//狭义对象
+
+var obj ={
+
+　　name:&quot;obj&quot;,
+
+　　func1 :func
+
+};
+
+obj.func1();//this---&gt;obj
+
+//【解释】我们将func函数名，当做了obj这个对象的一个方法，然后使用对象名.方法名， 这时候函数里面的this指向这个obj对象。
+
+
+
+//广义对象
+
+document.getElementById(&quot;div&quot;).onclick =function(){
+
+　　this.style.backgroundColor = &quot;red&quot;;
+
+};//this---&gt;div
+
+//【解释】对象打点调用还有一个情况，我们使用getElementById取到一个div控件，也是一种广义的对象，用它打点调用函数，则函数中的this指向这个div对象。
+复制代码
+　　③ 函数作为数组的一个元素，通过数组下标调用的：this指向这个数组
+
+vararr = [func,1,2,3];
+
+arr[0]();//this---&gt;arr
+
+//【解释】这个，我们把函数名，当做数组中的一个元素。使用数组下标调用，则函数中的this将指向这个数组arr。
+　　④ 函数作为window内置函数的回调函数调用：this指向window
+
+setTimeout(func,1000);//this---&gt;window
+//setInterval(func,1000);
+//【解释】使用setTimeout、setInterval等window内置函数调用函数，则函数中的this指向window。
+　　⑤ 函数作为构造函数，用new关键字调用时：this指向新new出的对象
+
+var obj =newfunc();//this---&gt;new出的新obj
+
+//【解释】这个就是第二部分我们使用构造函数new对象的语句，将函数用new关键字调用，则函数中的this指向新new出的对象。
+
+</code></pre>
+<ol start="3">
+<li>综合小练习</li>
+</ol>
+<p>没学得会，练习来校对！上述的五大准则你理解了吗？让我们来做几个小练习吧？看看这些this都是指向谁？</p>
+<pre><code class="language-javascript">var obj1 ={
+
+　　name:'obj1',
+
+　　arr:[setTimeout(func,3000),1,2,3]
+
+}
+
+document.getElementById(&quot;div&quot;).onclick = obj1.arr[0]; //函数最终调用者：setTimeout ，符合规律⑤ this---&gt;window
+
+var obj2 ={
+
+　　name:'obj1',
+
+　　arr:[func,1,2,3]
+
+}
+
+document.getElementById(&quot;div&quot;).onclick = obj2.arr[0]();//函数最终调用者：数组下标 ，符合规律③ this---&gt;arr
+
+var obj3 ={
+
+　　name:'obj1',
+
+　　arr:[{name:'arrObj',fun:func},1,2,3]
+
+}
+
+document.getElementById(&quot;div&quot;).onclick = obj3.arr[0].fun();//函数最终调用者：{name:'arrObj',fun:func} ，符合规律② this---&gt;obj
+</code></pre>
+<ol start="4">
+<li>模拟面试题</li>
+</ol>
+<p>小练习都做出来了吗？不要骄傲哦~~来看一套模拟面试题吧！！下面的打印语句都应该是什么结果呢？先不要看答案，自己做一下吧~</p>
+<pre><code class="language-javascript">var fullname = 'John Doe';
+
+var obj ={
+
+　　fullname:'Colin Ihrig',
+
+　　prop: {
+
+　　　　fullname:'Aurelio De Rosa',
+
+　　　　getFullname:function() {
+
+　　　　　　return this.fullname;
+
+　　　　}
+
+　　}
+
+};
+
+var arr = [obj.prop.getFullname,12,3,4,5];
+
+console.log(arr[0]());/ /this指向数组，数组没有fullname属性，所以未定义！
+
+console.log(obj.prop.getFullname());//Aurelio De Rosa//函数最终调用者：obj.prop  this---&gt;obj.propvartest =obj.prop.getFullname;
+
+console.log(test());//John Doe//函数最终调用者： 函数() window  this--&gt;windowobj.func =obj.prop.getFullname;
+
+console.log(obj.func());//this最终调用者是obj，所以this指向obj
+</code></pre>
+<p>好了，通过本篇博客，我们了解了什么是面向对象、类和对象的关系、JS中声明类与对象的步骤，以及重点讲解的this指向问题！ 希望能够帮助大家真正的理解了this的认知，接下来的博客让我们继续探讨JavaScript的面向对象。</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://imenghu.github.io/post/js-zhong-de-kuai-ji-zuo-yong-yu-varletconst-san-zhe-de-qu-bie">
+                  <h3 class="post-title">
+                    JS中的块级作用域，var、let、const三者的区别
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
