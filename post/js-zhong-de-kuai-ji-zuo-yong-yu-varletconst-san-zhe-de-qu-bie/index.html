@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>import aa 导入时做的事情 | i萌虎</title>
+<title>JS中的块级作用域，var、let、const三者的区别 | i萌虎</title>
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -128,30 +128,121 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">import aa 导入时做的事情</h2>
-            <div class="post-date">2019-10-26</div>
+            <h2 class="post-title">JS中的块级作用域，var、let、const三者的区别</h2>
+            <div class="post-date">2019-11-29</div>
             
             <div class="post-content">
-              <p>1 搜索aa这个模块并将里面的内容全部导入<br>
-2 给个模块起一个别名aa,然后后面就可以使用aa.xx来调用模块里面的东西了。<br>
-3 给import 取as 的别名的时候就是为了防止跟本地的变量名称冲突。</p>
+              <p>首先，ECMAScript和JavaScript关系：<br>
+      ECMAScript是一个国际通过的标准化脚本语言。JavaScript由ECMAScript和DOM、BOM三者组成。可以简单理解为：ECMAScript是JavaScript的语言规范，JavaScript是ECMAScript的实现和扩展。</p>
+<ol>
+<li>块作用域{ }<br>
+JS中作用域有：全局作用域、函数作用域。没有块作用域的概念。ECMAScript 6(简称ES6)中新增了块级作用域。<br>
+块作用域由 { } 包括，if语句和for语句里面的{ }也属于块作用域。</li>
+</ol>
+<pre><code class="language-javascript">&lt;script type=&quot;text/javascript&quot;&gt;
+	{
+		var a = 1;
+		console.log(a); // 1
+	}
+	console.log(a); // 1
+	// 可见，通过var定义的变量可以跨块作用域访问到。
+
+	(function A() {
+		var b = 2;
+		console.log(b); // 2
+	})();
+	// console.log(b); // 报错，
+	// 可见，通过var定义的变量不能跨函数作用域访问到
+
+	if(true) {
+		var c = 3;
+	}
+	console.log(c); // 3
+	for(var i = 0; i &lt; 4; i++) {
+		var d = 5;
+	};
+	console.log(i);	// 4   (循环结束i已经是4，所以此处i为4)
+	console.log(d); // 5
+	// if语句和for语句中用var定义的变量可以在外面访问到，
+	// 可见，if语句和for语句属于块作用域，不属于函数作用域。
+
+	{
+		var a = 1;
+		let b = 2;
+		const c = 3;	
+		
+		{
+			console.log(a);		// 1	子作用域可以访问到父作用域的变量
+			console.log(b);		// 2	子作用域可以访问到父作用域的变量
+			console.log(c);		// 3	子作用域可以访问到父作用域的变量
+
+			var aa = 11;
+			let bb = 22;
+			const cc = 33;
+		}
+		
+		console.log(aa);	// 11	// 可以跨块访问到子 块作用域 的变量
+		// console.log(bb);	// 报错	bb is not defined
+		// console.log(cc);	// 报错	cc is not defined
+	}
+&lt;/script&gt;
+</code></pre>
+<ol>
+<li>var、let、const的区别<br>
+var定义的变量，没有块的概念，可以跨块访问, 不能跨函数访问。<br>
+let定义的变量，只能在块作用域里访问，不能跨块访问，也不能跨函数访问。<br>
+const用来定义常量，使用时必须初始化(即必须赋值)，只能在块作用域里访问，而且不能修改。<br>
+同一个变量只能使用一种方式声明，不然会报错</li>
+</ol>
+<pre><code class="language-javascript">&lt;script type=&quot;text/javascript&quot;&gt;
+	// 块作用域
+	{
+		var a = 1;
+		let b = 2;
+		const c = 3;
+		// c = 4; // 报错
+		
+		// let a = 'a';	// 报错  注：是上面 var a = 1; 那行报错
+		// var b = 'b';	// 报错：本行报错
+		// const a = 'a1';	// 报错  注：是上面 var a = 1; 那行报错
+		// let c = 'c';	// 报错：本行报错
+
+		var aa;
+		let bb;
+		// const cc; // 报错
+		console.log(a); // 1
+		console.log(b); // 2
+		console.log(c); // 3
+		console.log(aa); // undefined
+		console.log(bb); // undefined
+	}
+	console.log(a); // 1
+	// console.log(b); // 报错
+	// console.log(c); // 报错
+
+	// 函数作用域
+	(function A() {
+		var d = 5;
+		let e = 6;
+		const f = 7;
+		console.log(d); // 5
+		console.log(e); // 6  (在同一个{ }中,也属于同一个块，可以正常访问到)
+		console.log(f); // 7  (在同一个{ }中,也属于同一个块，可以正常访问到)
+	})();
+	// console.log(d); // 报错
+	// console.log(e); // 报错
+	// console.log(f); // 报错
+&lt;/script&gt;
+</code></pre>
 
             </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://imenghu.github.io/tag/Fu9esguuE" class="tag">
-                    Python
-                  </a>
-                
-              </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://imenghu.github.io/post/jie-hong-hu-lian-wang-zhe-me-jiu-cai-zhi-dao-sou-suo-yin-qing-zhe-me-yong">
+                <a href="https://imenghu.github.io/post/zi-ding-yi-ke-die-dai-dui-xiang">
                   <h3 class="post-title">
-                    接触互联网这么久，才知道搜索引擎这么用！
+                    自定义可迭代对象
                   </h3>
                 </a>
               </div>
