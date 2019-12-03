@@ -2,13 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-11-29T07:40:58.077Z</updated>
+    <updated>2019-12-03T02:16:19.736Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[Ext js 图标示意图]]></title>
+        <id>https://imenghu.github.io/post/ext-js-tu-biao-shi-yi-tu</id>
+        <link href="https://imenghu.github.io/post/ext-js-tu-biao-shi-yi-tu">
+        </link>
+        <updated>2019-12-03T02:15:09.000Z</updated>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://imenghu.github.io/post-images/1575339355947.jpg" alt=""></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[JavaScript面向对象(一)——JS OOP基础与JS 中This指向详解]]></title>
         <id>https://imenghu.github.io/post/javascript-mian-xiang-dui-xiang-yi-js-oop-ji-chu-yu-js-zhong-this-zhi-xiang-xiang-jie</id>
@@ -1334,111 +1343,5 @@ ES6 通过对全局作用域的特殊实现，实现了js的块级作用域 let�
 let 的生效范围为 { }；<br>
 const 为定义常量。注：定义的常量的值存储的内存地址不可变动，值是可变的比如常量中定义的是数组 或者对象时候，可以通过数组或对象方法操作原数据，只要不重新赋值就没问题</p>
 <center>-END-</center>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[python中的类属性和对象属性的作用域]]></title>
-        <id>https://imenghu.github.io/post/python-zhong-de-lei-shu-xing-he-dui-xiang-shu-xing-de-zuo-yong-yu</id>
-        <link href="https://imenghu.github.io/post/python-zhong-de-lei-shu-xing-he-dui-xiang-shu-xing-de-zuo-yong-yu">
-        </link>
-        <updated>2019-11-19T04:58:47.000Z</updated>
-        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://imenghu.github.io/post-images/1574139587626.png" alt=""></figure>
-<pre><code class="language-python">class Test:
-    num=100 
-    def __init__(self):
-        self.age=18     
-
-test1=Test()
-test2=Test()
-print(test1.num)    
-test1.num=200  
-&quot;&quot;&quot;
-只是修改了这个对象作用域下的属性    
-类中的num不会发生改变
-&quot;&quot;&quot;
-print(test1.num)   
-print(Test.num)    
-del test1.num       
-print(test1.num)
-</code></pre>
-<p>def __init__方法的作用域限制在实例化出的对象<br>
-self.age=18<br>
-这里的age属性是对象的特有属性，类访问不到<br>
-跟 p=person()<br>
-p.age=18<br>
-是一样的效果<br>
-只有p能访问到这个age，person访问不到<br>
-如果person中也有这个age，是在两个区域，互不影响<br>
-除非在p中的age属性删除之后，p会向person中找相关的属性</p>
-<pre><code class="language-python">class a:
-    def __init__(self):
-        self.name=&quot;a&quot;
-        self.age=12
-        self.score=23
-    def test():
-        print(&quot;类方法测试&quot;)
-print(a.name)
-&quot;&quot;&quot;
-这里会报错，因为def __init__构造函数之内的属性只能通过
-实例化对象之后，通过对象进行访问，类没有办法直接访问
-如果是对象中再增加属性，或者修改属性的值，这些都跟类的属性没有关系
-因为两种属性是在两个区域内创建的
-&quot;&quot;&quot;
-a.test()
-</code></pre>
-<p>对于类：</p>
-<ol>
-<li>
-<p>类可以直接访问类属性</p>
-</li>
-<li>
-<p>类不可以直接访问实例方法，必须通过实例化之后的对象来访问实例方法</p>
-</li>
-<li>
-<p>类不可以访问对象特有的属性（比如：def __init__中定义的属性）</p>
-</li>
-<li>
-<p>类可以直接访问类方法</p>
-</li>
-<li>
-<p>类可以直接访问静态方法</p>
-</li>
-</ol>
-<p>所以存在：如果对象中的属性跟类中的属性相同，改变对象中的属性值，不会影响类中的属性值</p>
-<p>对于对象：</p>
-<ol>
-<li>
-<p>对象可以直接访问类的属性（实例化过程中，类已经将属性赋给对象）</p>
-</li>
-<li>
-<p>对象可以直接访问自己私有的属性</p>
-</li>
-<li>
-<p>对象可以直接访问类方法</p>
-</li>
-<li>
-<p>对象可以直接访问静态方法</p>
-</li>
-<li>
-<p>对象可以直接访问实例方法</p>
-</li>
-</ol>
-<pre><code class="language-python">class a:
-    def __init__(self,name):
-        self.name=name
-        print(self.name)
-    age=&quot;这是类属性&quot;
-    def test(self):
-        self.name=&quot;name已经修改&quot;
-        self.age=&quot;age已经修改&quot;
-        print(self.age)
-        print(self.name)
-a1=a(&quot;这是对象属性&quot;)
-print(a.age)
-print(a1.name)
-print(a1.age)
-a1.test()
-</code></pre>
-<p>这里所有的带有self的方法都是实例方法，只能由对象才能访问到，且实例方法中可以访问对象的属性。</p>
-]]></content>
     </entry>
 </feed>
