@@ -2,13 +2,58 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-12-05T08:26:52.890Z</updated>
+    <updated>2019-12-09T07:27:38.204Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[winserver定时压缩备份文件夹]]></title>
+        <id>https://imenghu.github.io/post/winserver-ding-shi-ya-suo-bei-fen-wen-jian-jia</id>
+        <link href="https://imenghu.github.io/post/winserver-ding-shi-ya-suo-bei-fen-wen-jian-jia">
+        </link>
+        <updated>2019-12-09T07:24:14.000Z</updated>
+        <content type="html"><![CDATA[<pre><code class="language-python">#! /usr/bin/python
+# version 1.1
+
+import sys, os, time, datetime
+
+# 要备份的文件夹目录
+fileFolder = 'D:\BPM\*'
+# 要输出的文件名称(输出到脚本存在的文件夹)
+fileName = 'BPM_bak_' + time.strftime('%Y%m%d%H') + '.zip'
+
+exeCode = 'WinRAR.exe a -r %s %s' % (fileName, fileFolder)
+
+# WinRAR.exe a -r D:\BPM.zip D:\BPM\*
+
+
+
+def work():
+    print('----开始备份----')
+    os.system(exeCode)
+    print('----备份完成----')
+
+
+def main(hour, minute):
+    
+    print('工具启动')
+    while True:
+        while True:
+            now = datetime.datetime.now()
+            if now.hour == hour and now.minute == minute:
+                break
+        work()
+        time.sleep(180)
+
+
+# 传入启动的时间
+main(24, 0)
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Ext js 图标示意图]]></title>
         <id>https://imenghu.github.io/post/ext-js-tu-biao-shi-yi-tu</id>
@@ -1276,72 +1321,5 @@ reload(hello)</p>
 
  4，你机器上已经启动了一个smartbi，请告知如何确认jvm所有启动参数</code></pre>
 ]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[javascript 作用域详解]]></title>
-        <id>https://imenghu.github.io/post/javascript-zuo-yong-yu-xiang-jie</id>
-        <link href="https://imenghu.github.io/post/javascript-zuo-yong-yu-xiang-jie">
-        </link>
-        <updated>2019-11-19T06:58:14.000Z</updated>
-        <content type="html"><![CDATA[<p>作用域理解：定义的变量、函数生效的范围。javascript 有全局作用域和函数作用域两种。</p>
-<p>注：es6实现let 块级作用域不是js原生的，底层同样是通过var实现的。如果想了解具体细节，请访问babel官方 对es6中let 进行解析。</p>
-<p>执行上下文<br>
-范围：一段内或者一个函数内；<br>
-全局：函数声明、变量声明 。范围：；<br>
-函数：函数声明、变量声明、this、arguments。范围：一个函数内部；</p>
-<p><strong>函数、变量声明提升</strong></p>
-<pre><code class="language-javascript">&lt;script&gt;
-
-        foo(); //打印a
-
-        var foo = 1;
-
-        function foo (){
-
-            console.log(’a‘)
-
-        }；
-
-        console.log(foo); //1
-
-&lt;/script&gt;
-
-//实际的执行顺序为
-
-&lt;script&gt;
-
-        function foo(){  //函数声明优先于变量的声明
-
-            console.log(&quot;a&quot;);
-
-        }
-
-        //var a ;  重复声明，这儿被省略了。
-
-        foo(); //打印a
-
-        foo = 1;  //给foo赋值为1
-
-        console.log(foo); //1
-
-&lt;/script&gt;
-</code></pre>
-<p>当js引擎执行一个 执行上下文代码块时，执行顺序为：</p>
-<ol>
-<li>函数声明 function a(){};(函数优先) 注：let a = function (){}; 这是变量的声明和赋值，不是函数的声明。</li>
-<li>变量声明 var a; 注：刚开始只对变量进行声明，没有进行赋值，如果 在赋值之前使用到这个变量 值为：undefined。</li>
-<li>执行上下文为函数作用域时：确定this和arguments。</li>
-<li>按照js单线程和异步策略依次执行 作用域中的代码。</li>
-</ol>
-<p>我们习惯将 var a = 2; 看作一个声明，而实际上 JavaScript 引擎并不这么认为。它将 var a和 a = 2 当作两个单独的声明，第一个是编译阶段的任务，而第二个则是执行阶段的任务。这意味着无论作用域中的声明出现在什么地方，都将在代码本身被执行前首先进行处理。可以将这个过程形象地想象成所有的声明（变量和函数）都会被“移动”到各自作用域的最顶端，这个过程被称为提升。要注意避免重复声明，特别是当普通的 var 声明和函数声明混合在一起的时候，否则会引起很多危险的问题！</p>
-<p><strong>作用域链</strong><br>
-自由变量：当前作用域没有定义的变量，但是上层作用域定义了，可以在此层作用域中使用的变量。<br>
-作用域链：当使用一个变量时候，先在自己的作用域里找，如果没有找到，再到父级作用域找，一直找到全局作用域，如果都没有找到即报错。</p>
-<p><strong>块级作用域</strong><br>
-js无块级作用域，仅有全局作用域和函数作用域两种作用域。<br>
-ES6 通过对全局作用域的特殊实现，实现了js的块级作用域 let；<br>
-let 的生效范围为 { }；<br>
-const 为定义常量。注：定义的常量的值存储的内存地址不可变动，值是可变的比如常量中定义的是数组 或者对象时候，可以通过数组或对象方法操作原数据，只要不重新赋值就没问题</p>
-<center>-END-</center>]]></content>
     </entry>
 </feed>
