@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>常用工具网址大全 | i萌虎</title>
+<title>鼠标点击特效：点击网站页面显示24字核心价值观上升的特效代码 | i萌虎</title>
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -128,39 +128,51 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">常用工具网址大全</h2>
-            <div class="post-date">2019-10-09</div>
+            <h2 class="post-title">鼠标点击特效：点击网站页面显示24字核心价值观上升的特效代码</h2>
+            <div class="post-date">2019-12-10</div>
             
             <div class="post-content">
-              <ol>
-<li><a href="http://tool.oschina.net">常用在线查询工具</a>  常用在线查询工具</li>
-<li><a href="http://tampermonkey.net/scripts.php?ext=dhdg">油猴插件</a>  油猴插件</li>
-<li><a href="http://www.box3.cn/#">开发人员工具箱</a></li>
-<li><a href="http://www.sowang.com/bbs/forum.php?mod=viewthread&amp;tid=132294">搜索大全</a></li>
-<li><a href="https://dwz.cn">百度短网址生成</a></li>
-<li><a href="http://baijiahao.baidu.com/s?id=1603886666150544094&amp;wfr=spider&amp;for=pc">VLOOKUP函数的使用</a></li>
-<li><a href="https://720yun.com/">720全景图</a></li>
-<li><a href="http://www.yxc3.com/888.php">邮箱批量购买</a></li>
-<li><a href="http://blog.zhaojie.me">.net博客</a><br>
-10.<a href="http://www.divcss5.com/peise/">配色表</a></li>
-</ol>
+              <h3 id="将以下代码直接写入html中即可也可以去掉首尾添加进js文件中然后在html中包含这个文件">将以下代码直接写入html中即可（也可以去掉首尾，添加进js文件中，然后在html中包含这个文件）</h3>
+<pre><code class="language-js">&lt;script type=&quot;text/javascript&quot;&gt;
+/* 鼠标点击特效 */
+var a_idx = 0;
+jQuery(document).ready(function($) {
+    $(&quot;body&quot;).click(function(e) {
+var a = new Array(&quot;富强&quot;, &quot;民主&quot;, &quot;文明&quot;, &quot;和谐&quot;, &quot;自由&quot;, &quot;平等&quot;, &quot;公正&quot; ,&quot;法治&quot;, &quot;爱国&quot;, &quot;敬业&quot;, &quot;诚信&quot;, &quot;友善&quot;);
+var $i = $(&quot;&lt;span/&gt;&quot;).text(a[a_idx]);
+        a_idx = (a_idx + 1) % a.length;
+var x = e.pageX,
+        y = e.pageY;
+        $i.css({
+&quot;z-index&quot;: 100000000,
+&quot;top&quot;: y - 20,
+&quot;left&quot;: x,
+&quot;position&quot;: &quot;absolute&quot;,
+&quot;font-weight&quot;: &quot;bold&quot;,
+&quot;color&quot;: &quot;#ff6651&quot;
+        });
+        $(&quot;body&quot;).append($i);
+        $i.animate({
+&quot;top&quot;: y - 180,
+&quot;opacity&quot;: 0
+        },
+        1500,
+function() {
+            $i.remove();
+        });
+    });
+});
+&lt;/script&gt;
+</code></pre>
 
             </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://imenghu.github.io/tag/ZlTQ8uj2u" class="tag">
-                    工作
-                  </a>
-                
-              </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://imenghu.github.io/post/mysql5722-an-zhuang-jiao-cheng">
+                <a href="https://imenghu.github.io/post/winserver-ding-shi-ya-suo-bei-fen-wen-jian-jia">
                   <h3 class="post-title">
-                    MYSQL5.7.22安装教程
+                    winserver定时压缩备份文件夹
                   </h3>
                 </a>
               </div>

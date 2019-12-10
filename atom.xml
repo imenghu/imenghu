@@ -2,13 +2,53 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-12-09T07:27:38.204Z</updated>
+    <updated>2019-12-10T01:10:53.142Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[鼠标点击特效：点击网站页面显示24字核心价值观上升的特效代码]]></title>
+        <id>https://imenghu.github.io/post/shu-biao-dian-ji-te-xiao-dian-ji-wang-zhan-ye-mian-xian-shi-24-zi-he-xin-jie-zhi-guan-shang-sheng-de-te-xiao-dai-ma</id>
+        <link href="https://imenghu.github.io/post/shu-biao-dian-ji-te-xiao-dian-ji-wang-zhan-ye-mian-xian-shi-24-zi-he-xin-jie-zhi-guan-shang-sheng-de-te-xiao-dai-ma">
+        </link>
+        <updated>2019-12-10T01:09:09.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="将以下代码直接写入html中即可也可以去掉首尾添加进js文件中然后在html中包含这个文件">将以下代码直接写入html中即可（也可以去掉首尾，添加进js文件中，然后在html中包含这个文件）</h3>
+<pre><code class="language-js">&lt;script type=&quot;text/javascript&quot;&gt;
+/* 鼠标点击特效 */
+var a_idx = 0;
+jQuery(document).ready(function($) {
+    $(&quot;body&quot;).click(function(e) {
+var a = new Array(&quot;富强&quot;, &quot;民主&quot;, &quot;文明&quot;, &quot;和谐&quot;, &quot;自由&quot;, &quot;平等&quot;, &quot;公正&quot; ,&quot;法治&quot;, &quot;爱国&quot;, &quot;敬业&quot;, &quot;诚信&quot;, &quot;友善&quot;);
+var $i = $(&quot;&lt;span/&gt;&quot;).text(a[a_idx]);
+        a_idx = (a_idx + 1) % a.length;
+var x = e.pageX,
+        y = e.pageY;
+        $i.css({
+&quot;z-index&quot;: 100000000,
+&quot;top&quot;: y - 20,
+&quot;left&quot;: x,
+&quot;position&quot;: &quot;absolute&quot;,
+&quot;font-weight&quot;: &quot;bold&quot;,
+&quot;color&quot;: &quot;#ff6651&quot;
+        });
+        $(&quot;body&quot;).append($i);
+        $i.animate({
+&quot;top&quot;: y - 180,
+&quot;opacity&quot;: 0
+        },
+        1500,
+function() {
+            $i.remove();
+        });
+    });
+});
+&lt;/script&gt;
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[winserver定时压缩备份文件夹]]></title>
         <id>https://imenghu.github.io/post/winserver-ding-shi-ya-suo-bei-fen-wen-jian-jia</id>
@@ -1177,149 +1217,6 @@ dir()函数一个排好序的字符串列表，内容是一个模块里定义过
 reload(module_name) 厦工叉车<br>
 在这里，module_name要直接放模块的名字，而不是一个字符串形式。比如想重载hello模块，如下：<br>
 reload(hello)</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[windows常用cmd命令]]></title>
-        <id>https://imenghu.github.io/post/windows-chang-yong-cmd-ming-ling</id>
-        <link href="https://imenghu.github.io/post/windows-chang-yong-cmd-ming-ling">
-        </link>
-        <updated>2019-11-21T08:47:29.000Z</updated>
-        <content type="html"><![CDATA[<p>windows常用cmd命令</p>
-<ul>
-<li>常用基本命令</li>
-<li>辅助符号或命令</li>
-<li>常用工具</li>
-<li>验证考核<br>
-常用基本命令：netstat，find，ping，cd，辅助符号或命令：Ctrl+C、cls、|、&gt;、向上的箭头键等，常用工具: Process Explorer。</li>
-</ul>
-<p>建议掌握这些命令获取帮助的方式，一般都是 ”命令 /?“ 或者“命令 -help”，如“cd /?”，能看懂命令帮助提示(根据帮助尝试使用)。</p>
-<p>常用基本命令<br>
-1，列出所有任务及进程号，杀进程</p>
-<pre><code> tasklist
-
- tasklist /?  获取使用帮助
-
- taskkill
-
- taskkill /?  获取使用帮助
-</code></pre>
-<p>2，cd 切换目录</p>
-<pre><code> cd /？ 获取使用帮助
-
- 跳转到当前驱动器的根目录
-
-      cd [当前驱动器盘符]:\    例如： cd c:\ ，或者更简单的   cd\
-
- 跳转到当前驱动器的其他文件夹
-
-      以C盘下的WINDOWS文件夹为例，输入：cd C:\WINDOWS
-
- 跳转到其他驱动器
-
-      以从C盘跳转到D盘为例 在任意目录下直接输入：  D:
-
- 跳转到其他驱动器的其他文件夹
-
-      假设当前在C盘，要跳转到E的software目录    cd /d e:\software
-
-      注意此处必须加/d参数。否则无法跳转。
-
- 跳转到上一层目录
-
-      cd..
-</code></pre>
-<p>3，netstat 查看网络连接状态</p>
-<pre><code> 显示协议统计信息和当前 TCP/IP 网络连接。该命令可以查看当前机器建立的所有网络链接状态，以及对应哪个进程。
-
- netstat -help 获取命令行使用帮助信息
-
- 例子:netstat -ano  查看网络连接、状态以及对应的进程id
-</code></pre>
-<p>4，find</p>
-<pre><code> 常用于某个命令输出结果太多，需要模糊搜索我们关心的内容时使用，一般辅助|使用（|代表前一个输出作为后一个的输入）
-
- find /？获取使用帮助
-
- 如果是linux就是grep，搜索特定字符
-
- 例子：netstat -ano|find &quot;.8&quot;
-</code></pre>
-<p>5，ping</p>
-<pre><code> ping -help
-</code></pre>
-<p>6，tracert</p>
-<pre><code> tracert也被称为Windows路由跟踪实用程序，在命令提示符（cmd）中使用tracert命令可以用于确定IP数据包访问目标时所选择的路径。
-
- tracert /? 获取使用帮助
-
- 例子：tracert www.baidu.com
-</code></pre>
-<p>辅助符号或命令<br>
-7，“|”cmd命令中|代表前一个的输出代表后一个的输入</p>
-<pre><code> 查找特定ip的网络连接及进程号：netstat -ano|find &quot;192.168.1.10&quot;  
-</code></pre>
-<p>8，重定向输出符号&gt; &gt;&gt;</p>
-<pre><code> 将原本输出到命令窗口的内容，转存到文件中，如jstack 12912 &gt;d:/s.txt  打印线程到指定文件
-
- cmd &gt;重定向输出并覆盖源文件。
-
-      例如
-
-      echo hello &gt;c:\1.txt
-
-      1.txt的文件内容先被清空，然后写入hello。
-
- cmd &gt;&gt;重定向输出追加到文件末尾
-
-      例如：
-
-      echo hello &gt;c:\1.txt
-
-      在1.txt文件末尾加上hello
-</code></pre>
-<p>9，重定向输入符号&lt; &lt;&lt;</p>
-<pre><code> cmd &lt; file
-
-      使cmd命令从file读入
-
- cmd &lt;&lt; text
-
-      从命令行读取输入，直到一个与text相同的行结束。除非使用引号把输入括起来，此模式将对输入内容进行shell变量替换。如果使用 &lt;&lt;- ，则会忽略接下来输入行首的tab，结束行也可以是一堆tab再加上一个与text相同的内容，可以参考后面的例子。
-
- cmd &lt;&lt;&lt; word
-
-      把word（而不是文件word）和后面的换行作为输入提供给cmd。
-
- cmd &lt;&gt; file
-
-      以读写模式把文件file重定向到输入，文件file不会被破坏。仅当应用程序利用了这一特性时，它才是有意义的。
-
- cmd &gt;| file
-
-      功能同&gt;，但即便在设置了noclobber时也会覆盖file文件，注意用的是|而非一些书中说的!，目前仅在csh中仍沿用&gt;!实现这一功能。 
-</code></pre>
-<p>10，终止一直在运行的命令ctrl+c</p>
-<pre><code> 有时某个命令一直打印输出结果(如ping 192.168.1.10 -t)，我们想终止这个命令的执行，直接按ctrl+c即可。
-</code></pre>
-<p>11，清空cmd窗口内容命令cls</p>
-<pre><code> 有时cmd内容太多，滚动费尽，需要清空屏幕内容，直接输入cls即可
-</code></pre>
-<p>12，cmd命令中，按键盘的向上箭头可以直接复制前一个命令</p>
-<p>常用工具<br>
-13，常用工具</p>
-<pre><code> Process Explorer，查询进程的详细信息，如查询java进程启动参数，运行环境，线程信息、网络连接信息、使用了哪些dll，打开了什么句柄。包含注册表、Socket、文件等等。
-
- 下载地址：https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://imenghu.github.io/post-images/1574326094006.png" alt=""></figure>
-<p>验证考核<br>
-1，浏览器访问任何一个域名网站（如百度），然后使用cmd命令查找到本机到这个网站的网络连接状态</p>
-<pre><code> 2，持续ping100次www.baidu.com,并且输出到d:/pingbaidu.txt
-
- 3，假如不通过环境变量中的java相关命令如jps、java， 而是希望使用你机器上装的某个版本jdk中命令jstack.exe（如装在D:\Program Files\java\jdk1.8.0_101），你会怎么做？
-
- 4，你机器上已经启动了一个smartbi，请告知如何确认jvm所有启动参数</code></pre>
 ]]></content>
     </entry>
 </feed>
