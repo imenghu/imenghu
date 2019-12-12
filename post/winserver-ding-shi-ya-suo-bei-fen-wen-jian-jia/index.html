@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://imenghu.github.io/favicon.ico?v=1575940250717">
+<link rel="shortcut icon" href="https://imenghu.github.io/favicon.ico?v=1576119836691">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://imenghu.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://imenghu.github.io">
-        <img src="https://imenghu.github.io/images/avatar.png?v=1575940250717" class="site-logo">
+        <img src="https://imenghu.github.io/images/avatar.png?v=1576119836691" class="site-logo">
         <h1 class="site-title">i萌虎</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -132,30 +132,35 @@
             <div class="post-date">2019-12-09</div>
             
             <div class="post-content">
-              <pre><code class="language-python">#! /usr/bin/python
+              <pre><code class="language-python">
+#! /usr/bin/python
 # version 1.1
 
-import sys, os, time, datetime
+import sys
+import os
+import time
+import datetime
 
 # 要备份的文件夹目录
-fileFolder = 'D:\BPM\*'
-# 要输出的文件名称(输出到脚本存在的文件夹)
-fileName = 'BPM_bak_' + time.strftime('%Y%m%d%H') + '.zip'
+fileFolder = r'D:\BPM'
 
-exeCode = 'WinRAR.exe a -r %s %s' % (fileName, fileFolder)
+# 要输出的文件名称(默认压缩在脚本执行的文件夹下)
+# 需要自己在服务器上创建好fileName的目录
+fileName = r'D:\Backup\BPM_bak_' + time.strftime('%Y%m%d%H') + '.zip'
 
-# WinRAR.exe a -r D:\BPM.zip D:\BPM\*
 
+exeCode = 'WinRAR a -r  %s %s' % (fileName, fileFolder)
+
+# winrar a -r d:\scon.zip c:\scon  将c盘scon文件夹下的所有文件生成压缩并移动到d盘的目录下
 
 
 def work():
     print('----开始备份----')
     os.system(exeCode)
-    print('----备份完成----')
+    print('----备份完成----' + time.strftime('%Y%m%d%H'))
 
 
 def main(hour, minute):
-    
     print('工具启动')
     while True:
         while True:
@@ -166,8 +171,9 @@ def main(hour, minute):
         time.sleep(180)
 
 
-# 传入启动的时间
-main(24, 0)
+main(1, 1)
+
+
 </code></pre>
 
             </div>

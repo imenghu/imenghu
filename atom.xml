@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-12-10T01:10:53.142Z</updated>
+    <updated>2019-12-12T03:04:02.920Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
@@ -55,30 +55,35 @@ function() {
         <link href="https://imenghu.github.io/post/winserver-ding-shi-ya-suo-bei-fen-wen-jian-jia">
         </link>
         <updated>2019-12-09T07:24:14.000Z</updated>
-        <content type="html"><![CDATA[<pre><code class="language-python">#! /usr/bin/python
+        <content type="html"><![CDATA[<pre><code class="language-python">
+#! /usr/bin/python
 # version 1.1
 
-import sys, os, time, datetime
+import sys
+import os
+import time
+import datetime
 
 # 要备份的文件夹目录
-fileFolder = 'D:\BPM\*'
-# 要输出的文件名称(输出到脚本存在的文件夹)
-fileName = 'BPM_bak_' + time.strftime('%Y%m%d%H') + '.zip'
+fileFolder = r'D:\BPM'
 
-exeCode = 'WinRAR.exe a -r %s %s' % (fileName, fileFolder)
+# 要输出的文件名称(默认压缩在脚本执行的文件夹下)
+# 需要自己在服务器上创建好fileName的目录
+fileName = r'D:\Backup\BPM_bak_' + time.strftime('%Y%m%d%H') + '.zip'
 
-# WinRAR.exe a -r D:\BPM.zip D:\BPM\*
 
+exeCode = 'WinRAR a -r  %s %s' % (fileName, fileFolder)
+
+# winrar a -r d:\scon.zip c:\scon  将c盘scon文件夹下的所有文件生成压缩并移动到d盘的目录下
 
 
 def work():
     print('----开始备份----')
     os.system(exeCode)
-    print('----备份完成----')
+    print('----备份完成----' + time.strftime('%Y%m%d%H'))
 
 
 def main(hour, minute):
-    
     print('工具启动')
     while True:
         while True:
@@ -89,8 +94,9 @@ def main(hour, minute):
         time.sleep(180)
 
 
-# 传入启动的时间
-main(24, 0)
+main(1, 1)
+
+
 </code></pre>
 ]]></content>
     </entry>
