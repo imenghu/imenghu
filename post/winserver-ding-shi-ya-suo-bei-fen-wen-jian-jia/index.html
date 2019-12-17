@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://imenghu.github.io/favicon.ico?v=1576201559531">
+<link rel="shortcut icon" href="https://imenghu.github.io/favicon.ico?v=1576553655166">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://imenghu.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://imenghu.github.io">
-        <img src="https://imenghu.github.io/images/avatar.png?v=1576201559531" class="site-logo">
+        <img src="https://imenghu.github.io/images/avatar.png?v=1576553655166" class="site-logo">
         <h1 class="site-title">i萌虎</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -132,8 +132,7 @@
             <div class="post-date">2019-12-09</div>
             
             <div class="post-content">
-              <pre><code class="language-python">
-#! /usr/bin/python
+              <pre><code class="language-python">#! /usr/bin/python
 # version 1.1
 
 import sys
@@ -144,20 +143,25 @@ import datetime
 # 要备份的文件夹目录
 fileFolder = r'D:\BPM'
 
+
 # 要输出的文件名称(默认压缩在脚本执行的文件夹下)
 # 需要自己在服务器上创建好fileName的目录
-fileName = r'D:\Backup\BPM_bak_' + time.strftime('%Y%m%d%H') + '.zip'
-
-
-exeCode = 'WinRAR a -r  %s %s' % (fileName, fileFolder)
+fileName = r'D:\Backup'  # 修改成存放备份的目录并在服务器上建立好。
+fileName += r'\BPM_bak_' + time.strftime('%Y%m%d%H') + '.zip'
 
 # winrar a -r d:\scon.zip c:\scon  将c盘scon文件夹下的所有文件生成压缩并移动到d盘的目录下
+exeCode = 'WinRAR a -r  %s %s' % (fileName, fileFolder)
+
+# 备份日志
+filebak_log = r&quot;D:\Backup\filebak.log&quot;
 
 
 def work():
     print('----开始备份----')
-    os.system(exeCode)
-    print('----备份完成----' + time.strftime('%Y%m%d%H'))
+    if os.system(exeCode) == 0:
+        print('----备份完成----' + time.strftime('%Y%m%d%H'))
+        with open(filebak_log, 'a') as filebak:
+            filebak.write('successfull backup to %s \n' % fileName)
 
 
 def main(hour, minute):
@@ -171,8 +175,7 @@ def main(hour, minute):
         time.sleep(180)
 
 
-main(1, 1)
-
+main(11, 30)
 
 </code></pre>
 
