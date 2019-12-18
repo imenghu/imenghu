@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>sql语句之case when null 解决方法 | i萌虎</title>
+<title>apply的用法 | i萌虎</title>
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -128,40 +128,38 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">sql语句之case when null 解决方法</h2>
-            <div class="post-date">2019-11-06</div>
+            <h2 class="post-title">apply的用法</h2>
+            <div class="post-date">2019-12-18</div>
             
             <div class="post-content">
-              <p>//判断空值,成功!!</p>
-<pre><code class="language-sql">   select case  
-          when 项目名称  IS NULL  
-          then '空值'  
-          when 项目名称 ='北二环'  
-          then 'A'  
-          when 项目名称 ='北三环'  
-          then 'B'  
-          else 'C'  
-          END  项目名称  
-   from   物件设计数量统计表
-
+              <p>apply的用法：</p>
+<pre><code>    Ext中apply及applyIf方法的应用
 </code></pre>
+<p>apply及applyIf方法都是用于实现把一个对象中的属性应用于另外一个对象中，相当于属性拷贝。</p>
+<p>不同的是apply将会覆盖目标对象中的属性，而applyIf只拷贝目标对象中没有而源对象中有的属性。</p>
+<p>apply方法的签名为“apply( Object obj, Object config, Object defaults ) : Object”，</p>
+<p>该方法包含三个参数，第一个参数是要拷贝的目标对象，第二个参数是拷贝的源对象，第三个参数是可选的，表示给目标对象提供一个默认值。可以简单的理解成把第三个参数（如果有的话）及第二个参数中的属性拷贝给第一个参数对象。看下面的代码：</p>
+<p>var b1={ p1:&quot;p1 value&quot;, p2:&quot;p2 value&quot;, f1:function(){alert(this.p2)}};</p>
+<p>var b2=new Object();</p>
+<p>b2.p2=&quot;b2 value&quot;;</p>
+<p>Ext.apply(b2,b1);b2.f1();</p>
+<p>在上面的代码中，Ext.apply(b2,b1)这一语句把b1的属性拷贝到了b2对象中，因此调用b2的f1方法可以弹出&quot;p2 value&quot;的提示信息。尽管b2对象已经包含了p2属性值，但拷贝后该属性值会被覆盖。可以在调用apply方法时，在第三个参数中指定拷贝属性的默认值，比如下面的代码：</p>
+<p>Ext.apply(b2,b1,{p3:&quot;p3 value&quot;});</p>
+<p>alert(b2.p3);</p>
+<p>这样会使得b2中包含一个p3的属性，值为&quot;p3 value&quot;。</p>
+<p>applyIf方法的功能跟apply一样，只是不会拷贝那些在目标对象及源对象都存在的属性。比如把前面演示apply方法的代码改成applyIf，</p>
+<p>如下：</p>
+<p>Ext.applyIf(b2,b1);b2.f1();</p>
+<p>由于b2中已经存在了p2属性，因此，b2.f1()方法中引用this.p2的时候，得到的是&quot;b2 value&quot;，而不是在b1中定义的&quot;p2 value&quot;。</p>
 
             </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://imenghu.github.io/tag/2MJtm3v-A" class="tag">
-                    mysql
-                  </a>
-                
-              </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://imenghu.github.io/post/xiu-gai-python-ide-zi-dong-bu-quan-de-jian-ge-shi-jian">
+                <a href="https://imenghu.github.io/post/shu-biao-dian-ji-te-xiao-dian-ji-wang-zhan-ye-mian-xian-shi-24-zi-he-xin-jie-zhi-guan-shang-sheng-de-te-xiao-dai-ma">
                   <h3 class="post-title">
-                    修改python ide 自动补全的间隔时间
+                    鼠标点击特效：点击网站页面显示24字核心价值观上升的特效代码
                   </h3>
                 </a>
               </div>

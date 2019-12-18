@@ -2,13 +2,40 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-12-17T03:34:25.597Z</updated>
+    <updated>2019-12-18T07:01:40.293Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[apply的用法]]></title>
+        <id>https://imenghu.github.io/post/apply-de-yong-fa</id>
+        <link href="https://imenghu.github.io/post/apply-de-yong-fa">
+        </link>
+        <updated>2019-12-18T07:01:21.000Z</updated>
+        <content type="html"><![CDATA[<p>apply的用法：</p>
+<pre><code>    Ext中apply及applyIf方法的应用
+</code></pre>
+<p>apply及applyIf方法都是用于实现把一个对象中的属性应用于另外一个对象中，相当于属性拷贝。</p>
+<p>不同的是apply将会覆盖目标对象中的属性，而applyIf只拷贝目标对象中没有而源对象中有的属性。</p>
+<p>apply方法的签名为“apply( Object obj, Object config, Object defaults ) : Object”，</p>
+<p>该方法包含三个参数，第一个参数是要拷贝的目标对象，第二个参数是拷贝的源对象，第三个参数是可选的，表示给目标对象提供一个默认值。可以简单的理解成把第三个参数（如果有的话）及第二个参数中的属性拷贝给第一个参数对象。看下面的代码：</p>
+<p>var b1={ p1:&quot;p1 value&quot;, p2:&quot;p2 value&quot;, f1:function(){alert(this.p2)}};</p>
+<p>var b2=new Object();</p>
+<p>b2.p2=&quot;b2 value&quot;;</p>
+<p>Ext.apply(b2,b1);b2.f1();</p>
+<p>在上面的代码中，Ext.apply(b2,b1)这一语句把b1的属性拷贝到了b2对象中，因此调用b2的f1方法可以弹出&quot;p2 value&quot;的提示信息。尽管b2对象已经包含了p2属性值，但拷贝后该属性值会被覆盖。可以在调用apply方法时，在第三个参数中指定拷贝属性的默认值，比如下面的代码：</p>
+<p>Ext.apply(b2,b1,{p3:&quot;p3 value&quot;});</p>
+<p>alert(b2.p3);</p>
+<p>这样会使得b2中包含一个p3的属性，值为&quot;p3 value&quot;。</p>
+<p>applyIf方法的功能跟apply一样，只是不会拷贝那些在目标对象及源对象都存在的属性。比如把前面演示apply方法的代码改成applyIf，</p>
+<p>如下：</p>
+<p>Ext.applyIf(b2,b1);b2.f1();</p>
+<p>由于b2中已经存在了p2属性，因此，b2.f1()方法中引用this.p2的时候，得到的是&quot;b2 value&quot;，而不是在b1中定义的&quot;p2 value&quot;。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[鼠标点击特效：点击网站页面显示24字核心价值观上升的特效代码]]></title>
         <id>https://imenghu.github.io/post/shu-biao-dian-ji-te-xiao-dian-ji-wang-zhan-ye-mian-xian-shi-24-zi-he-xin-jie-zhi-guan-shang-sheng-de-te-xiao-dai-ma</id>
@@ -1127,105 +1154,6 @@ c =Category()</p>
 <p>c.cate_fn()# ②<br>
 上面程序分别在全局空间、类命名空间内定义了两个 lambda 表达式，在全局空间内定义的 lambda 表达式就相当于一个普通函数，因此程序使用调用函数的方式来调用该 lambda 表达式，并显式地为第一个参数绑定参数值，如上面程序中 ① 号代码所示。</p>
 <p>对于在类命名空间内定义的 lambda 表达式，则相当于在该类命名空间中定义了一个函数，这个函数就变成了实例方法，因此程序必须使用调用方法的方式来调用该 lambda 表达式，Python 同样会为该方法的第一个参数（相当于 self 参数）绑定参数值，如上面程序中 ② 号代码所示。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[解读Python编程中的命名空间与作用域]]></title>
-        <id>https://imenghu.github.io/post/jie-du-python-bian-cheng-zhong-de-ming-ming-kong-jian-yu-zuo-yong-yu</id>
-        <link href="https://imenghu.github.io/post/jie-du-python-bian-cheng-zhong-de-ming-ming-kong-jian-yu-zuo-yong-yu">
-        </link>
-        <updated>2019-11-21T11:20:16.000Z</updated>
-        <content type="html"><![CDATA[<p>变量是拥有匹配对象的名字（标识符）。命名空间是一个包含了变量名称们（键）和它们各自相应的对象们（值）的字典。<br>
-一个Python表达式可以访问局部命名空间和全局命名空间里的变量。如果一个局部变量和一个全局变量重名，则局部变量会覆盖全局变量。<br>
-每个函数都有自己的命名空间。类的方法的作用域规则和通常函数的一样。<br>
-Python会智能地猜测一个变量是局部的还是全局的，它假设任何在函数内赋值的变量都是局部的。<br>
-因此，如果要给全局变量在一个函数里赋值，必须使用global语句。<br>
-global VarName的表达式会告诉Python， VarName是一个全局变量，这样Python就不会在局部命名空间里寻找这个变量了。</p>
-<p>命名空间的定义<br>
-Python命名空间是名称到对象的映射，这就像是字典，键名是变量名，值是变量的值。比如：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>x = 3<br>
-globals()<br>
-{'<strong>builtins</strong>': &lt;module '<strong>builtin</strong>' (built-in)&gt;, '<strong>name</strong>': '<strong>main</strong>', '<strong>doc</strong>': None, 'x': 3, '<strong>package</strong>': None}</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>可以看到变量x，3以字典的形式存放在globals空间内。以之对应的名字空间还有：locals()。</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>locals()<br>
-{'<strong>builtins</strong>': &lt;module '<strong>builtin</strong>' (built-in)&gt;, '<strong>name</strong>': '<strong>main</strong>', '<strong>doc</strong>': None, 'x': 3, '<strong>package</strong>': None}</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>实际上，你可以通过向名字添加键名和值：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>globals()['y'] = 5<br>
-y<br>
-5</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>上图左侧是内置命名空间，右侧是不同的模块，有各自的全局命名空间，全局命名空间内定义函数就会有局部命名空间。</p>
-<p>命名空间的种类<br>
-Python中有三种命名空间：</p>
-<p>a) 局部，函数内的命名空间就是局部的；<br>
-b) 全局，模块内的命名空间就是全局的；</p>
-<p>c) 内置，包括异常类型、内建函数和特殊方法，可以代码中任意地方调用；<br>
-下面讨论关于名字空间的搜索顺序，先来看张图：</p>
-<figure data-type="image" tabindex="1"><img src="https://img2.mukewang.com/5af99a370001f46803670254.jpg" alt=""></figure>
-<p>命名空间的可见性（作用域）</p>
-<p>a) 内置命名空间在代码所有位置都是可见的，所以可以随时被调用；</p>
-<p>b) 全局命名空间和局部命名空间中， 如果有同名变量，在全局命名空间处，局部命名空间内的同名变量是不可见的；</p>
-<p>c) 在局部命名空间处，全局命名空间的同名变量是不可见的（只有变量不同名的情况下，可使用 global关键字让其可见）。</p>
-<p>知道了可见性，下面说变量的查找顺序就要清楚多了。</p>
-<p>命名空间的查找顺序<br>
-a) 如果在函数内调用一个变量，先在函数内（局部命名空间）查找，如果找到则停止查找。否则在函数外部（全局命名空间）查找，如果还是没找到，则查找内置命名空间。如果以上三个命名都未找到，则抛出NameError 的异常错误。<br>
-b) 如果在函数外调用一个变量，则在函数外查找（全局命名空间，局部命名空间此时不可见），如果找到则停止查找，否则到内置命名空间中查找。如果两者都找不到，则抛出异常。只有当局部命名空间内，使用global 关键字声明了一个变量时，查找顺序则是 a) 的查找顺序。</p>
-<p>为了帮助理解，来举个例子，我们在全局命名空间里定义一个变量money。我们再在函数内给变量money赋值，然后Python会假定money是一个局部变量。然而，我们并没有在访问前声明一个局部变量money，结果就是会出现一个UnboundLocalError的错误。取消global语句的注释就能解决这个问题。</p>
-<p>#!/usr/bin/python</p>
-<h1 id="-coding-utf-8-">-<em>- coding: UTF-8 -</em>-</h1>
-<p>Money = 2000<br>
-def AddMoney():</p>
-<h1 id="想改正代码就取消以下注释">想改正代码就取消以下注释:</h1>
-<h1 id="global-money">global Money</h1>
-<p>Money = Money + 1</p>
-<p>print Money<br>
-AddMoney()<br>
-print Money</p>
-<p>dir()函数<br>
-dir()函数一个排好序的字符串列表，内容是一个模块里定义过的名字。<br>
-返回的列表容纳了在一个模块里定义的所有模块，变量和函数。如下一个简单的实例：<br>
-#!/usr/bin/python</p>
-<h1 id="-coding-utf-8--2">-<em>- coding: UTF-8 -</em>-</h1>
-<h1 id="导入内置math模块">导入内置math模块</h1>
-<p>import math</p>
-<p>content = dir(math)</p>
-<p>print content;</p>
-<p>以上实例输出结果：<br>
-['<strong>doc</strong>', '<strong>file</strong>', '<strong>name</strong>', 'acos', 'asin', 'atan',<br>
-'atan2', 'ceil', 'cos', 'cosh', 'degrees', 'e', 'exp',<br>
-'fabs', 'floor', 'fmod', 'frexp', 'hypot', 'ldexp', 'log',<br>
-'log10', 'modf', 'pi', 'pow', 'radians', 'sin', 'sinh',<br>
-'sqrt', 'tan', 'tanh']</p>
-<p>在这里，特殊字符串变量__name__指向模块的名字，__file__指向该模块的导入文件名。</p>
-<p>globals()和locals()函数</p>
-<pre><code>根据调用地方的不同，globals()和locals()函数可被用来返回全局和局部命名空间里的名字。
-如果在函数内部调用locals()，返回的是所有能在该函数里访问的命名。
-如果在函数内部调用globals()，返回的是所有在该函数里能访问的全局名字。
-两个函数的返回类型都是字典。所以名字们能用keys()函数摘取。
-</code></pre>
-<p>reload()函数<br>
-当一个模块被导入到一个脚本，模块顶层部分的代码只会被执行一次。<br>
-因此，如果你想重新执行模块里顶层部分的代码，可以用reload()函数。该函数会重新导入之前导入过的模块。语法如下：<br>
-reload(module_name) 厦工叉车<br>
-在这里，module_name要直接放模块的名字，而不是一个字符串形式。比如想重载hello模块，如下：<br>
-reload(hello)</p>
 ]]></content>
     </entry>
 </feed>
