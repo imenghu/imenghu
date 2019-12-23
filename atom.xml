@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2019-12-18T07:11:34.216Z</updated>
+    <updated>2019-12-23T06:52:05.234Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
@@ -114,18 +114,18 @@ def work():
             filebak.write('successfull backup to %s \n' % fileName)
 
 
-def main(hour, minute):
+def main(dau, hour, minute):
     print('工具启动')
     while True:
         while True:
             now = datetime.datetime.now()
-            if now.hour == hour and now.minute == minute:
+            if now.hour == hour and now.minute == minute and now.day ==day:
                 break
         work()
         time.sleep(180)
 
 
-main(11, 30)
+main(15, 1, 15)
 
 </code></pre>
 ]]></content>
