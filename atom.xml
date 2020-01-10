@@ -2,13 +2,34 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imenghu.github.io</id>
     <title>i萌虎</title>
-    <updated>2020-01-09T08:23:07.004Z</updated>
+    <updated>2020-01-10T05:29:02.930Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imenghu.github.io"/>
     <link rel="self" href="https://imenghu.github.io/atom.xml"/>
     <logo>https://imenghu.github.io/images/avatar.png</logo>
     <icon>https://imenghu.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, i萌虎</rights>
+    <entry>
+        <title type="html"><![CDATA[字节，字符，byte,bit]]></title>
+        <id>https://imenghu.github.io/post/zi-jie-zi-fu-bytebit</id>
+        <link href="https://imenghu.github.io/post/zi-jie-zi-fu-bytebit">
+        </link>
+        <updated>2020-01-10T05:28:39.000Z</updated>
+        <content type="html"><![CDATA[<p>因为项目需要的硬件设备对于内存要求很严格，设备内存大了价格昂贵不能，设备内存小了不能存储足够的信息也不好。</p>
+<p>于是调查设备的时候研究了下容量相关的知识。</p>
+<p>bit = 0/1   就是一个二进制数，这是计算机运算的最小单位，也是最基本的单位，什么都会转为01来计算</p>
+<p>byte  = 8bit    byte也就是字节。 是文件存储的最小单位。</p>
+<p>不同的编码，存储不同的内容，占用的空间不同。 比如常见的AscII码he unicode 存储英文和标点就是一个字节 1 byte 存中文就要2byte.UTF-8  存英文要1个byte,存中文要3个byte。</p>
+<p></p>
+<p>另外，字符，就是普通理解的字，比如A，B，？ 都是字符,她们占用一个byte。 汉字“吴” 也是一个字符。但是这个字符 = 2个byte。</p>
+<p>1KB = 1024B;</p>
+<p>1M = 1024KB;</p>
+<p>1G = 1024M;<br>
+————————————————<br>
+版权声明：本文为CSDN博主「嗷嗷的昶卅」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>
+原文链接：https://blog.csdn.net/supwuq/article/details/87862171</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[apply的用法]]></title>
         <id>https://imenghu.github.io/post/apply-de-yong-fa</id>
@@ -1110,50 +1131,6 @@ print locals()
 #{'__builtins__': &lt;module '__builtin__' (built-in)&gt;, '__file__': 'D:/PycharmProjects/TestProject/test.py', '__package__': None, 'i': 9, '__name__': '__main__', '__doc__': None}
 </code></pre>
 <p>第二个locals函数返回的命名空间信息中依然存在i是9这一项，表明i这个变量被泄露了出来，污染了外部的命名空间。这点需要注意一下。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[浅谈Python类命名空间]]></title>
-        <id>https://imenghu.github.io/post/qian-tan-python-lei-ming-ming-kong-jian</id>
-        <link href="https://imenghu.github.io/post/qian-tan-python-lei-ming-ming-kong-jian">
-        </link>
-        <updated>2019-11-21T11:25:52.000Z</updated>
-        <content type="html"><![CDATA[<p>前面章节中，已经不只一次提到，所有位于 class 语句中的代码，其实都位于特殊的命名空间中，通常称之为类命名空间。Python 中，编写的整个程序默认处于全局命名空间内，而类体则处于类命名空间内。</p>
-<p>Python 允许在全局范围内放置可执行代码，当 Python 执行该程序时，这些代码就会获得执行的机会。类似地，Python 同样允许在类范围内放置可执行代码，当 Python 执行该类定义肘，这些代码同样会获得执行的机会。</p>
-<p>例如，如下程序测试了类命名空间：<br>
-class Item:</p>
-<h1 id="直接在类空间中放置执行性质代码">直接在类空间中放置执行性质代码</h1>
-<p>print('正在定义Item类')<br>
-for i inrange(10):<br>
-if i %2==0:<br>
-print('偶数:', i)<br>
-else:<br>
-print('奇数:', i)<br>
-运行结果为：<br>
-正在定义Item类<br>
-偶数: 0<br>
-奇数: 1<br>
-偶数: 2<br>
-奇数: 3<br>
-偶数: 4<br>
-奇数: 5<br>
-偶数: 6<br>
-奇数: 7<br>
-偶数: 8<br>
-奇数: 9<br>
-正如从上面代码所看到的，程序直接在 Item 类体中放置普通的输出语句、循环语句、分支语句，这都是合法的。当程序执行 Item 类时，Item 类命名空间中的这些代码都会被执行。</p>
-<p>从执行效果来看，这些可执行代码被放在 Python 类命名空间与全局空间并没有太大的区别。确实如此，这是因为程序并没有定义“成员”（变量或函数），这些代码执行之后就完了，不会留下什么。</p>
-<p>但下面代码就有区别。下面代码示范了在全局空间和类命名空间内分别定义 lambda 表达式：<br>
-global_fn =lambda p:print('执行lambda表达式，p参数: ', p)<br>
-class Category:<br>
-cate_fn =lambda p:print('执行lambda表达式，p参数: ', p)</p>
-<h1 id="调用全局范围内的global_fn为参数p传入参数值">调用全局范围内的global_fn，为参数p传入参数值</h1>
-<p>global_fn('fkit')# ①<br>
-c =Category()</p>
-<h1 id="调用类命名空间内的cate_fnpython自动绑定第一个参数">调用类命名空间内的cate_fn，Python自动绑定第一个参数</h1>
-<p>c.cate_fn()# ②<br>
-上面程序分别在全局空间、类命名空间内定义了两个 lambda 表达式，在全局空间内定义的 lambda 表达式就相当于一个普通函数，因此程序使用调用函数的方式来调用该 lambda 表达式，并显式地为第一个参数绑定参数值，如上面程序中 ① 号代码所示。</p>
-<p>对于在类命名空间内定义的 lambda 表达式，则相当于在该类命名空间中定义了一个函数，这个函数就变成了实例方法，因此程序必须使用调用方法的方式来调用该 lambda 表达式，Python 同样会为该方法的第一个参数（相当于 self 参数）绑定参数值，如上面程序中 ② 号代码所示。</p>
 ]]></content>
     </entry>
 </feed>
