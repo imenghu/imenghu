@@ -9,10 +9,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://imenghu.github.io/favicon.ico?v=1578634139726">
+<link rel="shortcut icon" href="https://imenghu.github.io/favicon.ico?v=1579079083543">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://imenghu.github.io/styles/main.css">
 
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
 
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -30,7 +36,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://imenghu.github.io">
-        <img src="https://imenghu.github.io/images/avatar.png?v=1578634139726" class="site-logo">
+        <img src="https://imenghu.github.io/images/avatar.png?v=1579079083543" class="site-logo">
         <h1 class="site-title">i萌虎</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -172,7 +178,7 @@ A：检查最后执行文件路径，可能需要将文件属性中“复制到�
 A：检查py文件可否单独执行，如果可以执行，检查执行环境是否为3.x，可能需要py代码降级；如果不可执行，检查是否引用第三方包，第三方是否非全局安装</p>
 <p>Tip：目前 IronPython 支持Python模拟运行环境为2.x</p>
 <p>结果<br>
-<img src="https://imenghu.github.io/post-images/1573709817355.png" alt=""></p>
+<img src="https://imenghu.github.io/post-images/1573709817355.png" alt="" loading="lazy"></p>
 <p>方式二：适用于python脚本中包含第三方模块的情况</p>
 <p>C#代码</p>
 <pre><code class="language-c#">using System;
@@ -275,6 +281,12 @@ resetIPC(sys.argv[1], sys.argv[2], sys.argv[3])
             
 
             
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
 
           </div>
 
@@ -298,6 +310,29 @@ var app = new Vue({
 })
 
 </script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
 
 
 
