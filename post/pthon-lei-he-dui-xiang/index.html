@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>mysql数据库使用总结 | i萌虎</title>
+<title>pthon 类和对象 | i萌虎</title>
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -134,98 +134,20 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">mysql数据库使用总结</h2>
-            <div class="post-date">2019-11-01</div>
+            <h2 class="post-title">pthon 类和对象</h2>
+            <div class="post-date">2020-01-16</div>
             
             <div class="post-content">
-              <p>本文主要记录一些mysql日常使用的命令，供以后查询。<br>
-1.更改root密码<br>
-mysqladmin -uroot password 'yourpassword'<br>
-2.远程登陆mysql服务器<br>
-mysql -uroot -p -h192.168.137.10 -P3306<br>
-3.查询数据库<br>
-show databases;<br>
-4.进入某个数据库<br>
-use databasename;<br>
-5.列出数据库中的表<br>
-show tables;<br>
-6.查看某个表全部字段<br>
-desc slow_log;<br>
-show create table slow_log\G; （不仅可以显示表信息，还可以显示建表语句）<br>
-7.查看当前用户<br>
-select user();<br>
-8.查看当前所在数据库<br>
-select database();<br>
-9.创建新数据库（可以指定字符集）<br>
-create database db1 charset utf8;<br>
-10.创建新表<br>
-create table t1 (<code>id</code> int(4), <code>name</code> char(40));<br>
-11.查看数据库版本<br>
-select version();<br>
-12.查看数据库状态<br>
-show status;         当前会话状态<br>
-show global status;  全局数据库状态<br>
-show slave status\G;   查看主从数据库状态信息<br>
-13.查询数据库参数<br>
-show variables;<br>
-14.修改数据库参数<br>
-show variables like 'max_connect%';<br>
-set global max_connect_errors = 1000;（重启数据库会失效，要在配置文件中修改）<br>
-15.查看当前数据库队列<br>
-show processlist;<br>
-16.创建普通用户并授权给某个数据库<br>
-grant all on databasename.* to 'user1'@'localhost' identified by '123456';<br>
-17.查询表数据<br>
-select * from mysql.db;           //查询该表中的所有字段<br>
-select count(<em>) from mysql.user;  //count(</em>)表示表中有多少行<br>
-select db,user  from mysql.db;    //查询表中的多个字段<br>
-select * from mysql.db where host like '10.0.%';在查询语句中可以使用万能匹配 “%”<br>
-18.插入一行数据<br>
-insert into db1.t1 values (1, 'abc');<br>
-19.更改表的某一行数据<br>
-update db1.t1 set name='aaa' where id=1;<br>
-20.清空表数据<br>
-truncate table db1.t1;<br>
-21.删除表<br>
-drop table db1.t1;<br>
-22.清空数据库中的所有表（数据库名是eab12）<br>
-mysql -N -s information_schema -e &quot;SELECT CONCAT('TRUNCATE TABLE ',TABLE_NAME,';') FROM TABLES WHERE TABLE_SCHEMA='eab12'&quot; | mysql -f eab12<br>
-23.删除数据库<br>
-drop database db1;<br>
-24.数据库备份<br>
-mysqldump  -uroot -p'yourpassword' mysql &gt;/tmp/mysql.sql<br>
-25.数据库恢复<br>
-mysql -uroot -p'yourpassword' mysql &lt;/tmp/mysql.sql<br>
-26.新建普通用户<br>
-CREATE USER name IDENTIFIED BY 'ssapdrow';<br>
-27.更改普通用户密码<br>
-SET PASSWORD FOR name=PASSWORD('fdddfd');<br>
-28.查看name用户权限<br>
-SHOW GRANTS FOR name;<br>
-29.脚本中执行mysql命令<br>
-mysql -uuser -ppasswd -e&quot;show databases&quot;<br>
-echo &quot;show databases&quot;|mysql -uuser -ppassword<br>
-以下是执行大量mysql语句采用的方式<br>
-mysql -uuser -hhostname -ppasswd &lt;&lt;EOF<br>
-mysql语句<br>
-EOF</p>
+              <figure data-type="image" tabindex="1"><img src="https://imenghu.github.io/post-images/1579144236427.png" alt="" loading="lazy"></figure>
 
             </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://imenghu.github.io/tag/2MJtm3v-A" class="tag">
-                    mysql
-                  </a>
-                
-              </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://imenghu.github.io/post/shen-ru-li-jie-js-bi-bao">
+                <a href="https://imenghu.github.io/post/zi-jie-zi-fu-bytebit">
                   <h3 class="post-title">
-                    深入理解JS闭包
+                    字节，字符，byte,bit
                   </h3>
                 </a>
               </div>
